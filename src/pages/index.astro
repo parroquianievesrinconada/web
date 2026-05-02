@@ -10,23 +10,14 @@
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Parroquia Rinconada</title>
-		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 	</head>
 	<body>
 		<h1>Parroquia Rinconada</h1>
 
 		<script is:inline>
-			if (window.netlifyIdentity) {
-				window.netlifyIdentity.on("init", (user) => {
-					if (!user) {
-						window.netlifyIdentity.on("login", () => {
-							document.location.href = "/admin/";
-						});
-					}
-				});
-				if (window.location.hash && window.location.hash.includes("invite_token")) {
-					window.netlifyIdentity.open();
-				}
+			var hash = window.location.hash;
+			if (hash && (hash.includes("invite_token") || hash.includes("confirmation_token") || hash.includes("recovery_token"))) {
+				window.location.href = "/admin/" + hash;
 			}
 		</script>
 	</body>
