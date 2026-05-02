@@ -1,0 +1,40 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+locale: "es"
+
+collections:
+  - name: "anuncios"
+    label: "Anuncios"
+    folder: "src/content/anuncios"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Fecha", name: "date", widget: "datetime" }
+      - { label: "Imagen destacada", name: "image", widget: "image", required: false }
+      - { label: "Resumen corto", name: "summary", widget: "text" }
+      - { label: "Contenido", name: "body", widget: "markdown" }
+
+  - name: "paginas"
+    label: "Páginas fijas"
+    files:
+      - file: "src/content/paginas/horarios.md"
+        label: "Horarios"
+        name: "horarios"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Contenido", name: "body", widget: "markdown" }
+      - file: "src/content/paginas/contacto.md"
+        label: "Contacto"
+        name: "contacto"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Dirección", name: "direccion", widget: "string" }
+          - { label: "Teléfono", name: "telefono", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Mapa de Google (código embed)", name: "mapa", widget: "text" }
