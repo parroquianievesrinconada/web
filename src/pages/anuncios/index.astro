@@ -2,8 +2,14 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
+const fechaDeAnuncio = (anuncio: any): Date => {
+  if (anuncio.data.date) return new Date(anuncio.data.date);
+  const match = anuncio.id.match(/^(\d{4}-\d{2}-\d{2})/);
+  return match ? new Date(match[1]) : new Date();
+};
+
 const anuncios = (await getCollection("anuncios"))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  .sort((a, b) => fechaDeAnuncio(b).valueOf() - fechaDeAnuncio(a).valueOf());
 
 const formatFecha = (date: Date) =>
   date.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
@@ -25,7 +31,7 @@ const formatFecha = (date: Date) =>
               </a>
             )}
             <div class="item-body">
-              <time class="item-fecha">{formatFecha(anuncio.data.date)}</time>
+              <time class="item-fecha">{formatFecha(fechaDeAnuncio(anuncio))}</time>
               <h2><a href={`/anuncios/${anuncio.id}`}>{anuncio.data.title}</a></h2>
               <p>{anuncio.data.summary}</p>
               <a href={`/anuncios/${anuncio.id}`} class="leer-mas">Leer más →</a>

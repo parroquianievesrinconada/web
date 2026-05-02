@@ -4,9 +4,68 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel de Administración | Parroquia</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>window.CMS_MANUAL_INIT = true;</script>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    CMS.init({
+      config: {
+        load_config_file: false,
+        backend: {
+          name: "github",
+          repo: "antoniopelaezmoreno/parroquia-rinconada",
+          branch: "main",
+          base_url: window.location.origin,
+          auth_endpoint: "/auth",
+        },
+        media_folder: "public/uploads",
+        public_folder: "/uploads",
+        locale: "es",
+        collections: [
+          {
+            name: "anuncios",
+            label: "Anuncios",
+            folder: "src/content/anuncios",
+            create: true,
+            slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+            fields: [
+              { label: "Título", name: "title", widget: "string" },
+              { label: "Imagen destacada", name: "image", widget: "image", required: false },
+              { label: "Resumen corto", name: "summary", widget: "text" },
+              { label: "Contenido", name: "body", widget: "markdown" },
+            ],
+          },
+          {
+            name: "paginas",
+            label: "Páginas fijas",
+            files: [
+              {
+                file: "src/content/paginas/horarios.md",
+                label: "Horarios",
+                name: "horarios",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  { label: "Contenido", name: "body", widget: "markdown" },
+                ],
+              },
+              {
+                file: "src/content/paginas/contacto.md",
+                label: "Contacto",
+                name: "contacto",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  { label: "Dirección", name: "direccion", widget: "string" },
+                  { label: "Teléfono", name: "telefono", widget: "string" },
+                  { label: "Email", name: "email", widget: "string" },
+                  { label: "Mapa de Google (código embed)", name: "mapa", widget: "text" },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    });
+  </script>
 </body>
 </html>

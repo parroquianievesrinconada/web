@@ -13,6 +13,12 @@ export async function getStaticPaths() {
 const { anuncio } = Astro.props;
 const { Content } = await render(anuncio);
 
+const fechaDeAnuncio = (a: any): Date => {
+  if (a.data.date) return new Date(a.data.date);
+  const match = a.id.match(/^(\d{4}-\d{2}-\d{2})/);
+  return match ? new Date(match[1]) : new Date();
+};
+
 const formatFecha = (date: Date) =>
   date.toLocaleDateString("es-ES", {
     weekday: "long",
@@ -38,7 +44,7 @@ const formatFecha = (date: Date) =>
 
     <article class="articulo">
       <header class="cabecera">
-        <time class="fecha">{formatFecha(anuncio.data.date)}</time>
+        <time class="fecha">{formatFecha(fechaDeAnuncio(anuncio))}</time>
         <h1>{anuncio.data.title}</h1>
         <p class="entradilla">{anuncio.data.summary}</p>
         <div class="separador"></div>

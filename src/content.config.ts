@@ -5,7 +5,7 @@ const anuncios = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/anuncios" }),
   schema: z.object({
     title: z.string(),
-    date: z.coerce.date(),
+    date: z.coerce.date().optional(),
     image: z.string().optional(),
     summary: z.string(),
   }),

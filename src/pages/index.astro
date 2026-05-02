@@ -2,15 +2,21 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
+const fechaDeAnuncio = (anuncio: any): Date => {
+  if (anuncio.data.date) return new Date(anuncio.data.date);
+  const match = anuncio.id.match(/^(\d{4}-\d{2}-\d{2})/);
+  return match ? new Date(match[1]) : new Date();
+};
+
+const formatFecha = (date: Date) =>
+  date.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
+
 const anuncios = (await getCollection("anuncios"))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .sort((a, b) => fechaDeAnuncio(b).valueOf() - fechaDeAnuncio(a).valueOf())
   .slice(0, 4);
 
 const principal = anuncios[0];
 const secundarios = anuncios.slice(1);
-
-const formatFecha = (date: Date) =>
-  date.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
 ---
 
 <Layout title="Inicio">
@@ -40,7 +46,7 @@ const formatFecha = (date: Date) =>
                 </a>
               )}
               <div class="principal-cuerpo">
-                <time class="noticia-fecha">{formatFecha(principal.data.date)}</time>
+                <time class="noticia-fecha">{formatFecha(fechaDeAnuncio(principal))}</time>
                 <h3 class="principal-titulo">
                   <a href={`/anuncios/${principal.id}`}>{principal.data.title}</a>
                 </h3>
@@ -55,7 +61,7 @@ const formatFecha = (date: Date) =>
               {secundarios.map((anuncio) => (
                 <article class="noticia-secundaria">
                   <div class="secundaria-cuerpo">
-                    <time class="noticia-fecha">{formatFecha(anuncio.data.date)}</time>
+                    <time class="noticia-fecha">{formatFecha(fechaDeAnuncio(anuncio))}</time>
                     <h4><a href={`/anuncios/${anuncio.id}`}>{anuncio.data.title}</a></h4>
                     <p>{anuncio.data.summary}</p>
                   </div>
