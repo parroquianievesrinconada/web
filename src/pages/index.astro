@@ -15,7 +15,7 @@
 	<body>
 		<h1>Parroquia Rinconada</h1>
 
-		<script>
+		<script is:inline>
 			if (window.netlifyIdentity) {
 				window.netlifyIdentity.on("init", (user) => {
 					if (!user) {
@@ -24,6 +24,9 @@
 						});
 					}
 				});
+				if (window.location.hash && window.location.hash.includes("invite_token")) {
+					window.netlifyIdentity.open();
+				}
 			}
 		</script>
 	</body>
