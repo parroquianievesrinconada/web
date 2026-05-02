@@ -14,76 +14,156 @@ const { anuncio } = Astro.props;
 const { Content } = await render(anuncio);
 
 const formatFecha = (date: Date) =>
-  date.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
+  date.toLocaleDateString("es-ES", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 ---
 
 <Layout title={anuncio.data.title}>
+  {anuncio.data.image && (
+    <div class="portada-wrap">
+      <img src={anuncio.data.image} alt={anuncio.data.title} class="portada" />
+    </div>
+  )}
+
   <div class="container">
-    <a href="/anuncios" class="volver">← Volver a anuncios</a>
+    <nav class="migas">
+      <a href="/">Inicio</a>
+      <span>›</span>
+      <a href="/anuncios">Anuncios</a>
+    </nav>
 
     <article class="articulo">
-      {anuncio.data.image && (
-        <img src={anuncio.data.image} alt={anuncio.data.title} class="portada" />
-      )}
-
-      <header class="articulo-header">
+      <header class="cabecera">
         <time class="fecha">{formatFecha(anuncio.data.date)}</time>
         <h1>{anuncio.data.title}</h1>
-        <p class="resumen">{anuncio.data.summary}</p>
+        <p class="entradilla">{anuncio.data.summary}</p>
+        <div class="separador"></div>
       </header>
 
-      <div class="contenido">
+      <div class="cuerpo">
         <Content />
       </div>
     </article>
+
+    <a href="/anuncios" class="volver">← Volver al tablón de anuncios</a>
   </div>
 </Layout>
 
 <style>
-  .volver {
-    display: inline-block;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-    color: var(--color-muted);
+  /* Imagen a ancho completo antes del container */
+  .portada-wrap {
+    width: 100%;
+    max-height: 420px;
+    overflow: hidden;
   }
-
-  .volver:hover { color: var(--color-primary); text-decoration: none; }
-
-  .articulo { max-width: 700px; }
 
   .portada {
     width: 100%;
-    max-height: 400px;
+    height: 420px;
     object-fit: cover;
-    border-radius: 6px;
+    display: block;
+  }
+
+  /* Migas de pan */
+  .migas {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin-bottom: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .migas a { color: var(--color-muted); }
+  .migas a:hover { color: var(--color-primary); text-decoration: none; }
+
+  /* Artículo */
+  .articulo { max-width: 680px; }
+
+  .cabecera { margin-bottom: 2rem; }
+
+  .fecha {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    margin-bottom: 0.6rem;
+  }
+
+  h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .entradilla {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--color-muted);
+    line-height: 1.6;
     margin-bottom: 1.5rem;
   }
 
-  .articulo-header { margin-bottom: 2rem; }
-
-  .fecha { font-size: 0.85rem; color: var(--color-muted); }
-
-  h1 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    margin: 0.3rem 0 0.75rem;
+  .separador {
+    width: 3rem;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: 2px;
   }
 
-  .resumen {
-    font-size: 1.05rem;
+  /* Cuerpo del texto */
+  .cuerpo {
+    font-size: 1.02rem;
+    line-height: 1.85;
+    color: var(--color-text);
+  }
+
+  .cuerpo :global(h2) {
+    font-size: 1.25rem;
+    margin: 2rem 0 0.6rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .cuerpo :global(h3) { font-size: 1.08rem; margin: 1.5rem 0 0.5rem; }
+
+  .cuerpo :global(p) { margin-bottom: 1.1rem; }
+
+  .cuerpo :global(ul),
+  .cuerpo :global(ol) { padding-left: 1.5rem; margin-bottom: 1.1rem; }
+
+  .cuerpo :global(li) { margin-bottom: 0.3rem; }
+
+  .cuerpo :global(img) {
+    width: 100%;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+  }
+
+  .cuerpo :global(strong) { color: var(--color-text); }
+
+  /* Volver */
+  .volver {
+    display: inline-block;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
     color: var(--color-muted);
-    font-style: italic;
-    border-left: 3px solid var(--color-primary);
-    padding-left: 1rem;
+    text-decoration: none;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+    width: 100%;
+    max-width: 680px;
   }
 
-  .contenido {
-    font-size: 1rem;
-    line-height: 1.8;
-  }
-
-  .contenido :global(h2) { font-size: 1.3rem; margin: 1.5rem 0 0.5rem; }
-  .contenido :global(h3) { font-size: 1.1rem; margin: 1.25rem 0 0.5rem; }
-  .contenido :global(p) { margin-bottom: 1rem; }
-  .contenido :global(ul), .contenido :global(ol) { padding-left: 1.5rem; margin-bottom: 1rem; }
-  .contenido :global(img) { border-radius: 4px; margin: 1rem 0; }
+  .volver:hover { color: var(--color-primary); }
 </style>
