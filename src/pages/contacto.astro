@@ -1,0 +1,96 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getEntry } from "astro:content";
+
+const entrada = await getEntry("paginas", "contacto");
+const datos = {
+  title: "Contacto",
+  direccion: "",
+  telefono: "",
+  email: "",
+  mapa: "",
+  ...entrada?.data,
+};
+---
+
+<Layout title="Contacto">
+  <div class="container">
+    <h1>{datos.title}</h1>
+
+    <div class="grid">
+      <div class="info">
+        {datos.direccion && (
+          <div class="campo">
+            <span class="icono">📍</span>
+            <div>
+              <strong>Dirección</strong>
+              <p>{datos.direccion}</p>
+            </div>
+          </div>
+        )}
+        {datos.telefono && (
+          <div class="campo">
+            <span class="icono">📞</span>
+            <div>
+              <strong>Teléfono</strong>
+              <p><a href={`tel:${datos.telefono}`}>{datos.telefono}</a></p>
+            </div>
+          </div>
+        )}
+        {datos.email && (
+          <div class="campo">
+            <span class="icono">✉️</span>
+            <div>
+              <strong>Correo electrónico</strong>
+              <p><a href={`mailto:${datos.email}`}>{datos.email}</a></p>
+            </div>
+          </div>
+        )}
+        {!datos.direccion && !datos.telefono && !datos.email && (
+          <p class="vacio">La información de contacto se publicará próximamente.</p>
+        )}
+      </div>
+
+      {datos.mapa && (
+        <div class="mapa" set:html={datos.mapa} />
+      )}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .campo {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .icono { font-size: 1.5rem; flex-shrink: 0; }
+
+  .campo strong { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-muted); margin-bottom: 0.2rem; }
+
+  .campo p { margin: 0; }
+
+  .mapa :global(iframe) { width: 100%; border-radius: 6px; border: 1px solid var(--color-border); }
+
+  .vacio { color: var(--color-muted); font-style: italic; }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,24 +1,165 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
 
+const anuncios = (await getCollection("anuncios"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const formatFecha = (date: Date) =>
+  date.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
 ---
 
-<html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Parroquia Rinconada</title>
-	</head>
-	<body>
-		<h1>Parroquia Rinconada</h1>
+<Layout title="Inicio">
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Bienvenidos a la Parroquia Rinconada</h1>
+      <p>Comunidad de fe al servicio de todos</p>
+    </div>
+  </section>
 
-		<script is:inline>
-			var hash = window.location.hash;
-			if (hash && (hash.includes("invite_token") || hash.includes("confirmation_token") || hash.includes("recovery_token"))) {
-				window.location.href = "/admin/" + hash;
-			}
-		</script>
-	</body>
-</html>
+  <div class="container">
+    <section class="anuncios-recientes">
+      <div class="section-header">
+        <h2>Últimas noticias</h2>
+        <a href="/anuncios">Ver todos →</a>
+      </div>
+
+      {anuncios.length === 0 ? (
+        <p class="vacio">No hay anuncios publicados todavía.</p>
+      ) : (
+        <div class="cards">
+          {anuncios.map((anuncio) => (
+            <article class="card">
+              {anuncio.data.image && (
+                <a href={`/anuncios/${anuncio.id}`}>
+                  <img src={anuncio.data.image} alt={anuncio.data.title} class="card-img" />
+                </a>
+              )}
+              <div class="card-body">
+                <time class="card-fecha">{formatFecha(anuncio.data.date)}</time>
+                <h3><a href={`/anuncios/${anuncio.id}`}>{anuncio.data.title}</a></h3>
+                <p class="card-resumen">{anuncio.data.summary}</p>
+                <a href={`/anuncios/${anuncio.id}`} class="card-link">Leer más →</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </section>
+
+    <section class="bloques">
+      <a href="/horarios" class="bloque">
+        <span class="bloque-icono">🕐</span>
+        <h3>Horarios de misas</h3>
+        <p>Consulta los horarios de celebraciones</p>
+      </a>
+      <a href="/contacto" class="bloque">
+        <span class="bloque-icono">📍</span>
+        <h3>Contacto y ubicación</h3>
+        <p>Encuéntranos y ponte en contacto</p>
+      </a>
+      <a href="/anuncios" class="bloque">
+        <span class="bloque-icono">📢</span>
+        <h3>Tablón de anuncios</h3>
+        <p>Todas las noticias de la parroquia</p>
+      </a>
+    </section>
+  </div>
+
+  <script is:inline>
+    var hash = window.location.hash;
+    if (hash && (hash.includes("invite_token") || hash.includes("confirmation_token") || hash.includes("recovery_token"))) {
+      window.location.href = "/admin/" + hash;
+    }
+  </script>
+</Layout>
+
+<style>
+  .hero {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+
+  .hero-inner { max-width: var(--max-width); margin: 0 auto; }
+
+  .hero h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .hero p { font-size: 1.1rem; opacity: 0.85; }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 0.75rem;
+  }
+
+  .section-header h2 { font-size: 1.5rem; }
+
+  .vacio { color: var(--color-muted); font-style: italic; }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-img { width: 100%; height: 180px; object-fit: cover; }
+
+  .card-body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .card-fecha { font-size: 0.8rem; color: var(--color-muted); }
+
+  .card-body h3 { font-size: 1.1rem; }
+  .card-body h3 a { color: var(--color-text); }
+  .card-body h3 a:hover { color: var(--color-primary); text-decoration: none; }
+
+  .card-resumen { font-size: 0.9rem; color: var(--color-muted); flex: 1; }
+
+  .card-link { font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; }
+
+  .bloques {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .bloque {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .bloque:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 8px rgba(122, 62, 43, 0.1);
+    text-decoration: none;
+  }
+
+  .bloque-icono { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+  .bloque h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+  .bloque p { font-size: 0.85rem; color: var(--color-muted); }
+</style>

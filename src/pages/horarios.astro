@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getEntry, render } from "astro:content";
+
+const entrada = await getEntry("paginas", "horarios");
+const titulo = entrada?.data.title ?? "Horarios";
+const { Content } = entrada ? await render(entrada) : { Content: null };
+---
+
+<Layout title="Horarios">
+  <div class="container">
+    <h1>{titulo}</h1>
+    <div class="contenido">
+      {Content ? <Content /> : <p class="vacio">Los horarios se publicarán próximamente.</p>}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .vacio { color: var(--color-muted); font-style: italic; }
+
+  .contenido {
+    max-width: 700px;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .contenido :global(h2) { font-size: 1.3rem; margin: 1.5rem 0 0.5rem; color: var(--color-primary); }
+  .contenido :global(h3) { font-size: 1.1rem; margin: 1.25rem 0 0.5rem; }
+  .contenido :global(p) { margin-bottom: 1rem; }
+  .contenido :global(ul), .contenido :global(ol) { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .contenido :global(table) { border-collapse: collapse; width: 100%; margin-bottom: 1rem; }
+  .contenido :global(th), .contenido :global(td) { border: 1px solid var(--color-border); padding: 0.5rem 0.75rem; text-align: left; }
+  .contenido :global(th) { background: var(--color-primary); color: #fff; }
+</style>
