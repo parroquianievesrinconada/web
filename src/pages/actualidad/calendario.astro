@@ -26,7 +26,8 @@ for (let i = 0; i < celdas.length; i += 7) semanas.push(celdas.slice(i, i + 7));
 
 const DIAS = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
 
-const eventosRaw = entrada.data.eventos ?? [];
+const mesActual = mes + 1; // getMonth() es 0-indexed
+const eventosRaw = (entrada.data.eventos ?? []).filter((ev) => ev.mes === mesActual);
 const eventos: Record<number, { texto: string; tipo: string }[]> = {};
 for (const ev of eventosRaw) {
   if (!eventos[ev.dia]) eventos[ev.dia] = [];

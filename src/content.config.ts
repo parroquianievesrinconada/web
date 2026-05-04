@@ -23,6 +23,7 @@ const paginas = defineCollection({
       .array(
         z.object({
           dia: z.coerce.number(),
+          mes: z.coerce.number(),
           texto: z.string(),
           tipo: z.string(),
         })
