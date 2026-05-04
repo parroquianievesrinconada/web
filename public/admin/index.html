@@ -39,11 +39,96 @@
             files: [
               {
                 file: "src/content/paginas/horarios.md",
-                label: "Horarios",
+                label: "Horarios de misa",
                 name: "horarios",
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
                   { label: "Contenido", name: "body", widget: "markdown" },
+                ],
+              },
+              {
+                file: "src/content/paginas/historia.md",
+                label: "Historia y Patrimonio",
+                name: "historia",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  { label: "Contenido", name: "body", widget: "markdown" },
+                ],
+              },
+              {
+                file: "src/content/paginas/catequesis.md",
+                label: "Catequesis",
+                name: "catequesis",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  { label: "Contenido", name: "body", widget: "markdown" },
+                ],
+              },
+              {
+                file: "src/content/paginas/pastoral-salud.md",
+                label: "Pastoral de la Salud",
+                name: "pastoral-salud",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  { label: "Contenido", name: "body", widget: "markdown" },
+                ],
+              },
+              {
+                file: "src/content/paginas/hermandad-dolores.md",
+                label: "Hermandad de los Dolores",
+                name: "hermandad-dolores",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  { label: "Contenido", name: "body", widget: "markdown" },
+                ],
+              },
+              {
+                file: "src/content/paginas/hermandad-salud.md",
+                label: "Hermandad de la Salud",
+                name: "hermandad-salud",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  { label: "Contenido", name: "body", widget: "markdown" },
+                ],
+              },
+              {
+                file: "src/content/paginas/hermandad-resucitado.md",
+                label: "Hermandad del Resucitado",
+                name: "hermandad-resucitado",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  { label: "Contenido", name: "body", widget: "markdown" },
+                ],
+              },
+              {
+                file: "src/content/paginas/calendario.md",
+                label: "Calendario Litúrgico",
+                name: "calendario",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  {
+                    label: "Eventos del mes",
+                    name: "eventos",
+                    widget: "list",
+                    fields: [
+                      { label: "Día del mes", name: "dia", widget: "number", value_type: "int", min: 1, max: 31 },
+                      { label: "Descripción", name: "texto", widget: "string" },
+                      {
+                        label: "Tipo",
+                        name: "tipo",
+                        widget: "select",
+                        options: [
+                          { label: "Misa especial", value: "misa" },
+                          { label: "Sacramento", value: "sacramento" },
+                          { label: "Pastoral", value: "pastoral" },
+                          { label: "Formación", value: "formacion" },
+                          { label: "Evento especial", value: "especial" },
+                          { label: "Festividad", value: "festivo" },
+                        ],
+                      },
+                    ],
+                  },
+                  { label: "Próximos eventos (texto)", name: "body", widget: "markdown" },
                 ],
               },
               {

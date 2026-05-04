@@ -19,6 +19,15 @@ const paginas = defineCollection({
     telefono: z.string().optional(),
     email: z.string().optional(),
     mapa: z.string().optional(),
+    eventos: z
+      .array(
+        z.object({
+          dia: z.coerce.number(),
+          texto: z.string(),
+          tipo: z.string(),
+        })
+      )
+      .optional(),
   }),
 });
 

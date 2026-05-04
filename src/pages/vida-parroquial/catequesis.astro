@@ -1,5 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getEntry, render } from "astro:content";
+
+const entrada = await getEntry("paginas", "catequesis");
+const { Content } = await render(entrada);
 ---
 
 <Layout title="Catequesis">
@@ -11,58 +15,8 @@ import Layout from "../../layouts/Layout.astro";
   </div>
 
   <div class="container">
-    <div class="intro">
-      <p>La catequesis es el proceso por el cual la comunidad parroquial acompaña a las personas en el conocimiento y la vivencia de la fe cristiana. En nuestra parroquia ofrecemos diferentes itinerarios adaptados a cada etapa de la vida.</p>
-    </div>
-
-    <div class="programas">
-
-      <div class="programa">
-        <div class="programa-icono">🧒</div>
-        <div class="programa-info">
-          <h2>Catequesis de Iniciación <span class="badge">6 – 9 años</span></h2>
-          <p>Primer acercamiento a la fe cristiana. Los niños aprenden de forma lúdica los fundamentos de la Biblia, la oración y los sacramentos. Se celebra los <strong>sábados de 10:00 a 11:30</strong>.</p>
-          <p>Inscripciones: septiembre, en el despacho parroquial.</p>
-        </div>
-      </div>
-
-      <div class="programa">
-        <div class="programa-icono">🕊️</div>
-        <div class="programa-info">
-          <h2>Primera Comunión <span class="badge">8 – 10 años</span></h2>
-          <p>Preparación para la recepción del sacramento de la Eucaristía. El itinerario tiene una duración de dos años, con encuentros semanales los <strong>sábados de 11:30 a 13:00</strong>. Se complementa con retiros y convivencias a lo largo del curso.</p>
-          <p>Requisito previo: haber realizado el primer año de catequesis de iniciación o valoración individual.</p>
-        </div>
-      </div>
-
-      <div class="programa">
-        <div class="programa-icono">✝️</div>
-        <div class="programa-info">
-          <h2>Confirmación <span class="badge">14 – 16 años</span></h2>
-          <p>Preparación para el sacramento de la Confirmación. Itinerario de dos años con catequesis semanales los <strong>viernes de 18:00 a 19:30</strong>, campamento de verano y servicio a la comunidad como parte de la formación integral.</p>
-        </div>
-      </div>
-
-      <div class="programa">
-        <div class="programa-icono">👨‍👩‍👧</div>
-        <div class="programa-info">
-          <h2>Catequesis familiar</h2>
-          <p>Espacio de formación para padres que acompañan a sus hijos en el proceso catequético. Se reúnen una vez al mes los <strong>domingos a las 12:30</strong>, tras la misa mayor. Orientado a integrar la fe en la vida familiar cotidiana.</p>
-        </div>
-      </div>
-
-      <div class="programa">
-        <div class="programa-icono">📖</div>
-        <div class="programa-info">
-          <h2>Catequesis de adultos</h2>
-          <p>Para personas que deseen recibir los sacramentos del Bautismo, la Comunión o la Confirmación en la edad adulta, así como para quienes quieran profundizar en la fe. Reuniones quincenales los <strong>miércoles de 19:30 a 21:00</strong>.</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="contacto-catequesis">
-      <p>Para más información o inscripciones, contacta con el despacho parroquial o escríbenos a través de nuestra <a href="/contacto">página de contacto</a>.</p>
+    <div class="cuerpo">
+      <Content />
     </div>
   </div>
 </Layout>
@@ -76,53 +30,26 @@ import Layout from "../../layouts/Layout.astro";
   .hero-interior h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
   .hero-interior p { opacity: 0.85; }
 
-  .intro {
-    max-width: 700px;
-    font-size: 1rem;
-    line-height: 1.8;
-    color: var(--color-muted);
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
+  .cuerpo { max-width: 760px; font-size: 1rem; line-height: 1.8; }
+
+  .cuerpo :global(p) { margin-bottom: 1rem; }
+
+  .cuerpo :global(h2) {
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    margin: 2rem 0 0.6rem;
+    padding-bottom: 0.4rem;
     border-bottom: 1px solid var(--color-border);
   }
 
-  .programas { display: flex; flex-direction: column; gap: 1.5rem; max-width: 760px; }
+  .cuerpo :global(ul) { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .cuerpo :global(li) { margin-bottom: 0.4rem; }
 
-  .programa {
-    display: flex;
-    gap: 1.25rem;
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 1.5rem;
-    align-items: flex-start;
+  .cuerpo :global(hr) {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 2rem 0;
   }
 
-  .programa-icono { font-size: 2rem; flex-shrink: 0; }
-
-  .programa-info h2 { font-size: 1.1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
-
-  .badge {
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    background: var(--color-primary);
-    color: #fff;
-    padding: 0.15rem 0.5rem;
-    border-radius: 20px;
-    font-weight: 600;
-  }
-
-  .programa-info p { font-size: 0.9rem; margin-bottom: 0.5rem; line-height: 1.7; }
-  .programa-info p:last-child { margin-bottom: 0; color: var(--color-muted); font-size: 0.85rem; }
-
-  .contacto-catequesis {
-    margin-top: 2.5rem;
-    padding: 1.25rem 1.5rem;
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-left: 4px solid var(--color-primary);
-    border-radius: 0 6px 6px 0;
-    font-size: 0.95rem;
-    color: var(--color-muted);
-  }
+  .cuerpo :global(a) { color: var(--color-primary); }
 </style>

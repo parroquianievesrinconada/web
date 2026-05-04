@@ -1,5 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getEntry, render } from "astro:content";
+
+const entrada = await getEntry("paginas", "calendario");
+const { Content } = await render(entrada);
 
 const hoy = new Date();
 const año = hoy.getFullYear();
@@ -22,17 +26,12 @@ for (let i = 0; i < celdas.length; i += 7) semanas.push(celdas.slice(i, i + 7));
 
 const DIAS = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
 
-const eventos: Record<number, { texto: string; tipo: string }[]> = {
-  1: [{ texto: "Misa de inicio de mes", tipo: "misa" }],
-  3: [{ texto: "Adoración nocturna", tipo: "especial" }],
-  7: [{ texto: "Misa de enfermos", tipo: "pastoral" }],
-  10: [{ texto: "Reunión catequistas", tipo: "formacion" }],
-  15: [{ texto: "Festivo – Asunción", tipo: "festivo" }],
-  17: [{ texto: "Confesiones generales", tipo: "sacramento" }],
-  21: [{ texto: "Retiro espiritual", tipo: "especial" }],
-  24: [{ texto: "Lectio Divina", tipo: "formacion" }],
-  28: [{ texto: "Pastoral de la Salud", tipo: "pastoral" }],
-};
+const eventosRaw = entrada.data.eventos ?? [];
+const eventos: Record<number, { texto: string; tipo: string }[]> = {};
+for (const ev of eventosRaw) {
+  if (!eventos[ev.dia]) eventos[ev.dia] = [];
+  eventos[ev.dia].push({ texto: ev.texto, tipo: ev.tipo });
+}
 ---
 
 <Layout title="Calendario Litúrgico">
@@ -91,13 +90,9 @@ const eventos: Record<number, { texto: string; tipo: string }[]> = {
 
     <div class="proximos">
       <h3>Próximos eventos</h3>
-      <ul class="proximos-lista">
-        <li><strong>Primer viernes de mes</strong> — Adoración nocturna a las 21:00</li>
-        <li><strong>Primer sábado de mes</strong> — Misa de enfermos a las 12:00</li>
-        <li><strong>15 de agosto</strong> — Festividad de la Asunción de la Virgen (Patrona)</li>
-        <li><strong>Cada miércoles</strong> — Lectio Divina a las 19:30</li>
-        <li><strong>Último lunes de mes</strong> — Reunión Pastoral de la Salud a las 19:00</li>
-      </ul>
+      <div class="proximos-cuerpo">
+        <Content />
+      </div>
     </div>
   </div>
 </Layout>
@@ -157,7 +152,6 @@ const eventos: Record<number, { texto: string; tipo: string }[]> = {
 
   .cal-dia:nth-child(7n) { border-right: none; }
   .cal-dia.vacio { background: var(--color-bg); }
-
   .cal-dia.hoy { background: #fff8f0; }
   .cal-dia.hoy .cal-num {
     background: var(--color-primary);
@@ -171,7 +165,6 @@ const eventos: Record<number, { texto: string; tipo: string }[]> = {
   }
 
   .cal-num { font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.25rem; }
-
   .cal-eventos { display: flex; flex-direction: column; gap: 2px; }
 
   .cal-evento {
@@ -200,13 +193,7 @@ const eventos: Record<number, { texto: string; tipo: string }[]> = {
 
   .leyenda-item { display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; color: var(--color-muted); }
 
-  .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 3px;
-    flex-shrink: 0;
-  }
-
+  .dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
   .dot.tipo-misa { background: #fdebd0; border: 1px solid #c99060; }
   .dot.tipo-sacramento { background: #d5e8d4; border: 1px solid #5a9c5a; }
   .dot.tipo-pastoral { background: #d6eaf8; border: 1px solid #5a90c0; }
@@ -217,8 +204,8 @@ const eventos: Record<number, { texto: string; tipo: string }[]> = {
   .proximos { margin-top: 1.5rem; }
   .proximos h3 { font-size: 1.1rem; color: var(--color-primary); margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--color-border); }
 
-  .proximos-lista { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-  .proximos-lista li { font-size: 0.9rem; padding-left: 1rem; border-left: 2px solid var(--color-primary); }
+  .proximos-cuerpo :global(ul) { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .proximos-cuerpo :global(li) { font-size: 0.9rem; padding-left: 1rem; border-left: 2px solid var(--color-primary); }
 
   @media (max-width: 600px) {
     .cal-dia { min-height: 50px; }
