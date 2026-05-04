@@ -1,0 +1,3 @@
+/anuncios /actualidad 301
+/anuncios/* /actualidad/:splat 301
+/horarios /parroquia/horarios 301

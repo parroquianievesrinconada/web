@@ -11,15 +11,20 @@ const datos = {
   mapa: "",
   ...entrada?.data,
 };
-
-const enviado = Astro.url.searchParams.get("enviado") === "1";
 ---
 
 <Layout title="Contacto">
-  <div class="container">
-    <h1>{datos.title}</h1>
+  <div class="hero-interior">
+    <div class="container">
+      <h1>Contacto</h1>
+      <p>Estamos aquí para ayudarte</p>
+    </div>
+  </div>
 
+  <div class="container">
     <div class="pagina-grid">
+
+      <!-- INFO + MAPA -->
       <div class="columna-info">
         {datos.direccion && (
           <div class="campo">
@@ -49,165 +54,169 @@ const enviado = Astro.url.searchParams.get("enviado") === "1";
           </div>
         )}
 
+        <div class="campo">
+          <span class="icono">🕐</span>
+          <div>
+            <strong>Despacho parroquial</strong>
+            <p>Lun, Mié y Vie: 10:00 – 12:30</p>
+            <p>Mar y Jue: 17:30 – 19:30</p>
+          </div>
+        </div>
+
         {datos.mapa && (
           <div class="mapa" set:html={datos.mapa} />
         )}
       </div>
 
+      <!-- FORMULARIO -->
       <div class="columna-form">
         <h2>Escríbenos</h2>
 
-        {enviado ? (
-          <div class="aviso-ok">
-            <strong>Mensaje enviado.</strong> Nos pondremos en contacto contigo en breve.
+        <div id="aviso-ok" class="aviso-ok" style="display:none">
+          <strong>Mensaje enviado.</strong> Nos pondremos en contacto contigo en breve.
+        </div>
+        <div id="aviso-error" class="aviso-error" style="display:none">
+          Ha ocurrido un error. Por favor inténtalo de nuevo.
+        </div>
+
+        <form id="form-contacto" class="formulario">
+          <input type="hidden" name="access_key" value="REEMPLAZA_CON_TU_CLAVE_WEB3FORMS" />
+          <input type="hidden" name="subject" value="Mensaje desde la web de la parroquia" />
+          <input type="checkbox" name="botcheck" style="display:none" />
+
+          <div class="campo-form">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="name" required placeholder="Tu nombre" />
           </div>
-        ) : (
-          <form
-            name="contacto"
-            method="POST"
-            action="/contacto?enviado=1"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            class="formulario"
-          >
-            <input type="hidden" name="form-name" value="contacto" />
-            <p class="oculto">
-              <label>No rellenar: <input name="bot-field" /></label>
-            </p>
+          <div class="campo-form">
+            <label for="email-form">Correo electrónico</label>
+            <input type="email" id="email-form" name="email" required placeholder="tucorreo@ejemplo.com" />
+          </div>
+          <div class="campo-form">
+            <label for="asunto">Asunto</label>
+            <input type="text" id="asunto" name="asunto" required placeholder="Motivo del mensaje" />
+          </div>
+          <div class="campo-form">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="message" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
+          </div>
+          <button type="submit" id="btn-enviar">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
 
-            <div class="campo-form">
-              <label for="nombre">Nombre</label>
-              <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre" />
-            </div>
-
-            <div class="campo-form">
-              <label for="email">Correo electrónico</label>
-              <input type="email" id="email" name="email" required placeholder="tucorreo@ejemplo.com" />
-            </div>
-
-            <div class="campo-form">
-              <label for="asunto">Asunto</label>
-              <input type="text" id="asunto" name="asunto" required placeholder="Motivo del mensaje" />
-            </div>
-
-            <div class="campo-form">
-              <label for="mensaje">Mensaje</label>
-              <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
-            </div>
-
-            <button type="submit">Enviar mensaje</button>
-          </form>
-        )}
+    <!-- REDES SOCIALES -->
+    <div class="redes">
+      <h2>Síguenos</h2>
+      <div class="redes-grid">
+        <a href="https://facebook.com" class="red" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.875v2.26h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          <span>Facebook</span>
+        </a>
+        <a href="https://instagram.com" class="red" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>Instagram</span>
+        </a>
+        <a href="https://youtube.com" class="red" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          <span>YouTube</span>
+        </a>
       </div>
     </div>
   </div>
 </Layout>
 
+<script is:inline>
+  document.getElementById("form-contacto").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var btn = document.getElementById("btn-enviar");
+    btn.disabled = true;
+    btn.textContent = "Enviando...";
+
+    var formData = new FormData(this);
+    var asunto = formData.get("asunto");
+    formData.set("subject", "Parroquia Rinconada — " + asunto);
+
+    try {
+      var res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      });
+      if (res.ok) {
+        document.getElementById("form-contacto").style.display = "none";
+        document.getElementById("aviso-ok").style.display = "block";
+      } else { throw new Error(); }
+    } catch {
+      document.getElementById("aviso-error").style.display = "block";
+      btn.disabled = false;
+      btn.textContent = "Enviar mensaje";
+    }
+  });
+</script>
+
 <style>
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--color-border);
-  }
+  .hero-interior { background: linear-gradient(135deg, #4a2515, #7a4020); color: #fff; padding: 3rem 0; }
+  .hero-interior h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
+  .hero-interior p { opacity: 0.85; }
 
-  h2 {
-    font-size: 1.3rem;
-    margin-bottom: 1.25rem;
-    color: var(--color-primary);
-  }
+  .pagina-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin-bottom: 3rem; }
 
-  .pagina-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
-  }
+  h2 { font-size: 1.2rem; margin-bottom: 1.25rem; color: var(--color-primary); }
 
-  /* Info de contacto */
-  .campo {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
-  }
-
-  .icono { font-size: 1.5rem; flex-shrink: 0; }
-
-  .campo strong {
-    display: block;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-muted);
-    margin-bottom: 0.2rem;
-  }
-
-  .campo p { margin: 0; }
+  .campo { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.25rem; }
+  .icono { font-size: 1.4rem; flex-shrink: 0; }
+  .campo strong { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-muted); margin-bottom: 0.15rem; }
+  .campo p { margin: 0; font-size: 0.9rem; }
 
   .mapa :global(iframe) { width: 100%; border-radius: 6px; border: 1px solid var(--color-border); margin-top: 1rem; }
 
-  /* Formulario */
   .formulario { display: flex; flex-direction: column; gap: 1rem; }
-
   .campo-form { display: flex; flex-direction: column; gap: 0.3rem; }
-
-  .campo-form label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  .campo-form input,
-  .campo-form textarea {
+  .campo-form label { font-size: 0.85rem; font-weight: 600; }
+  .campo-form input, .campo-form textarea {
     padding: 0.6rem 0.75rem;
     border: 1px solid var(--color-border);
     border-radius: 4px;
     font-family: var(--font-sans);
     font-size: 0.95rem;
     background: #fff;
-    color: var(--color-text);
-    transition: border-color 0.2s;
     width: 100%;
+    transition: border-color 0.2s;
   }
-
-  .campo-form input:focus,
-  .campo-form textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(122, 62, 43, 0.1);
-  }
-
+  .campo-form input:focus, .campo-form textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(122,62,43,0.1); }
   .campo-form textarea { resize: vertical; }
 
-  button[type="submit"] {
-    background: var(--color-primary);
-    color: #fff;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    align-self: flex-start;
-    transition: background 0.2s;
-  }
+  button[type="submit"] { background: var(--color-primary); color: #fff; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; font-family: var(--font-sans); font-size: 1rem; font-weight: 600; cursor: pointer; align-self: flex-start; transition: background 0.2s; }
+  button[type="submit"]:hover:not(:disabled) { background: var(--color-primary-light); }
+  button[type="submit"]:disabled { opacity: 0.7; cursor: not-allowed; }
 
-  button[type="submit"]:hover { background: var(--color-primary-light); }
+  .aviso-ok { background: #f0faf0; border: 1px solid #a3d9a5; color: #2d6a30; border-radius: 6px; padding: 1.25rem; font-size: 0.95rem; margin-bottom: 1rem; }
+  .aviso-error { background: #fff0f0; border: 1px solid #f5a5a5; color: #8b0000; border-radius: 6px; padding: 1.25rem; font-size: 0.95rem; margin-bottom: 1rem; }
 
-  .oculto { display: none; }
+  /* Redes sociales */
+  .redes { border-top: 2px solid var(--color-border); padding-top: 2rem; }
+  .redes-grid { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-  .aviso-ok {
-    background: #f0faf0;
-    border: 1px solid #a3d9a5;
-    color: #2d6a30;
+  .red {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.25rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
     border-radius: 6px;
-    padding: 1.25rem 1.5rem;
-    font-size: 0.95rem;
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: border-color 0.2s, color 0.2s;
   }
 
-  @media (max-width: 700px) {
-    .pagina-grid { grid-template-columns: 1fr; gap: 2rem; }
-  }
+  .red:hover { text-decoration: none; }
+  .red:nth-child(1):hover { color: #1877f2; border-color: #1877f2; }
+  .red:nth-child(2):hover { color: #c13584; border-color: #c13584; }
+  .red:nth-child(3):hover { color: #ff0000; border-color: #ff0000; }
+
+  @media (max-width: 700px) { .pagina-grid { grid-template-columns: 1fr; gap: 2rem; } }
 </style>

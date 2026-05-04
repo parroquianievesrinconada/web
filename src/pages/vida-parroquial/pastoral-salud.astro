@@ -1,0 +1,110 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Pastoral de la Salud">
+  <div class="hero-interior">
+    <div class="container">
+      <h1>Pastoral de la Salud</h1>
+      <p>Acompañamiento cristiano a enfermos, mayores y sus familias</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="intro">
+      <p>La Pastoral de la Salud es el servicio de la parroquia a quienes sufren la enfermedad y la vejez. Siguiendo el ejemplo de Jesús, que curó a los enfermos y se acercó a los más vulnerables, un equipo de voluntarios y el párroco llevan la presencia de la comunidad a hospitales, residencias y domicilios.</p>
+    </div>
+
+    <div class="servicios">
+
+      <div class="servicio">
+        <h2>🏠 Visita a domicilio</h2>
+        <p>El equipo de pastoral visita regularmente a personas enfermas o con movilidad reducida que no pueden asistir a la iglesia. Se les lleva la comunión, la oración y el acompañamiento de la comunidad parroquial.</p>
+        <p><strong>Días de visita:</strong> Martes y jueves por la mañana.</p>
+        <p>Si conoces a alguien que desee recibir esta visita, contacta con el despacho parroquial.</p>
+      </div>
+
+      <div class="servicio">
+        <h2>💒 Sacramento de la Unción de Enfermos</h2>
+        <p>El primer sábado de cada mes se celebra la <strong>Misa de enfermos</strong> a las 12:00, con posibilidad de recibir el sacramento de la Unción. Se ruega avisar con antelación al despacho parroquial si se desea recibir el sacramento.</p>
+        <p>Para casos de urgencia (enfermos graves o en peligro de muerte), el sacerdote puede desplazarse a cualquier hora. Llamar al teléfono parroquial.</p>
+      </div>
+
+      <div class="servicio">
+        <h2>🏥 Atención en residencias y hospitales</h2>
+        <p>Colaboramos con el servicio de asistencia religiosa del Hospital San Juan de Dios y visitamos mensualmente la Residencia de Mayores "El Olivar" de La Rinconada.</p>
+        <p>Si un familiar tuyo está ingresado y desea recibir atención pastoral, ponte en contacto con nosotros.</p>
+      </div>
+
+      <div class="servicio">
+        <h2>👐 Grupo de voluntarios</h2>
+        <p>La Pastoral de la Salud se sostiene gracias a un grupo de voluntarios comprometidos que dedican parte de su tiempo a acompañar a los más vulnerables. Si deseas unirte al equipo, no se requiere ninguna formación previa, solo disposición y fe.</p>
+        <p>El grupo se reúne el <strong>último lunes de cada mes a las 19:00</strong> en la sala parroquial para compartir experiencias, formación y oración.</p>
+      </div>
+
+    </div>
+
+    <div class="cita">
+      <blockquote>
+        «Estaba enfermo y me visitasteis.»
+        <cite>Mt 25, 36</cite>
+      </blockquote>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .hero-interior {
+    background: linear-gradient(135deg, #4a2515, #7a4020);
+    color: #fff;
+    padding: 3rem 0;
+  }
+  .hero-interior h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
+  .hero-interior p { opacity: 0.85; }
+
+  .intro {
+    max-width: 700px;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-muted);
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .servicios { display: flex; flex-direction: column; gap: 1.5rem; max-width: 760px; }
+
+  .servicio {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .servicio h2 { font-size: 1.1rem; color: var(--color-primary); margin-bottom: 0.75rem; }
+  .servicio p { font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.5rem; }
+  .servicio p:last-child { margin-bottom: 0; }
+
+  .cita {
+    margin-top: 2.5rem;
+    max-width: 500px;
+  }
+
+  blockquote {
+    border-left: 4px solid var(--color-primary);
+    padding: 1rem 1.5rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--color-text);
+    background: #fff;
+  }
+
+  cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    font-style: normal;
+    color: var(--color-muted);
+  }
+</style>

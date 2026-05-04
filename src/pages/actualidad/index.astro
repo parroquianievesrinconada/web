@@ -1,0 +1,84 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const fechaDeAnuncio = (anuncio: any): Date => {
+  if (anuncio.data.date) return new Date(anuncio.data.date);
+  const match = anuncio.id.match(/^(\d{4}-\d{2}-\d{2})/);
+  return match ? new Date(match[1]) : new Date();
+};
+
+const anuncios = (await getCollection("anuncios"))
+  .sort((a, b) => fechaDeAnuncio(b).valueOf() - fechaDeAnuncio(a).valueOf());
+
+const formatFecha = (date: Date) =>
+  date.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<Layout title="Noticias">
+  <div class="hero-interior">
+    <div class="container">
+      <h1>Noticias y Anuncios</h1>
+      <p>Toda la actualidad de la parroquia</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="nav-actualidad">
+      <a href="/actualidad" class="tab active">Noticias</a>
+      <a href="/actualidad/calendario" class="tab">Calendario Litúrgico</a>
+    </div>
+
+    {anuncios.length === 0 ? (
+      <p class="vacio">No hay anuncios publicados todavía.</p>
+    ) : (
+      <ul class="lista">
+        {anuncios.map((anuncio) => (
+          <li class="item">
+            {anuncio.data.image && (
+              <a href={`/actualidad/${anuncio.id}`} class="item-img-wrap">
+                <img src={anuncio.data.image} alt={anuncio.data.title} class="item-img" />
+              </a>
+            )}
+            <div class="item-body">
+              <time class="item-fecha">{formatFecha(fechaDeAnuncio(anuncio))}</time>
+              <h2><a href={`/actualidad/${anuncio.id}`}>{anuncio.data.title}</a></h2>
+              <p>{anuncio.data.summary}</p>
+              <a href={`/actualidad/${anuncio.id}`} class="leer-mas">Leer más →</a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</Layout>
+
+<style>
+  .hero-interior { background: linear-gradient(135deg, #4a2515, #7a4020); color: #fff; padding: 3rem 0; }
+  .hero-interior h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
+  .hero-interior p { opacity: 0.85; }
+
+  .nav-actualidad { display: flex; gap: 0; border-bottom: 2px solid var(--color-primary); margin-bottom: 2rem; }
+  .tab { padding: 0.6rem 1.25rem; font-size: 0.85rem; font-weight: 600; color: var(--color-muted); text-decoration: none; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: color 0.2s; }
+  .tab:hover { color: var(--color-primary); text-decoration: none; }
+  .tab.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+
+  .vacio { color: var(--color-muted); font-style: italic; }
+  .lista { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .item { background: #fff; border: 1px solid var(--color-border); border-radius: 6px; overflow: hidden; display: flex; }
+  .item-img-wrap { flex-shrink: 0; }
+  .item-img { width: 200px; height: 100%; object-fit: cover; display: block; }
+  .item-body { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .item-fecha { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-primary); font-weight: 600; }
+  .item-body h2 { font-size: 1.15rem; }
+  .item-body h2 a { color: var(--color-text); }
+  .item-body h2 a:hover { color: var(--color-primary); text-decoration: none; }
+  .item-body p { font-size: 0.9rem; color: var(--color-muted); }
+  .leer-mas { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.25rem; }
+
+  @media (max-width: 500px) {
+    .item { flex-direction: column; }
+    .item-img { width: 100%; height: 160px; }
+  }
+</style>

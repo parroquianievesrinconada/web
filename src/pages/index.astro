@@ -20,18 +20,64 @@ const secundarios = anuncios.slice(1);
 ---
 
 <Layout title="Inicio">
-  <section class="hero">
-    <div class="hero-inner">
-      <h1>Bienvenidos a la Parroquia Rinconada</h1>
-      <p>Comunidad de fe al servicio de todos</p>
-    </div>
-  </section>
 
+  <!-- BANNER ROTATIVO -->
+  <div class="banner" aria-label="Fotos de la parroquia">
+    <div class="slides">
+      <div class="slide slide-1 active">
+        <div class="slide-texto">
+          <h1>Parroquia de La Rinconada</h1>
+          <p>Comunidad de fe, esperanza y caridad</p>
+        </div>
+      </div>
+      <div class="slide slide-2">
+        <div class="slide-texto">
+          <h1>Bienvenidos a nuestra casa</h1>
+          <p>Un lugar de encuentro para todos</p>
+        </div>
+      </div>
+      <div class="slide slide-3">
+        <div class="slide-texto">
+          <h1>Juntos en el camino</h1>
+          <p>Vida sacramental · Catequesis · Hermandades</p>
+        </div>
+      </div>
+    </div>
+    <div class="dots" aria-hidden="true">
+      <button class="dot active" data-slide="0"></button>
+      <button class="dot" data-slide="1"></button>
+      <button class="dot" data-slide="2"></button>
+    </div>
+    <button class="arrow arrow-prev" aria-label="Anterior">&#8249;</button>
+    <button class="arrow arrow-next" aria-label="Siguiente">&#8250;</button>
+  </div>
+
+  <!-- ACCESO RÁPIDO -->
+  <div class="acceso-rapido">
+    <a href="/parroquia/horarios" class="acceso-btn">
+      <span class="acceso-icono">🕐</span>
+      <span class="acceso-label">Horarios de Misa</span>
+    </a>
+    <a href="/parroquia/horarios#confesiones" class="acceso-btn">
+      <span class="acceso-icono">🙏</span>
+      <span class="acceso-label">Confesiones</span>
+    </a>
+    <a href="/actualidad" class="acceso-btn">
+      <span class="acceso-icono">📢</span>
+      <span class="acceso-label">Noticias</span>
+    </a>
+    <a href="/contacto" class="acceso-btn">
+      <span class="acceso-icono">📍</span>
+      <span class="acceso-label">Contacto</span>
+    </a>
+  </div>
+
+  <!-- ÚLTIMAS NOTICIAS -->
   <div class="container">
     <section class="noticias">
       <div class="section-header">
         <h2>Últimas noticias</h2>
-        <a href="/anuncios">Ver todas →</a>
+        <a href="/actualidad">Ver todas →</a>
       </div>
 
       {anuncios.length === 0 ? (
@@ -41,32 +87,31 @@ const secundarios = anuncios.slice(1);
           {principal && (
             <article class="noticia-principal">
               {principal.data.image && (
-                <a href={`/anuncios/${principal.id}`} class="principal-img-wrap">
+                <a href={`/actualidad/${principal.id}`} class="principal-img-wrap">
                   <img src={principal.data.image} alt={principal.data.title} class="principal-img" />
                 </a>
               )}
               <div class="principal-cuerpo">
                 <time class="noticia-fecha">{formatFecha(fechaDeAnuncio(principal))}</time>
                 <h3 class="principal-titulo">
-                  <a href={`/anuncios/${principal.id}`}>{principal.data.title}</a>
+                  <a href={`/actualidad/${principal.id}`}>{principal.data.title}</a>
                 </h3>
                 <p class="principal-resumen">{principal.data.summary}</p>
-                <a href={`/anuncios/${principal.id}`} class="leer-mas">Leer más →</a>
+                <a href={`/actualidad/${principal.id}`} class="leer-mas">Leer más →</a>
               </div>
             </article>
           )}
-
           {secundarios.length > 0 && (
             <div class="noticias-secundarias">
               {secundarios.map((anuncio) => (
                 <article class="noticia-secundaria">
                   <div class="secundaria-cuerpo">
                     <time class="noticia-fecha">{formatFecha(fechaDeAnuncio(anuncio))}</time>
-                    <h4><a href={`/anuncios/${anuncio.id}`}>{anuncio.data.title}</a></h4>
+                    <h4><a href={`/actualidad/${anuncio.id}`}>{anuncio.data.title}</a></h4>
                     <p>{anuncio.data.summary}</p>
                   </div>
                   {anuncio.data.image && (
-                    <a href={`/anuncios/${anuncio.id}`} class="secundaria-img-wrap">
+                    <a href={`/actualidad/${anuncio.id}`} class="secundaria-img-wrap">
                       <img src={anuncio.data.image} alt={anuncio.data.title} class="secundaria-img" />
                     </a>
                   )}
@@ -77,45 +122,163 @@ const secundarios = anuncios.slice(1);
         </div>
       )}
     </section>
-
-    <section class="bloques">
-      <a href="/horarios" class="bloque">
-        <span class="bloque-icono">🕐</span>
-        <h3>Horarios de misas</h3>
-        <p>Consulta los horarios de celebraciones</p>
-      </a>
-      <a href="/contacto" class="bloque">
-        <span class="bloque-icono">📍</span>
-        <h3>Contacto y ubicación</h3>
-        <p>Encuéntranos y ponte en contacto</p>
-      </a>
-      <a href="/anuncios" class="bloque">
-        <span class="bloque-icono">📢</span>
-        <h3>Tablón de anuncios</h3>
-        <p>Todas las noticias de la parroquia</p>
-      </a>
-    </section>
   </div>
+
+  <script is:inline>
+    var slides = document.querySelectorAll(".slide");
+    var dots = document.querySelectorAll(".dot");
+    var current = 0;
+    var timer;
+
+    function goTo(n) {
+      slides[current].classList.remove("active");
+      dots[current].classList.remove("active");
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add("active");
+      dots[current].classList.add("active");
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(next, 5000);
+    }
+
+    timer = setInterval(next, 5000);
+
+    dots.forEach(function (dot) {
+      dot.addEventListener("click", function () {
+        goTo(parseInt(dot.dataset.slide));
+        resetTimer();
+      });
+    });
+
+    document.querySelector(".arrow-next").addEventListener("click", function () { next(); resetTimer(); });
+    document.querySelector(".arrow-prev").addEventListener("click", function () { prev(); resetTimer(); });
+  </script>
 </Layout>
 
 <style>
-  .hero {
-    background: var(--color-primary);
-    color: #fff;
-    padding: 4rem 1.5rem;
+  /* ── BANNER ── */
+  .banner {
+    position: relative;
+    height: 480px;
+    overflow: hidden;
+    background: #3a2218;
+  }
+
+  .slides { height: 100%; }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .slide.active { opacity: 1; }
+
+  .slide-1 { background: linear-gradient(135deg, #4a2515 0%, #7a4020 40%, #c07840 100%); }
+  .slide-2 { background: linear-gradient(135deg, #1a2a3a 0%, #2a4a6a 50%, #3a6a8a 100%); }
+  .slide-3 { background: linear-gradient(135deg, #2a1a0a 0%, #5a3a18 40%, #8a6030 100%); }
+
+  .slide-texto {
     text-align: center;
+    color: #fff;
+    padding: 2rem;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
   }
 
-  .hero-inner { max-width: var(--max-width); margin: 0 auto; }
-
-  .hero h1 {
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
+  .slide-texto h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
     margin-bottom: 0.75rem;
+    color: #fff;
   }
 
-  .hero p { font-size: 1.1rem; opacity: 0.85; }
+  .slide-texto p {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    opacity: 0.9;
+  }
 
-  /* Cabecera de sección */
+  .dots {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s;
+  }
+
+  .dot.active { background: #fff; }
+
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    line-height: 1;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .arrow:hover { background: rgba(255,255,255,0.3); }
+  .arrow-prev { left: 1rem; }
+  .arrow-next { right: 1rem; }
+
+  /* ── ACCESO RÁPIDO ── */
+  .acceso-rapido {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    background: var(--color-primary);
+    flex-wrap: wrap;
+  }
+
+  .acceso-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1.1rem 2rem;
+    color: #fff;
+    text-decoration: none;
+    border-right: 1px solid rgba(255,255,255,0.2);
+    transition: background 0.2s;
+    min-width: 130px;
+  }
+
+  .acceso-btn:last-child { border-right: none; }
+  .acceso-btn:hover { background: rgba(255,255,255,0.12); text-decoration: none; color: #fff; }
+
+  .acceso-icono { font-size: 1.6rem; }
+  .acceso-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* ── NOTICIAS ── */
   .section-header {
     display: flex;
     justify-content: space-between;
@@ -125,85 +288,37 @@ const secundarios = anuncios.slice(1);
     padding-bottom: 0.5rem;
   }
 
-  .section-header h2 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-primary); }
+  .section-header h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-primary); }
   .section-header a { font-size: 0.85rem; }
 
-  .vacio { color: var(--color-muted); font-style: italic; margin-bottom: 2rem; }
+  .vacio { color: var(--color-muted); font-style: italic; }
 
-  /* Grid editorial */
   .noticias-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
-    margin-bottom: 3rem;
     border: 1px solid var(--color-border);
     border-radius: 4px;
     overflow: hidden;
   }
 
-  /* Noticia principal */
-  .noticia-principal {
-    border-right: 1px solid var(--color-border);
-    display: flex;
-    flex-direction: column;
-  }
-
+  .noticia-principal { border-right: 1px solid var(--color-border); display: flex; flex-direction: column; }
   .principal-img-wrap { display: block; overflow: hidden; }
-
-  .principal-img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s;
-  }
-
+  .principal-img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.3s; display: block; }
   .principal-img-wrap:hover .principal-img { transform: scale(1.03); }
+  .principal-cuerpo { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; background: #fff; }
 
-  .principal-cuerpo {
-    padding: 1.25rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    background: #fff;
-  }
+  .noticia-fecha { font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-primary); font-weight: 600; }
 
-  .noticia-fecha {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-primary);
-    font-weight: 600;
-  }
+  .principal-titulo { font-size: 1.3rem; line-height: 1.25; }
+  .principal-titulo a { color: var(--color-text); }
+  .principal-titulo a:hover { color: var(--color-primary); text-decoration: none; }
+  .principal-resumen { font-size: 0.88rem; color: var(--color-muted); line-height: 1.6; flex: 1; }
+  .leer-mas { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
 
-  .principal-titulo {
-    font-size: 1.35rem;
-    line-height: 1.25;
-    margin: 0;
-  }
-
-  .principal-titulo a { color: var(--color-text); text-decoration: none; }
-  .principal-titulo a:hover { color: var(--color-primary); }
-
-  .principal-resumen {
-    font-size: 0.9rem;
-    color: var(--color-muted);
-    line-height: 1.6;
-    flex: 1;
-  }
-
-  .leer-mas { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-
-  /* Noticias secundarias */
-  .noticias-secundarias {
-    display: flex;
-    flex-direction: column;
-  }
+  .noticias-secundarias { display: flex; flex-direction: column; }
 
   .noticia-secundaria {
     display: flex;
-    gap: 0;
     padding: 1rem 1.25rem;
     border-bottom: 1px solid var(--color-border);
     background: #fff;
@@ -213,75 +328,20 @@ const secundarios = anuncios.slice(1);
   .noticia-secundaria:last-child { border-bottom: none; }
   .noticia-secundaria:hover { background: #faf6f2; }
 
-  .secundaria-cuerpo {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    min-width: 0;
-  }
-
-  .secundaria-cuerpo h4 {
-    font-size: 0.95rem;
-    line-height: 1.3;
-    margin: 0;
-    font-family: var(--font-serif);
-  }
-
-  .secundaria-cuerpo h4 a { color: var(--color-text); text-decoration: none; }
-  .secundaria-cuerpo h4 a:hover { color: var(--color-primary); }
-
-  .secundaria-cuerpo p {
-    font-size: 0.82rem;
-    color: var(--color-muted);
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+  .secundaria-cuerpo { flex: 1; display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
+  .secundaria-cuerpo h4 { font-size: 0.92rem; line-height: 1.3; font-family: var(--font-serif); }
+  .secundaria-cuerpo h4 a { color: var(--color-text); }
+  .secundaria-cuerpo h4 a:hover { color: var(--color-primary); text-decoration: none; }
+  .secundaria-cuerpo p { font-size: 0.8rem; color: var(--color-muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
   .secundaria-img-wrap { flex-shrink: 0; margin-left: 0.75rem; }
-
-  .secundaria-img {
-    width: 70px;
-    height: 70px;
-    object-fit: cover;
-    border-radius: 3px;
-    display: block;
-  }
-
-  /* Bloques de acceso rápido */
-  .bloques {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  .bloque {
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    padding: 1.5rem;
-    text-align: center;
-    text-decoration: none;
-    color: var(--color-text);
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-
-  .bloque:hover {
-    border-color: var(--color-primary);
-    box-shadow: 0 2px 8px rgba(122, 62, 43, 0.1);
-    text-decoration: none;
-  }
-
-  .bloque-icono { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
-  .bloque h3 { font-size: 1rem; margin-bottom: 0.3rem; }
-  .bloque p { font-size: 0.85rem; color: var(--color-muted); }
+  .secundaria-img { width: 68px; height: 68px; object-fit: cover; border-radius: 3px; }
 
   @media (max-width: 620px) {
+    .banner { height: 300px; }
     .noticias-grid { grid-template-columns: 1fr; }
     .noticia-principal { border-right: none; border-bottom: 1px solid var(--color-border); }
+    .acceso-btn { min-width: unset; flex: 1; padding: 1rem 0.75rem; }
+    .acceso-label { font-size: 0.7rem; }
   }
 </style>

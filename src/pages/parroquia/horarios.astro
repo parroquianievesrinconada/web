@@ -1,0 +1,190 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Horarios">
+  <div class="hero-interior">
+    <div class="container">
+      <h1>Horarios</h1>
+      <p>Celebraciones, apertura del templo y atención parroquial</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="grid-horarios">
+
+      <section class="bloque">
+        <h2>⛪ Misas — Temporada de invierno</h2>
+        <p class="subtitulo">Octubre – mayo</p>
+        <table>
+          <thead>
+            <tr><th>Día</th><th>Horario</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lunes a viernes</td><td>9:00 · 19:00</td></tr>
+            <tr><td>Sábados</td><td>12:00 · 19:00</td></tr>
+            <tr><td>Domingos y festivos</td><td>10:00 · 12:00 · 19:00</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="bloque">
+        <h2>☀️ Misas — Temporada de verano</h2>
+        <p class="subtitulo">Junio – septiembre</p>
+        <table>
+          <thead>
+            <tr><th>Día</th><th>Horario</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lunes a viernes</td><td>9:00 · 20:00</td></tr>
+            <tr><td>Sábados</td><td>12:00 · 20:00</td></tr>
+            <tr><td>Domingos y festivos</td><td>10:00 · 12:00 · 20:00</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="bloque" id="confesiones">
+        <h2>🙏 Confesiones</h2>
+        <table>
+          <thead>
+            <tr><th>Día</th><th>Horario</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lunes a viernes</td><td>30 min. antes de cada misa</td></tr>
+            <tr><td>Sábados</td><td>11:00 – 12:00 y 18:00 – 19:00</td></tr>
+            <tr><td>Domingos</td><td>30 min. antes de cada misa</td></tr>
+          </tbody>
+        </table>
+        <p class="nota">Para confesiones fuera de estos horarios, contactar con el despacho parroquial.</p>
+      </section>
+
+      <section class="bloque">
+        <h2>🚪 Apertura del templo</h2>
+        <table>
+          <thead>
+            <tr><th>Período</th><th>Horario</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mañanas (todo el año)</td><td>8:30 – 13:00</td></tr>
+            <tr><td>Tardes (invierno)</td><td>17:30 – 20:30</td></tr>
+            <tr><td>Tardes (verano)</td><td>18:30 – 21:30</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="bloque">
+        <h2>🏢 Despacho parroquial</h2>
+        <table>
+          <thead>
+            <tr><th>Día</th><th>Horario</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lunes, miércoles y viernes</td><td>10:00 – 12:30</td></tr>
+            <tr><td>Martes y jueves</td><td>17:30 – 19:30</td></tr>
+            <tr><td>Sábados</td><td>11:00 – 13:00</td></tr>
+          </tbody>
+        </table>
+        <p class="nota">En el despacho se atienden bautismos, matrimonios, funerales y certificados.</p>
+      </section>
+
+      <section class="bloque">
+        <h2>✝️ Celebraciones especiales</h2>
+        <ul class="lista-especial">
+          <li><strong>Primer viernes de mes</strong> — Adoración nocturna (21:00)</li>
+          <li><strong>Primer sábado de mes</strong> — Misa de enfermos (12:00), con Unción si se solicita</li>
+          <li><strong>Semana Santa</strong> — Según programa propio publicado en anuncios</li>
+          <li><strong>Corpus Christi</strong> — Misa solemne y procesión (consultar fecha)</li>
+          <li><strong>Festividad patronal</strong> — 15 de agosto, Asunción de la Virgen</li>
+        </ul>
+      </section>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .hero-interior {
+    background: linear-gradient(135deg, #4a2515, #7a4020);
+    color: #fff;
+    padding: 3rem 0;
+  }
+
+  .hero-interior h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
+  .hero-interior p { opacity: 0.85; }
+
+  .grid-horarios {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .bloque {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 1.5rem;
+  }
+
+  .bloque h2 {
+    font-size: 1.05rem;
+    color: var(--color-primary);
+    margin-bottom: 0.3rem;
+  }
+
+  .subtitulo {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin-bottom: 0.75rem;
+    font-style: italic;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  th {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: var(--color-bg); }
+
+  .nota {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    font-style: italic;
+  }
+
+  .lista-especial {
+    list-style: none;
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .lista-especial li {
+    padding-left: 1rem;
+    border-left: 2px solid var(--color-primary);
+  }
+
+  @media (max-width: 640px) {
+    .grid-horarios { grid-template-columns: 1fr; }
+  }
+</style>

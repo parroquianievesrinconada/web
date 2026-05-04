@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+<Layout title="Hermandad de los Dolores">
+  <div class="hero-hmd" style="background: linear-gradient(135deg, #2a0a0a, #6a1a1a);">
+    <div class="container">
+      <p class="hmd-label">Hermandad de</p>
+      <h1>Nuestra Señora de los Dolores</h1>
+      <p>Parroquia de La Rinconada · Fundada en 1892</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="proximamente">
+      <div class="icono">✝️</div>
+      <h2>Contenido en construcción</h2>
+      <p>Estamos preparando la información de esta hermandad. Próximamente encontrarás aquí su historia, actividades, junta de gobierno y calendario de cultos.</p>
+      <a href="/contacto" class="btn">Contactar con la parroquia</a>
+    </div>
+  </div>
+</Layout>
+<style>
+  .hero-hmd { color: #fff; padding: 3rem 0; }
+  .hmd-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; }
+  .hero-hmd h1 { color: #fff; font-size: 1.8rem; margin: 0.25rem 0 0.5rem; }
+  .hero-hmd p { opacity: 0.8; }
+  .proximamente { text-align: center; padding: 4rem 2rem; max-width: 500px; margin: 0 auto; }
+  .icono { font-size: 3rem; margin-bottom: 1rem; }
+  .proximamente h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+  .proximamente p { color: var(--color-muted); margin-bottom: 2rem; }
+  .btn { display: inline-block; background: var(--color-primary); color: #fff; padding: 0.75rem 1.5rem; border-radius: 4px; font-weight: 600; text-decoration: none; }
+  .btn:hover { background: var(--color-primary-light); text-decoration: none; }
+</style>

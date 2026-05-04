@@ -1,0 +1,143 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Historia y Patrimonio">
+  <div class="hero-interior">
+    <div class="container">
+      <h1>Historia y Patrimonio</h1>
+      <p>La Parroquia de La Rinconada, un testimonio de fe a lo largo de los siglos</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="contenido">
+
+      <section class="seccion">
+        <h2>Nuestros orígenes</h2>
+        <p>La Parroquia de La Rinconada tiene sus raíces en el siglo XVII, cuando fue erigida canónicamente bajo la advocación de <strong>Nuestra Señora de la Asunción</strong>. Su fundación estuvo impulsada por la creciente comunidad de fieles que se asentó en estas tierras del Aljarafe sevillano, necesitada de un centro de culto propio e independiente de las parroquias vecinas.</p>
+        <p>El templo original era de humilde construcción, con nave única y cubierta de madera. A lo largo de las siguientes centurias fue ampliado y reformado, adquiriendo la fisonomía barroca andaluza que en parte conserva hoy.</p>
+      </section>
+
+      <section class="seccion">
+        <h2>El edificio</h2>
+        <p>El templo actual responde a la tipología de iglesia de tres naves, separadas por arcos de medio punto sobre pilastras de ladrillo. La nave central, más elevada y ancha, está cubierta con bóveda de cañón con lunetos, decorada con yeserías de estilo mudéjar-barroco fechadas en el siglo XVIII.</p>
+        <p>La <strong>portada principal</strong>, orientada a la plaza del pueblo, presenta un arco de medio punto flanqueado por pilastras de orden toscano y rematado con una hornacina que acoge una imagen de la Virgen de la Asunción. La torre campanario, de planta cuadrada y tres cuerpos, domina la silueta del municipio y es visible desde los principales accesos a la localidad.</p>
+      </section>
+
+      <div class="galeria">
+        <div class="galeria-item placeholder">
+          <span>Retablo Mayor</span>
+        </div>
+        <div class="galeria-item placeholder">
+          <span>Torre Campanario</span>
+        </div>
+        <div class="galeria-item placeholder">
+          <span>Nave Central</span>
+        </div>
+      </div>
+
+      <section class="seccion">
+        <h2>El Retablo Mayor</h2>
+        <p>La pieza más destacada del patrimonio artístico es, sin duda, el <strong>Retablo Mayor</strong>, obra del taller sevillano de los Churriguera datada en torno a 1740. Tallado en madera de pino de Flandes y dorado a la hoja, presenta tres calles y ático, con imágenes de San Pedro y San Pablo flanqueando la hornacina central donde se venera la imagen titular de la Virgen de la Asunción.</p>
+        <p>En el banco del retablo pueden apreciarse relieves con escenas de la vida de la Virgen, de una calidad escultórica notable para tratarse de un encargo de una localidad rural de la época.</p>
+      </section>
+
+      <section class="seccion">
+        <h2>Imágenes y esculturas</h2>
+        <ul class="lista-patrimonio">
+          <li>
+            <strong>Virgen de la Asunción</strong> — Imagen titular, talla de vestir del siglo XVII atribuida al círculo de Juan de Mesa.
+          </li>
+          <li>
+            <strong>Cristo de la Misericordia</strong> — Crucificado de candelero del siglo XVIII, de autor desconocido. Titular de culto de la Hermandad de los Dolores.
+          </li>
+          <li>
+            <strong>Nuestra Señora de los Dolores</strong> — Dolorosa de candelero, posiblemente de taller local del siglo XIX.
+          </li>
+          <li>
+            <strong>Cristo Resucitado</strong> — Imagen contemporánea, obra del escultor sevillano Antonio Díaz Fernández (1978).
+          </li>
+          <li>
+            <strong>San José con el Niño</strong> — Talla de bulto redondo del siglo XVIII ubicada en la capilla lateral derecha.
+          </li>
+        </ul>
+      </section>
+
+      <section class="seccion">
+        <h2>La Sacristía</h2>
+        <p>La sacristía conserva un valioso conjunto de ornamentos litúrgicos históricos, entre los que destacan varias casullas bordadas en hilo de oro y plata de los siglos XVIII y XIX, una custodia procesional de plata dorada del siglo XVII y un conjunto de candelabros de bronce de estilo neoclásico.</p>
+        <p>El armario-cajonería de la sacristía, realizado en madera de nogal y cedro, data de mediados del siglo XVIII y fue declarado Bien de Interés Cultural por la Consejería de Cultura de la Junta de Andalucía en el año 2003.</p>
+      </section>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .hero-interior {
+    background: linear-gradient(135deg, #4a2515, #7a4020);
+    color: #fff;
+    padding: 3rem 0;
+  }
+
+  .hero-interior h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
+  .hero-interior p { opacity: 0.85; }
+
+  .contenido { max-width: 760px; }
+
+  .seccion { margin-bottom: 2.5rem; }
+
+  .seccion h2 {
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .seccion p { margin-bottom: 0.9rem; line-height: 1.8; }
+
+  .lista-patrimonio {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .lista-patrimonio li {
+    padding: 0.75rem 1rem;
+    background: #fff;
+    border-left: 3px solid var(--color-primary);
+    border-radius: 0 4px 4px 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .galeria {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .galeria-item.placeholder {
+    height: 160px;
+    background: linear-gradient(135deg, #c8a882, #a07850);
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0.75rem;
+  }
+
+  .galeria-item.placeholder span {
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  @media (max-width: 600px) {
+    .galeria { grid-template-columns: 1fr 1fr; }
+  }
+</style>
