@@ -26,7 +26,7 @@ const formatFecha = (date: Date) =>
 <Layout title={anuncio.data.title}>
   {anuncio.data.image && (
     <div class="portada-wrap">
-      <img src={anuncio.data.image} alt={anuncio.data.title} class="portada" />
+      <img src={anuncio.data.image} alt={anuncio.data.title} class="portada" fetchpriority="high" />
     </div>
   )}
 

@@ -12,6 +12,7 @@
     CMS.init({
       config: {
         load_config_file: false,
+        publish_mode: "editorial_workflow",
         backend: {
           name: "github",
           repo: "antoniopelaezmoreno/parroquia-rinconada",
@@ -31,7 +32,6 @@
             slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
             fields: [
               { label: "Título", name: "title", widget: "string" },
-              { label: "Imagen destacada", name: "image", widget: "image", required: false },
               { label: "Resumen corto", name: "summary", widget: "text" },
               { label: "Contenido", name: "body", widget: "markdown" },
             ],

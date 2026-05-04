@@ -24,19 +24,25 @@ const secundarios = anuncios.slice(1);
   <!-- BANNER ROTATIVO -->
   <div class="banner" aria-label="Fotos de la parroquia">
     <div class="slides">
-      <div class="slide slide-1 active">
+      <div class="slide active">
+        <img src="/uploads/rotativo-1.webp" alt="Parroquia de La Rinconada" class="slide-img" fetchpriority="high" />
+        <div class="slide-overlay"></div>
         <div class="slide-texto">
           <h1>Parroquia de La Rinconada</h1>
           <p>Comunidad de fe, esperanza y caridad</p>
         </div>
       </div>
-      <div class="slide slide-2">
+      <div class="slide">
+        <img src="/uploads/rotativo-2.webp" alt="Bienvenidos a nuestra casa" class="slide-img" loading="lazy" />
+        <div class="slide-overlay"></div>
         <div class="slide-texto">
           <h1>Bienvenidos a nuestra casa</h1>
           <p>Un lugar de encuentro para todos</p>
         </div>
       </div>
-      <div class="slide slide-3">
+      <div class="slide">
+        <img src="/uploads/rotativo-3.webp" alt="Juntos en el camino" class="slide-img" loading="lazy" />
+        <div class="slide-overlay"></div>
         <div class="slide-texto">
           <h1>Juntos en el camino</h1>
           <p>Vida sacramental · Catequesis · Hermandades</p>
@@ -57,10 +63,6 @@ const secundarios = anuncios.slice(1);
     <a href="/parroquia/horarios" class="acceso-btn">
       <span class="acceso-icono">🕐</span>
       <span class="acceso-label">Horarios de Misa</span>
-    </a>
-    <a href="/parroquia/horarios#confesiones" class="acceso-btn">
-      <span class="acceso-icono">🙏</span>
-      <span class="acceso-label">Confesiones</span>
     </a>
     <a href="/actualidad" class="acceso-btn">
       <span class="acceso-icono">📢</span>
@@ -88,7 +90,7 @@ const secundarios = anuncios.slice(1);
             <article class="noticia-principal">
               {principal.data.image && (
                 <a href={`/actualidad/${principal.id}`} class="principal-img-wrap">
-                  <img src={principal.data.image} alt={principal.data.title} class="principal-img" />
+                  <img src={principal.data.image} alt={principal.data.title} class="principal-img" loading="lazy" />
                 </a>
               )}
               <div class="principal-cuerpo">
@@ -112,7 +114,7 @@ const secundarios = anuncios.slice(1);
                   </div>
                   {anuncio.data.image && (
                     <a href={`/actualidad/${anuncio.id}`} class="secundaria-img-wrap">
-                      <img src={anuncio.data.image} alt={anuncio.data.title} class="secundaria-img" />
+                      <img src={anuncio.data.image} alt={anuncio.data.title} class="secundaria-img" loading="lazy" />
                     </a>
                   )}
                 </article>
@@ -183,9 +185,19 @@ const secundarios = anuncios.slice(1);
 
   .slide.active { opacity: 1; }
 
-  .slide-1 { background: linear-gradient(135deg, #4a2515 0%, #7a4020 40%, #c07840 100%); }
-  .slide-2 { background: linear-gradient(135deg, #1a2a3a 0%, #2a4a6a 50%, #3a6a8a 100%); }
-  .slide-3 { background: linear-gradient(135deg, #2a1a0a 0%, #5a3a18 40%, #8a6030 100%); }
+  .slide-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.42);
+  }
 
   .slide-texto {
     text-align: center;

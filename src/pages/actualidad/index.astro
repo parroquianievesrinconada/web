@@ -37,7 +37,7 @@ const formatFecha = (date: Date) =>
           <li class="item">
             {anuncio.data.image && (
               <a href={`/actualidad/${anuncio.id}`} class="item-img-wrap">
-                <img src={anuncio.data.image} alt={anuncio.data.title} class="item-img" />
+                <img src={anuncio.data.image} alt={anuncio.data.title} class="item-img" loading="lazy" />
               </a>
             )}
             <div class="item-body">
