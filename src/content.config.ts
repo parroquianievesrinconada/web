@@ -29,6 +29,21 @@ const paginas = defineCollection({
         })
       )
       .optional(),
+    intro: z.string().optional(),
+    informacion: z.string().optional(),
+    requisitos: z.string().optional(),
+    catequesis: z.string().optional(),
+    nota: z.string().optional(),
+    visionGeneral: z.string().optional(),
+    catequesisAdultos: z.string().optional(),
+    pasos: z
+      .array(
+        z.object({
+          titulo: z.string(),
+          descripcion: z.string().optional(),
+        })
+      )
+      .optional(),
   }),
 });
 

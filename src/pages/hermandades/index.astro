@@ -1,0 +1,133 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const hermandades = [
+  {
+    nombre: "Nuestra Señora de los Dolores",
+    corto: "Dolores",
+    color: "linear-gradient(135deg, #2a0a0a, #6a1a1a)",
+    descripcion: "Fundada en 1892. Acompaña a la comunidad en la veneración de Nuestra Señora de los Dolores, con una larga tradición de cultos y procesiones en Semana Santa.",
+  },
+  {
+    nombre: "Nuestra Señora de la Salud",
+    corto: "Salud",
+    color: "linear-gradient(135deg, #0a2a0a, #1a5a2a)",
+    descripcion: "Fundada en 1954. Dedicada a la devoción de Nuestra Señora de la Salud, patrona de los enfermos y protectora de las familias de La Rinconada.",
+  },
+  {
+    nombre: "Santísimo Cristo Resucitado",
+    corto: "Resucitado",
+    color: "linear-gradient(135deg, #1a1a2a, #2a2a6a)",
+    descripcion: "Fundada en 1978. Custodia la devoción al Cristo Resucitado, imagen contemporánea del escultor Antonio Díaz Fernández. Procesión gloriosa de Domingo de Resurrección.",
+  },
+];
+---
+
+<Layout title="Hermandades">
+  <div class="hero-interior">
+    <div class="container">
+      <h1>Hermandades</h1>
+      <p>Las tres hermandades de la Parroquia de La Rinconada</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <p class="intro">
+      La Parroquia de La Rinconada cuenta con tres hermandades de gloria y penitencia
+      que acompañan la vida de fe del pueblo a lo largo de todo el año litúrgico,
+      especialmente durante la Semana Santa.
+    </p>
+
+    <div class="hermandades-grid">
+      {hermandades.map((h) => (
+        <article class="hmd-card">
+          <div class="hmd-header" style={`background: ${h.color};`}>
+            <p class="hmd-label">Hermandad de</p>
+            <h2>{h.nombre}</h2>
+          </div>
+          <div class="hmd-body">
+            <p>{h.descripcion}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .hero-interior { background: linear-gradient(135deg, #4a2515, #7a4020); color: #fff; padding: 3rem 0; }
+  .hero-interior h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
+  .hero-interior p { opacity: 0.85; }
+
+  .intro {
+    max-width: 720px;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+    font-size: 1.05rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+
+  .hermandades-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .hmd-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .hmd-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+
+  .hmd-header {
+    color: #fff;
+    padding: 2rem 1.5rem;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hmd-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.85;
+    margin-bottom: 0.4rem;
+  }
+
+  .hmd-header h2 {
+    color: #fff;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .hmd-body {
+    padding: 1.5rem;
+    flex: 1;
+  }
+
+  .hmd-body p {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  @media (max-width: 820px) {
+    .hermandades-grid { grid-template-columns: 1fr; }
+  }
+</style>

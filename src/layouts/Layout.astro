@@ -44,12 +44,14 @@ const { title = "Parroquia" } = Astro.props;
 
           <div class="nav-grupo">
             <button class="nav-btn" aria-haspopup="true" aria-expanded="false">
-              Hermandades <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Sacramentos <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </button>
             <div class="dropdown" role="menu">
-              <a href="/hermandades/dolores" role="menuitem">Hmd. de los Dolores</a>
-              <a href="/hermandades/salud" role="menuitem">Hmd. de la Salud</a>
-              <a href="/hermandades/resucitado" role="menuitem">Hmd. del Resucitado</a>
+              <a href="/sacramentos" role="menuitem">Información general</a>
+              <a href="/sacramentos/bautismo" role="menuitem">Bautismo</a>
+              <a href="/sacramentos/primera-comunion" role="menuitem">Primera Comunión</a>
+              <a href="/sacramentos/confirmacion" role="menuitem">Confirmación</a>
+              <a href="/sacramentos/matrimonio" role="menuitem">Matrimonio</a>
             </div>
           </div>
 
@@ -62,6 +64,8 @@ const { title = "Parroquia" } = Astro.props;
               <a href="/vida-parroquial/pastoral-salud" role="menuitem">Pastoral de la Salud</a>
             </div>
           </div>
+
+          <a href="/hermandades" class="nav-link">Hermandades</a>
 
           <div class="nav-grupo">
             <button class="nav-btn" aria-haspopup="true" aria-expanded="false">

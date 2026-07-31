@@ -1,0 +1,132 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const sacramentos = [
+  {
+    nombre: "Bautismo",
+    descripcion: "El primer sacramento de la Iniciación Cristiana. Acoge al niño en la comunidad de fe.",
+    href: "/sacramentos/bautismo",
+    icono: "🕊️",
+  },
+  {
+    nombre: "Primera Comunión",
+    descripcion: "Itinerario catequético para que los niños reciban por primera vez el sacramento de la Eucaristía.",
+    href: "/sacramentos/primera-comunion",
+    icono: "🍞",
+  },
+  {
+    nombre: "Confirmación",
+    descripcion: "Sacramento en el que se recibe la fuerza del Espíritu Santo para ser testigos de Cristo.",
+    href: "/sacramentos/confirmacion",
+    icono: "🔥",
+  },
+  {
+    nombre: "Matrimonio",
+    descripcion: "Sacramento que une a los esposos en una comunidad de amor y vida entregada a Dios.",
+    href: "/sacramentos/matrimonio",
+    icono: "💍",
+  },
+];
+---
+
+<Layout title="Sacramentos">
+  <div class="hero-interior">
+    <div class="container">
+      <h1>Sacramentos</h1>
+      <p>Información y trámites para recibir los sacramentos en la parroquia</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <p class="intro">
+      La parroquia de La Rinconada acompaña a los fieles en la celebración
+      y preparación de los sacramentos. Aquí encontrarás la información
+      necesaria para cada uno, así como los pasos a seguir y la
+      documentación requerida.
+    </p>
+
+    <div class="sacramentos-grid">
+      {sacramentos.map((s) => (
+        <a href={s.href} class="card">
+          <span class="card-icono" aria-hidden="true">{s.icono}</span>
+          <h2>{s.nombre}</h2>
+          <p>{s.descripcion}</p>
+          <span class="card-flecha">Ver información →</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .hero-interior { background: linear-gradient(135deg, #4a2515, #7a4020); color: #fff; padding: 3rem 0; }
+  .hero-interior h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
+  .hero-interior p { opacity: 0.85; }
+
+  .intro {
+    max-width: 720px;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+    font-size: 1.05rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+
+  .sacramentos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 1.75rem 1.5rem;
+    text-decoration: none;
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    border-color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .card-icono {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .card h2 {
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .card p {
+    font-size: 0.92rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+  }
+
+  .card-flecha {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .sacramentos-grid { grid-template-columns: 1fr; }
+  }
+</style>
