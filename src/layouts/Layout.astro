@@ -107,6 +107,7 @@ const { title = "Parroquia" } = Astro.props;
             <a href="/actualidad">Noticias</a>
             <a href="/contacto">Contacto</a>
             <a href="/admin/">Panel</a>
+            <button type="button" id="login-btn" class="footer-nav-btn">Acceder</button>
           </nav>
         </div>
       </div>
@@ -125,6 +126,26 @@ const { title = "Parroquia" } = Astro.props;
           if (!user && (window.location.hash.indexOf("invite_token") !== -1 || window.location.hash.indexOf("recovery_token") !== -1 || window.location.hash.indexOf("confirmation_token") !== -1)) {
             netlifyIdentity.open("login");
           }
+          // Si el usuario ya está logueado, el botón "Acceder" lo lleva al panel
+          var btn = document.getElementById("login-btn");
+          if (btn) {
+            if (user) {
+              btn.textContent = "Ir al panel";
+              btn.onclick = function () { window.location.href = "/admin/"; };
+            } else {
+              btn.onclick = function () {
+                if (window.netlifyIdentity) {
+                  window.netlifyIdentity.open("login");
+                } else {
+                  window.location.href = "/admin/";
+                }
+              };
+            }
+          }
+        });
+        // Tras login, redirigir al panel
+        netlifyIdentity.on("login", function () {
+          window.location.href = "/admin/";
         });
         netlifyIdentity.init();
       })();
@@ -355,6 +376,17 @@ const { title = "Parroquia" } = Astro.props;
   .footer-nav { display: flex; flex-direction: column; gap: 0.3rem; }
   .footer-nav a { color: rgba(255,255,255,0.8); font-size: 0.85rem; text-decoration: none; }
   .footer-nav a:hover { color: #fff; }
+  .footer-nav-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.85rem;
+    text-align: left;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .footer-nav-btn:hover { color: #fff; }
 
   .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.2);
