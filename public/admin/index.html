@@ -5,8 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel de Administración | Parroquia</title>
   <script>window.CMS_MANUAL_INIT = true;</script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
+  <script>
+    // Si la URL trae un token de invitación (#invite_token=...),
+    // el widget lo detecta automáticamente. Nos aseguramos de que
+    // abra el modal de login si el usuario aún no está autenticado.
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", function (user) {
+        if (!user) {
+          window.netlifyIdentity.open("login");
+        }
+      });
+    }
+  </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
     CMS.init({

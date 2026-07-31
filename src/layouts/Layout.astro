@@ -16,6 +16,7 @@ const { title = "Parroquia" } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+    <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <header>
@@ -115,6 +116,19 @@ const { title = "Parroquia" } = Astro.props;
     </footer>
 
     <script is:inline>
+      // Netlify Identity: detecta token de invitación en la URL y abre modal de login/registro
+      (function initNetlifyIdentity() {
+        if (typeof netlifyIdentity === "undefined") {
+          return setTimeout(initNetlifyIdentity, 100);
+        }
+        netlifyIdentity.on("init", function (user) {
+          if (!user && (window.location.hash.indexOf("invite_token") !== -1 || window.location.hash.indexOf("recovery_token") !== -1 || window.location.hash.indexOf("confirmation_token") !== -1)) {
+            netlifyIdentity.open("login");
+          }
+        });
+        netlifyIdentity.init();
+      })();
+
       // Hamburger
       var toggle = document.getElementById("nav-toggle");
       var menu = document.getElementById("nav-menu");
