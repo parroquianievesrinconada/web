@@ -2,7 +2,7 @@
 title: Calendario Litúrgico
 eventos:
   - dia: 1
-    mes: 5
+    mes: 8
     texto: Misa de inicio de mes
     tipo: misa
   - dia: 3
@@ -38,9 +38,3 @@ eventos:
     texto: Pastoral de la Salud
     tipo: pastoral
 ---
-
-- **Primer viernes de mes** — Adoración nocturna a las 21:00
-- **Primer sábado de mes** — Misa de enfermos a las 12:00
-- **15 de agosto** — Festividad de la Asunción de la Virgen (Patrona)
-- **Cada miércoles** — Lectio Divina a las 19:30
-- **Último lunes de mes** — Reunión Pastoral de la Salud a las 19:00

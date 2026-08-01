@@ -1,8 +1,18 @@
 ---
+import { getEntry } from "astro:content";
+
 interface Props {
   title?: string;
 }
 const { title = "Parroquia" } = Astro.props;
+
+const contacto = await getEntry("paginas", "contacto");
+const horarios = await getEntry("paginas", "horarios");
+
+const parroquiaNombre = contacto?.data.parroquiaNombre || "Parroquia Nuestra Señora de las Nieves";
+const direccion = contacto?.data.direccion || "Pl. de España, 41309 La Rinconada, Sevilla";
+const telefono = contacto?.data.telefono || "955 79 00 00";
+const misas = horarios?.data.misas ?? [];
 ---
 
 <!DOCTYPE html>
@@ -12,7 +22,7 @@ const { title = "Parroquia" } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} | Parroquia Rinconada</title>
+    <title>{title} | Parroquia Nuestra Señora de las Nieves</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
@@ -22,7 +32,7 @@ const { title = "Parroquia" } = Astro.props;
       <div class="header-inner">
         <a href="/" class="logo">
           <span class="logo-sub">Parroquia de</span>
-          <span class="logo-nombre">La Rinconada</span>
+          <span class="logo-nombre">Ntra. Sra. de las Nieves</span>
         </a>
 
         <button class="hamburger" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
@@ -39,6 +49,8 @@ const { title = "Parroquia" } = Astro.props;
             <div class="dropdown" role="menu">
               <a href="/parroquia" role="menuitem">Historia y Patrimonio</a>
               <a href="/parroquia/horarios" role="menuitem">Horarios</a>
+              <a href="/actualidad" role="menuitem">Noticias</a>
+              <a href="/actualidad/calendario" role="menuitem">Calendario Litúrgico</a>
             </div>
           </div>
 
@@ -67,16 +79,6 @@ const { title = "Parroquia" } = Astro.props;
 
           <a href="/hermandades" class="nav-link">Hermandades</a>
 
-          <div class="nav-grupo">
-            <button class="nav-btn" aria-haspopup="true" aria-expanded="false">
-              Actualidad <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </button>
-            <div class="dropdown" role="menu">
-              <a href="/actualidad" role="menuitem">Noticias</a>
-              <a href="/actualidad/calendario" role="menuitem">Calendario Litúrgico</a>
-            </div>
-          </div>
-
           <a href="/contacto" class="nav-link">Contacto</a>
         </nav>
       </div>
@@ -89,16 +91,18 @@ const { title = "Parroquia" } = Astro.props;
     <footer>
       <div class="footer-inner">
         <div class="footer-col">
-          <strong>Parroquia de La Rinconada</strong>
-          <p>C/ Virgen de Luján, 41 · 41300 La Rinconada, Sevilla</p>
-          <p>Tel. 955 79 00 00</p>
+          <strong>{parroquiaNombre}</strong>
+          <p>{direccion}</p>
+          <p>Tel. {telefono}</p>
         </div>
-        <div class="footer-col">
-          <strong>Horario de misas</strong>
-          <p>L-V: 9:00 y 19:00</p>
-          <p>Sábado: 12:00 y 19:00</p>
-          <p>Domingos: 10:00, 12:00 y 19:00</p>
-        </div>
+        {misas.length > 0 && (
+          <div class="footer-col">
+            <strong>Horario de misas</strong>
+            {misas.map((m) => (
+              <p>{m.dias}: {m.horario}</p>
+            ))}
+          </div>
+        )}
         <div class="footer-col">
           <strong>Accesos</strong>
           <nav class="footer-nav">
@@ -110,7 +114,7 @@ const { title = "Parroquia" } = Astro.props;
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© {new Date().getFullYear()} Parroquia de La Rinconada · Diócesis de Sevilla</p>
+        <p>© {new Date().getFullYear()} {parroquiaNombre} · Diócesis de Sevilla</p>
       </div>
     </footer>
 

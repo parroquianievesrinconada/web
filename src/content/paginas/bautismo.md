@@ -44,7 +44,6 @@ pasos:
   - titulo: "Asiste al Cursillo Prebautismal"
     descripcion: "Apúntate y participa en la sesión preparatoria antes de la celebración."
 catequesis: |
-  ## Cursillos Prebautismales
 
   Dirigidos a padres y padrinos que deseen bautizar a un niño.
 

@@ -1,10 +1,10 @@
 ---
 title: Horarios
+misas:
+  - dias: "L-V"
+    horario: "9:00 y 19:00"
+  - dias: "Sábado"
+    horario: "12:00 y 19:00"
+  - dias: "Domingos"
+    horario: "10:00, 12:00 y 19:00"
 ---
-Lunes a Viernes: 9:00, 11:00 y 18:00
-
-Sábados, Domingos y Festivos: 9:00, 11:00, 19:30, 20:30
-
-nuevo cambio
-
-![](/uploads/landing-sucio.jpg)

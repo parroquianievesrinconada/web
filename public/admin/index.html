@@ -44,6 +44,16 @@
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
                   { label: "Contenido", name: "body", widget: "markdown" },
+                  {
+                    label: "Horarios de misas (footer)",
+                    name: "misas",
+                    widget: "list",
+                    required: false,
+                    fields: [
+                      { label: "Días", name: "dias", widget: "string" },
+                      { label: "Horario", name: "horario", widget: "string" },
+                    ],
+                  },
                 ],
               },
               {
@@ -198,6 +208,7 @@
                 name: "contacto",
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
+                  { label: "Nombre de la parroquia (footer)", name: "parroquiaNombre", widget: "string", required: false },
                   { label: "Dirección", name: "direccion", widget: "string" },
                   { label: "Teléfono", name: "telefono", widget: "string" },
                   { label: "Email", name: "email", widget: "string" },

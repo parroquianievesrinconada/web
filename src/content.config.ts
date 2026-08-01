@@ -15,10 +15,19 @@ const paginas = defineCollection({
   loader: glob({ pattern: "*.md", base: "./src/content/paginas" }),
   schema: z.object({
     title: z.string(),
+    parroquiaNombre: z.string().optional(),
     direccion: z.string().optional(),
     telefono: z.string().optional(),
     email: z.string().optional(),
     mapa: z.string().optional(),
+    misas: z
+      .array(
+        z.object({
+          dias: z.string(),
+          horario: z.string(),
+        })
+      )
+      .optional(),
     eventos: z
       .array(
         z.object({
