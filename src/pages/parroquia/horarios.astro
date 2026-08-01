@@ -1,5 +1,17 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getEntry } from "astro:content";
+
+const entrada = await getEntry("paginas", "horarios");
+const d = entrada?.data;
+
+const tieneInvierno = !!d?.misasInvierno && d.misasInvierno.filas.length > 0;
+const tieneVerano = !!d?.misasVerano && d.misasVerano.filas.length > 0;
+const tieneConfesiones = !!d?.confesiones && d.confesiones.filas.length > 0;
+const tieneApertura = !!d?.apertura && d.apertura.filas.length > 0;
+const tieneDespacho = !!d?.despacho && d.despacho.filas.length > 0;
+
+const hayContenido = tieneInvierno || tieneVerano || tieneConfesiones || tieneApertura || tieneDespacho;
 ---
 
 <Layout title="Horarios">
@@ -11,83 +23,97 @@ import Layout from "../../layouts/Layout.astro";
   </div>
 
   <div class="container">
-    <div class="grid-horarios">
+    {!hayContenido ? (
+      <p class="vacio">No hay horarios publicados todavía.</p>
+    ) : (
+      <div class="grid-horarios">
 
-      <section class="bloque">
-        <h2>⛪ Misas — Temporada de invierno</h2>
-        <p class="subtitulo">Octubre – mayo</p>
-        <table>
-          <thead>
-            <tr><th>Día</th><th>Horario</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Lunes a viernes</td><td>9:00 · 19:00</td></tr>
-            <tr><td>Sábados</td><td>12:00 · 19:00</td></tr>
-            <tr><td>Domingos y festivos</td><td>10:00 · 12:00 · 19:00</td></tr>
-          </tbody>
-        </table>
-      </section>
+        {tieneInvierno && (
+          <section class="bloque">
+            <h2>⛪ Misas — Temporada de invierno</h2>
+            {d.misasInvierno.subtitulo && <p class="subtitulo">{d.misasInvierno.subtitulo}</p>}
+            <table>
+              <thead>
+                <tr><th>Día</th><th>Horario</th></tr>
+              </thead>
+              <tbody>
+                {d.misasInvierno.filas.map((f) => (
+                  <tr><td>{f.dias}</td><td>{f.horario}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        )}
 
-      <section class="bloque">
-        <h2>☀️ Misas — Temporada de verano</h2>
-        <p class="subtitulo">Junio – septiembre</p>
-        <table>
-          <thead>
-            <tr><th>Día</th><th>Horario</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Lunes a viernes</td><td>9:00 · 20:00</td></tr>
-            <tr><td>Sábados</td><td>12:00 · 20:00</td></tr>
-            <tr><td>Domingos y festivos</td><td>10:00 · 12:00 · 20:00</td></tr>
-          </tbody>
-        </table>
-      </section>
+        {tieneVerano && (
+          <section class="bloque">
+            <h2>☀️ Misas — Temporada de verano</h2>
+            {d.misasVerano.subtitulo && <p class="subtitulo">{d.misasVerano.subtitulo}</p>}
+            <table>
+              <thead>
+                <tr><th>Día</th><th>Horario</th></tr>
+              </thead>
+              <tbody>
+                {d.misasVerano.filas.map((f) => (
+                  <tr><td>{f.dias}</td><td>{f.horario}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        )}
 
-      <section class="bloque" id="confesiones">
-        <h2>🙏 Confesiones</h2>
-        <table>
-          <thead>
-            <tr><th>Día</th><th>Horario</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Lunes a viernes</td><td>30 min. antes de cada misa</td></tr>
-            <tr><td>Sábados</td><td>11:00 – 12:00 y 18:00 – 19:00</td></tr>
-            <tr><td>Domingos</td><td>30 min. antes de cada misa</td></tr>
-          </tbody>
-        </table>
-        <p class="nota">Para confesiones fuera de estos horarios, contactar con el despacho parroquial.</p>
-      </section>
+        {tieneConfesiones && (
+          <section class="bloque" id="confesiones">
+            <h2>🙏 Confesiones</h2>
+            <table>
+              <thead>
+                <tr><th>Día</th><th>Horario</th></tr>
+              </thead>
+              <tbody>
+                {d.confesiones.filas.map((f) => (
+                  <tr><td>{f.dias}</td><td>{f.horario}</td></tr>
+                ))}
+              </tbody>
+            </table>
+            {d.confesiones.nota && <p class="nota">{d.confesiones.nota}</p>}
+          </section>
+        )}
 
-      <section class="bloque">
-        <h2>🚪 Apertura del templo</h2>
-        <table>
-          <thead>
-            <tr><th>Período</th><th>Horario</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Mañanas (todo el año)</td><td>8:30 – 13:00</td></tr>
-            <tr><td>Tardes (invierno)</td><td>17:30 – 20:30</td></tr>
-            <tr><td>Tardes (verano)</td><td>18:30 – 21:30</td></tr>
-          </tbody>
-        </table>
-      </section>
+        {tieneApertura && (
+          <section class="bloque">
+            <h2>🚪 Apertura del templo</h2>
+            <table>
+              <thead>
+                <tr><th>Período</th><th>Horario</th></tr>
+              </thead>
+              <tbody>
+                {d.apertura.filas.map((f) => (
+                  <tr><td>{f.dias}</td><td>{f.horario}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        )}
 
-      <section class="bloque">
-        <h2>🏢 Despacho parroquial</h2>
-        <table>
-          <thead>
-            <tr><th>Día</th><th>Horario</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Lunes, miércoles y viernes</td><td>10:00 – 12:30</td></tr>
-            <tr><td>Martes y jueves</td><td>17:30 – 19:30</td></tr>
-            <tr><td>Sábados</td><td>11:00 – 13:00</td></tr>
-          </tbody>
-        </table>
-        <p class="nota">En el despacho se atienden bautismos, matrimonios, funerales y certificados.</p>
-      </section>
+        {tieneDespacho && (
+          <section class="bloque">
+            <h2>🏢 Despacho parroquial</h2>
+            <table>
+              <thead>
+                <tr><th>Día</th><th>Horario</th></tr>
+              </thead>
+              <tbody>
+                {d.despacho.filas.map((f) => (
+                  <tr><td>{f.dias}</td><td>{f.horario}</td></tr>
+                ))}
+              </tbody>
+            </table>
+            {d.despacho.nota && <p class="nota">{d.despacho.nota}</p>}
+          </section>
+        )}
 
-    </div>
+      </div>
+    )}
   </div>
 </Layout>
 
@@ -100,6 +126,8 @@ import Layout from "../../layouts/Layout.astro";
 
   .hero-interior h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
   .hero-interior p { opacity: 0.85; }
+
+  .vacio { color: var(--color-muted); font-style: italic; padding: 2rem 0; }
 
   .grid-horarios {
     display: grid;
@@ -157,20 +185,6 @@ import Layout from "../../layouts/Layout.astro";
     font-size: 0.8rem;
     color: var(--color-muted);
     font-style: italic;
-  }
-
-  .lista-especial {
-    list-style: none;
-    margin-top: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    font-size: 0.9rem;
-  }
-
-  .lista-especial li {
-    padding-left: 1rem;
-    border-left: 2px solid var(--color-primary);
   }
 
   @media (max-width: 640px) {

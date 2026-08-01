@@ -28,6 +28,60 @@ const paginas = defineCollection({
         })
       )
       .optional(),
+    misasInvierno: z
+      .object({
+        subtitulo: z.string().optional(),
+        filas: z.array(
+          z.object({
+            dias: z.string(),
+            horario: z.string(),
+          })
+        ),
+      })
+      .optional(),
+    misasVerano: z
+      .object({
+        subtitulo: z.string().optional(),
+        filas: z.array(
+          z.object({
+            dias: z.string(),
+            horario: z.string(),
+          })
+        ),
+      })
+      .optional(),
+    confesiones: z
+      .object({
+        filas: z.array(
+          z.object({
+            dias: z.string(),
+            horario: z.string(),
+          })
+        ),
+        nota: z.string().optional(),
+      })
+      .optional(),
+    apertura: z
+      .object({
+        filas: z.array(
+          z.object({
+            dias: z.string(),
+            horario: z.string(),
+          })
+        ),
+      })
+      .optional(),
+    despacho: z
+      .object({
+        filas: z.array(
+          z.object({
+            dias: z.string(),
+            horario: z.string(),
+          })
+        ),
+        nota: z.string().optional(),
+      })
+      .optional(),
     eventos: z
       .array(
         z.object({

@@ -46,13 +46,108 @@
                   { label: "Título", name: "title", widget: "string" },
                   { label: "Contenido", name: "body", widget: "markdown" },
                   {
-                    label: "Horarios de misas (footer)",
+                    label: "Resumen de misas (footer)",
                     name: "misas",
                     widget: "list",
                     required: false,
+                    summary: "{{dias}}: {{horario}}",
                     fields: [
                       { label: "Días", name: "dias", widget: "string" },
                       { label: "Horario", name: "horario", widget: "string" },
+                    ],
+                  },
+                  {
+                    label: "Misas — Temporada de invierno",
+                    name: "misasInvierno",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      { label: "Subtítulo (ej: 'Octubre – mayo')", name: "subtitulo", widget: "string", required: false },
+                      {
+                        label: "Filas",
+                        name: "filas",
+                        widget: "list",
+                        summary: "{{dias}}: {{horario}}",
+                        fields: [
+                          { label: "Día", name: "dias", widget: "string" },
+                          { label: "Horario", name: "horario", widget: "string" },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    label: "Misas — Temporada de verano",
+                    name: "misasVerano",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      { label: "Subtítulo (ej: 'Junio – septiembre')", name: "subtitulo", widget: "string", required: false },
+                      {
+                        label: "Filas",
+                        name: "filas",
+                        widget: "list",
+                        summary: "{{dias}}: {{horario}}",
+                        fields: [
+                          { label: "Día", name: "dias", widget: "string" },
+                          { label: "Horario", name: "horario", widget: "string" },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    label: "Confesiones",
+                    name: "confesiones",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      {
+                        label: "Filas",
+                        name: "filas",
+                        widget: "list",
+                        summary: "{{dias}}: {{horario}}",
+                        fields: [
+                          { label: "Día", name: "dias", widget: "string" },
+                          { label: "Horario", name: "horario", widget: "string" },
+                        ],
+                      },
+                      { label: "Nota al pie", name: "nota", widget: "text", required: false },
+                    ],
+                  },
+                  {
+                    label: "Apertura del templo",
+                    name: "apertura",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      {
+                        label: "Filas",
+                        name: "filas",
+                        widget: "list",
+                        summary: "{{dias}}: {{horario}}",
+                        fields: [
+                          { label: "Período", name: "dias", widget: "string" },
+                          { label: "Horario", name: "horario", widget: "string" },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    label: "Despacho parroquial",
+                    name: "despacho",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      {
+                        label: "Filas",
+                        name: "filas",
+                        widget: "list",
+                        summary: "{{dias}}: {{horario}}",
+                        fields: [
+                          { label: "Día", name: "dias", widget: "string" },
+                          { label: "Horario", name: "horario", widget: "string" },
+                        ],
+                      },
+                      { label: "Nota al pie", name: "nota", widget: "text", required: false },
                     ],
                   },
                 ],
