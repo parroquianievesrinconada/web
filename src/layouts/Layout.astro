@@ -7,12 +7,10 @@ interface Props {
 const { title = "Parroquia" } = Astro.props;
 
 const contacto = await getEntry("paginas", "contacto");
-const horarios = await getEntry("paginas", "horarios");
 
 const parroquiaNombre = contacto?.data.parroquiaNombre || "Parroquia Nuestra Señora de las Nieves";
 const direccion = contacto?.data.direccion || "Pl. de España, 41309 La Rinconada, Sevilla";
 const telefono = contacto?.data.telefono || "955 79 00 00";
-const misas = horarios?.data.misas ?? [];
 ---
 
 <!DOCTYPE html>
@@ -103,14 +101,6 @@ const misas = horarios?.data.misas ?? [];
           <p>{direccion}</p>
           <p>Tel. {telefono}</p>
         </div>
-        {misas.length > 0 && (
-          <div class="footer-col">
-            <strong>Horario de misas</strong>
-            {misas.map((m) => (
-              <p>{m.dias}: {m.horario}</p>
-            ))}
-          </div>
-        )}
         <div class="footer-col">
           <strong>Accesos</strong>
           <nav class="footer-nav">
@@ -120,9 +110,6 @@ const misas = horarios?.data.misas ?? [];
             <a href="/admin/">Panel</a>
           </nav>
         </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© {new Date().getFullYear()} {parroquiaNombre} · Diócesis de Sevilla</p>
       </div>
     </footer>
 
@@ -335,31 +322,37 @@ const misas = horarios?.data.misas ?? [];
   footer {
     background: var(--color-primary);
     color: rgba(255,255,255,0.9);
-    margin-top: 4rem;
+    margin-top: 3rem;
   }
 
   .footer-inner {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 2.5rem 1.5rem;
+    padding: 1.25rem 1.5rem;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1.4fr 1fr;
     gap: 2rem;
+    align-items: center;
   }
 
-  .footer-col strong { display: block; color: #fff; margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; }
-  .footer-col p { font-size: 0.85rem; line-height: 1.7; }
+  .footer-col strong { display: block; color: #fff; margin-bottom: 0.35rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .footer-col p { font-size: 0.85rem; line-height: 1.5; }
 
-  .footer-nav { display: flex; flex-direction: column; gap: 0.3rem; }
-  .footer-nav a { color: rgba(255,255,255,0.8); font-size: 0.85rem; text-decoration: none; }
-  .footer-nav a:hover { color: #fff; }
-
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.2);
-    text-align: center;
-    padding: 1rem 1.5rem;
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.6);
+  .footer-nav { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .footer-nav a {
+    color: rgba(255,255,255,0.9);
+    font-size: 0.8rem;
+    text-decoration: none;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .footer-nav a:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.6);
+    color: #fff;
   }
 
   /* ── MOBILE ── */
@@ -400,5 +393,8 @@ const misas = horarios?.data.misas ?? [];
     .dropdown a { padding: 0.6rem 2rem; font-size: 0.85rem; }
 
     .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+
+    .footer-col { text-align: center; }
+    .footer-nav { justify-content: center; }
   }
 </style>

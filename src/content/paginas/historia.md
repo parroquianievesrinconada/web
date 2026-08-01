@@ -1,35 +1,27 @@
 ---
 title: Historia y Patrimonio
 ---
+## Fundación de la iglesia
 
-## Nuestros orígenes
+### Iglesia Parroquial de Nuestra Señora de las Nieves de La Rinconada
 
-La Parroquia de La Rinconada tiene sus raíces en el siglo XVII, cuando fue erigida canónicamente bajo la advocación de **Nuestra Señora de la Asunción**. Su fundación estuvo impulsada por la creciente comunidad de fieles que se asentó en estas tierras del Aljarafe sevillano, necesitada de un centro de culto propio e independiente de las parroquias vecinas.
+Tras la llegada de Fernando III a La Rinconada se instaura el culto cristiano en la población y, aunque desconocemos la cronología exacta de la construcción de la primitiva fábrica parroquial mudéjar, suponemos que debió ser levantada en la época de plenitud del mudéjar sevillano, hacia finales del siglo XV. Constatan este hecho, entre otras, dos cuestiones: la existencia de la talla del Cristo tardogótico del Cansancio, datada por los especialistas de hacia 1500 y, sobre todo, el hallazgo y restauración de las pinturas murales del Cristo de la Clemencia atado a la columna, realizadas durante el siglo XV.
 
-El templo original era de humilde construcción, con nave única y cubierta de madera. A lo largo de las siguientes centurias fue ampliado y reformado, adquiriendo la fisonomía barroca andaluza que en parte conserva hoy.
+Con anterioridad a la erección de este inmueble, desde mediados del XIII hubo en La Rinconada servicios religiosos cubriendo todas las necesidades de los fieles, ya que existía la capilla de la Misericordia de Nuestro Señor Jesucristo, dotada de cementerio anejo, tras ser hospital de sangre de las tropas cristianas de Fernando III durante la conquista de Sevilla.
 
-## El edificio
+## Retablo mayor
 
-El templo actual responde a la tipología de iglesia de tres naves, separadas por arcos de medio punto sobre pilastras de ladrillo. La nave central, más elevada y ancha, está cubierta con bóveda de cañón con lunetos, decorada con yeserías de estilo mudéjar-barroco fechadas en el siglo XVIII.
+### Iglesia de Nuestra Señora de las Nieves de La Rinconada
 
-La **portada principal**, orientada a la plaza del pueblo, presenta un arco de medio punto flanqueado por pilastras de orden toscano y rematado con una hornacina que acoge una imagen de la Virgen de la Asunción. La torre campanario, de planta cuadrada y tres cuerpos, domina la silueta del municipio y es visible desde los principales accesos a la localidad.
+Situado en el presbiterio, se trata de un retablo barroco compuesto de altar, banco, que alberga el Sagrario y dos pequeñas puertas laterales, un cuerpo de tres calles y ático. Fue tallado en madera entre 1717 y 1718 y dorado posteriormente por Antonio José de Carvajal, perteneciendo sus imágenes a la época del retablo.
 
-## El Retablo Mayor
+El 10 de julio de 1717, Antonio José de Carvajal firma el contrato de ejecución del retablo mayor de La Rinconada presentando al maestro entallador Joseph Cano y a Joseph Solís como sus fiadores.
 
-La pieza más destacada del patrimonio artístico es, sin duda, el **Retablo Mayor**, obra del taller sevillano de los Churriguera datada en torno a 1740. Tallado en madera de pino de Flandes y dorado a la hoja, presenta tres calles y ático, con imágenes de San Pedro y San Pablo flanqueando la hornacina central donde se venera la imagen titular de la Virgen de la Asunción.
+Carvajal firma la escritura de obligación para el retablo mayor comprometiéndose a ejecutar su arquitectura, ensambladura e imaginería en nueve mil quinientos reales de vellón. En cuanto a la madera, empleará el pino de Flandes para el retablo y el cedro, mucho más difícil de conseguir, para el Sagrario y algunos ornamentos.
 
-En el banco del retablo pueden apreciarse relieves con escenas de la vida de la Virgen, de una calidad escultórica notable para tratarse de un encargo de una localidad rural de la época.
+En cuanto al programa iconográfico que debe albergar el retablo, es don Juan de Sandoval, párroco de la Villa, quien señala al arquitecto las efigies que ha de tallar, entre las que se encuentran la imagen titular, que se ha de hacer nueva, y la imagen de Cristo crucificado que rematará el retablo. Asimismo, junto al Sagrario irán San Pedro y San Pablo, en la cúpula Señor San Miguel y en las calles laterales del retablo se han de colocar el Patriarca Señor San José, Santa Teresa de Jesús, Santa Bárbara, Santa Gertrudis, San Ignacio de Loyola, San Juan Bautista y Señor San Francisco Javier.
 
-## Imágenes y esculturas
+Dichas imágenes no se corresponden con las existentes en la actualidad en el retablo mayor, que son las siguientes: en la hornacina central se halla situada la Virgen de las Nieves, titular del templo. Desde el punto de vista del espectador, en la calle de la derecha del cuerpo del retablo aparecen Santa Bárbara, Santa Ana con la Virgen Niña y Santa Teresa. En la calle izquierda se encuentran San Estanislao Kostka, San Joaquín y San Juan Bautista. En el manifestador central del ático se sitúa una imagen de Cristo Resucitado, a su derecha vemos a María Magdalena y a la izquierda a Santo Tomás Apóstol. Por último, remata el conjunto una imagen de Dios Creador y adornan el mismo distintos angelotes separando las diferentes calles.
 
-- **Virgen de la Asunción** — Imagen titular, talla de vestir del siglo XVII atribuida al círculo de Juan de Mesa.
-- **Cristo de la Misericordia** — Crucificado de candelero del siglo XVIII, de autor desconocido. Titular de culto de la Hermandad de los Dolores.
-- **Nuestra Señora de los Dolores** — Dolorosa de candelero, posiblemente de taller local del siglo XIX.
-- **Cristo Resucitado** — Imagen contemporánea, obra del escultor sevillano Antonio Díaz Fernández (1978).
-- **San José con el Niño** — Talla de bulto redondo del siglo XVIII ubicada en la capilla lateral derecha.
+Dado su mal estado de conservación, tras un laborioso trabajo de restauración de siete meses bajo la dirección técnica de Antonio Gamero Osuna y Agustín Martín de Soto, esta obra artística barroca volvió a nuestra iglesia en febrero de 2025.
 
-## La Sacristía
-
-La sacristía conserva un valioso conjunto de ornamentos litúrgicos históricos, entre los que destacan varias casullas bordadas en hilo de oro y plata de los siglos XVIII y XIX, una custodia procesional de plata dorada del siglo XVII y un conjunto de candelabros de bronce de estilo neoclásico.
-
-El armario-cajonería de la sacristía, realizado en madera de nogal y cedro, data de mediados del siglo XVIII y fue declarado Bien de Interés Cultural por la Consejería de Cultura de la Junta de Andalucía en el año 2003.
