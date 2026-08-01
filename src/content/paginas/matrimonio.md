@@ -2,8 +2,6 @@
 title: Matrimonio
 intro: "¿Habéis decidido casaros? Os acompañamos en la preparación y celebración del sacramento del Matrimonio."
 informacion: |
-  > **BORRADOR** — Pendiente de revisión por el párroco.
-
   ¡Enhorabuena por vuestra decisión! Ahora se trata de prepararlo todo convenientemente. No es tan complicado como os han dicho, tan sólo es necesario saber qué hacer y en qué orden. Intentaremos ayudaros.
 
   Lo **primero** es comprobar que estáis confirmados. En nuestra diócesis se observa lo establecido por el canon 1065 del Código de Derecho Canónico: los católicos aún no confirmados deben recibir el sacramento de la Confirmación antes de ser admitidos al matrimonio. Si alguno de los dos contrayentes no está confirmado, es muy importante **no fijar la fecha de la boda ni contraer compromisos** con capillas, empresas de catering, agencias de viajes, etc., hasta no haber resuelto la recepción del sacramento de la Confirmación.

@@ -1,9 +1,7 @@
 ---
 title: Primera Comunión
-intro: "Itinerario de Iniciación Cristiana para niños que se preparan para recibir la Eucaristía por primera vez."
+intro: '"DEJAD QUE LOS NIÑOS SE ACERQUEN A MÍ" (Mc 10-14)'
 informacion: |
-  > **BORRADOR** — Pendiente de revisión por el párroco.
-
   La catequesis de Primera Comunión es el proceso por el cual la comunidad parroquial acompaña a los niños y a sus familias en el conocimiento y la vivencia de la fe cristiana, culminando con la recepción de los sacramentos de la Reconciliación y la Eucaristía.
 
   ## Objetivos
@@ -44,7 +42,6 @@ pasos:
   - titulo: "Asiste a las sesiones"
     descripcion: "Participa semanalmente en las catequesis y en la misa dominical junto con tu familia."
 catequesis: |
-  ## Catequesis de Comunión
 
   Dirigida a niños para recibir por primera vez los sacramentos de Reconciliación y Eucaristía.
 
@@ -63,5 +60,4 @@ catequesis: |
 
   **COMPROMISO ESPERADO:** Participar activamente en la educación cristiana de los niños mediante oración, asistencia a las catequesis, a la misa dominical y a las actividades propuestas.
 
-  > "DEJAD QUE LOS NIÑOS SE ACERQUEN A MÍ" (Mc 10-14)
 ---

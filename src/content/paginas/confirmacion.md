@@ -1,9 +1,7 @@
 ---
 title: Confirmación
-intro: "Sacramento por el que se recibe de manera especial la fuerza del Espíritu Santo para ser testigos de Cristo en el mundo."
+intro: '"RECIBIRÉIS LA FUERZA DEL ESPÍRITU SANTO Y VENDRÁ SOBRE VOSOTROS Y SERÉIS MIS TESTIGOS" (Hch 1,8)'
 informacion: |
-  > **BORRADOR** — Pendiente de revisión por el párroco.
-
   La Confirmación es el sacramento que da el Espíritu Santo para enraizarnos más profundamente en la filiación divina, incorporarnos más firmemente a Cristo, hacer más sólido nuestro vínculo con la Iglesia, asociarnos todavía más a su misión y ayudarnos a dar testimonio de la fe cristiana por la palabra acompañada de las obras.
 
   Imprime en el alma un carácter indeleble, por lo que solo puede recibirse una vez en la vida.
@@ -45,7 +43,6 @@ pasos:
   - titulo: "Recibe el sacramento"
     descripcion: "En la fecha señalada por la parroquia, participa con tu familia y padrinos en la celebración."
 catequesis: |
-  ## Catequesis de Confirmación
 
   Dirigida a adolescentes, jóvenes y adultos que desean profundizar en su fe y recibir el Sacramento de la Confirmación, por el que reciben de manera especial la fuerza del Espíritu Santo para ser testigos de Cristo en el mundo.
 
@@ -65,5 +62,4 @@ catequesis: |
 
   No es el final de un camino, sino un nuevo comienzo para vivir la fe con madurez y compromiso dentro de la Iglesia.
 
-  > "RECIBIRÉIS LA FUERZA DEL ESPÍRITU SANTO Y VENDRÁ SOBRE VOSOTROS Y SERÉIS MIS TESTIGOS" (Hch 1,8)
 ---

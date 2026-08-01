@@ -1,9 +1,7 @@
 ---
 title: Bautismo
-intro: "Has tenido un hijo y quieres bautizarlo, ¿qué tienes que hacer?"
+intro: '"ID Y HACED DISCÍPULOS A TODOS LOS PUEBLOS BAUTIZANDO EN EL NOMBRE DEL PADRE, DEL HIJO Y DEL ESPÍRITU SANTO" (Mt 28,19)'
 informacion: |
-  > **BORRADOR** — Pendiente de revisión por el párroco.
-
   Lo primero, daros la enhorabuena. Después, plantearnos dos cuestiones: ¿dónde y cuándo celebrar el bautismo de vuestro hijo? Para responder a esto recurrimos a lo establecido en el Directorio Diocesano de la Iniciación Cristiana.
 
   El **lugar propio de la celebración del Bautismo**, fuera del caso de necesidad, es el templo que tenga pila bautismal; esto es, en primer lugar la iglesia Catedral y, en segundo lugar, la iglesia parroquial.
@@ -62,5 +60,4 @@ catequesis: |
 
   **DESTINATARIOS:** Padres que soliciten el Bautismo para sus hijos y padrinos en situación de poder serlo.
 
-  > "ID Y HACED DISCÍPULOS A TODOS LOS PUEBLOS BAUTIZANDO EN EL NOMBRE DEL PADRE, DEL HIJO Y DEL ESPÍRITU SANTO" (Mt 28,19)
 ---
