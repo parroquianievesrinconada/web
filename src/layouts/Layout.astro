@@ -26,6 +26,14 @@ const misas = horarios?.data.misas ?? [];
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  
+    <!-- Redirección automática para invitaciones de Netlify Identity -->
+    <script is:inline>
+      if (window.location.hash.includes("_token=")) {
+        window.location.replace("/admin/" + window.location.hash);
+      }
+    </script>
+    
   </head>
   <body>
     <header>

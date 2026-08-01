@@ -6,12 +6,6 @@
   <title>Panel de Administración | Parroquia</title>
   <script>window.CMS_MANUAL_INIT = true;</script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    // Si la URL contiene un token de identidad de Netlify, redirige al admin
-    if (window.location.hash.includes("_token=")) {
-      window.location.replace("/admin/" + window.location.hash);
-    }
-</script>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
