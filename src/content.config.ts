@@ -20,14 +20,6 @@ const paginas = defineCollection({
     telefono: z.string().optional(),
     email: z.string().optional(),
     mapa: z.string().optional(),
-    misas: z
-      .array(
-        z.object({
-          dias: z.string(),
-          horario: z.string(),
-        })
-      )
-      .optional(),
     misasInvierno: z
       .object({
         subtitulo: z.string().optional(),
