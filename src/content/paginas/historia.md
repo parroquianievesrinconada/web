@@ -1,7 +1,7 @@
 ---
 title: Historia y Patrimonio
 ---
-## Fundación de la iglesia
+## Fundación de la iglesia.
 
 ### Iglesia Parroquial de Nuestra Señora de las Nieves de La Rinconada
 
@@ -24,4 +24,3 @@ En cuanto al programa iconográfico que debe albergar el retablo, es don Juan de
 Dichas imágenes no se corresponden con las existentes en la actualidad en el retablo mayor, que son las siguientes: en la hornacina central se halla situada la Virgen de las Nieves, titular del templo. Desde el punto de vista del espectador, en la calle de la derecha del cuerpo del retablo aparecen Santa Bárbara, Santa Ana con la Virgen Niña y Santa Teresa. En la calle izquierda se encuentran San Estanislao Kostka, San Joaquín y San Juan Bautista. En el manifestador central del ático se sitúa una imagen de Cristo Resucitado, a su derecha vemos a María Magdalena y a la izquierda a Santo Tomás Apóstol. Por último, remata el conjunto una imagen de Dios Creador y adornan el mismo distintos angelotes separando las diferentes calles.
 
 Dado su mal estado de conservación, tras un laborioso trabajo de restauración de siete meses bajo la dirección técnica de Antonio Gamero Osuna y Agustín Martín de Soto, esta obra artística barroca volvió a nuestra iglesia en febrero de 2025.
-
