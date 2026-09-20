@@ -23,6 +23,10 @@ const pasos = entrada?.data.pasos ?? [];
   </div>
 
   <div class="container">
+    {entrada?.data.imagen && (
+      <img src={entrada.data.imagen.src} alt={entrada.data.imagen.alt ?? ""} class="img-pagina" />
+    )}
+
     {htmlInfo && (
       <section class="bloque">
         <h2 class="bloque-titulo">Información</h2>
@@ -72,6 +76,8 @@ const pasos = entrada?.data.pasos ?? [];
   .hero-interior { background: linear-gradient(135deg, #4a2515, #7a4020); color: #fff; padding: 3rem 0; }
   .hero-interior h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
   .hero-interior p { opacity: 0.9; font-size: 1.05rem; }
+
+  .img-pagina { width: 100%; max-width: 500px; border-radius: 6px; margin-bottom: 1.5rem; }
 
   .bloque {
     background: #fff;

@@ -31,6 +31,7 @@
             fields: [
               { label: "Título", name: "title", widget: "string" },
               { label: "Resumen corto", name: "summary", widget: "text" },
+              { label: "Imagen", name: "image", widget: "image", required: false },
               { label: "Contenido", name: "body", widget: "markdown" },
             ],
           },
@@ -38,6 +39,39 @@
             name: "paginas",
             label: "Páginas fijas",
             files: [
+              {
+                file: "src/content/paginas/inicio.md",
+                label: "Inicio (portada)",
+                name: "inicio",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  {
+                    label: "Banner rotativo",
+                    name: "banner",
+                    widget: "list",
+                    required: false,
+                    summary: "{{fields.titulo}} {{fields.texto}}",
+                    fields: [
+                      { label: "Imagen", name: "imagen", widget: "image" },
+                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
+                      { label: "Título (opcional)", name: "titulo", widget: "string", required: false },
+                      { label: "Texto", name: "texto", widget: "string", required: false },
+                      {
+                        label: "Cómo encajar la imagen",
+                        name: "ajuste",
+                        widget: "select",
+                        required: false,
+                        options: [
+                          { label: "Completa (se ve entera, con fondo difuminado alrededor)", value: "completa" },
+                          { label: "Recortada (rellena todo el hueco, puede recortar bordes)", value: "recortada" },
+                        ],
+                      },
+                      { label: "Posición del recorte (ej: 'center 15%')", name: "posicion", widget: "string", required: false },
+                    ],
+                  },
+                  { label: "Código QR del grupo de WhatsApp", name: "qrWhatsapp", widget: "image", required: false },
+                ],
+              },
               {
                 file: "src/content/paginas/horarios.md",
                 label: "Horarios de misa",
@@ -116,6 +150,30 @@
                 name: "historia",
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
+                  {
+                    label: "Foto antigua de la iglesia",
+                    name: "imagen",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      { label: "Imagen", name: "src", widget: "image" },
+                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
+                      { label: "Pie de foto", name: "pie", widget: "string", required: false },
+                    ],
+                  },
+                  {
+                    label: "Galería del Retablo Mayor",
+                    name: "galeria",
+                    widget: "list",
+                    required: false,
+                    summary: "{{pie}}",
+                    fields: [
+                      { label: "Imagen", name: "src", widget: "image" },
+                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
+                      { label: "Pie de foto", name: "pie", widget: "string", required: false },
+                      { label: "Mostrar grande", name: "grande", widget: "boolean", required: false, default: false },
+                    ],
+                  },
                   { label: "Contenido", name: "body", widget: "markdown" },
                 ],
               },
@@ -125,6 +183,16 @@
                 name: "catequesis",
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
+                  {
+                    label: "Imagen",
+                    name: "imagen",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      { label: "Imagen", name: "src", widget: "image" },
+                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
+                    ],
+                  },
                   { label: "Visión general", name: "visionGeneral", widget: "markdown", required: false },
                   { label: "Catequesis de Adultos", name: "catequesisAdultos", widget: "markdown", required: false },
                 ],
@@ -135,6 +203,16 @@
                 name: "pastoral-salud",
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
+                  {
+                    label: "Imagen",
+                    name: "imagen",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      { label: "Imagen", name: "src", widget: "image" },
+                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
+                    ],
+                  },
                   { label: "Contenido", name: "body", widget: "markdown" },
                 ],
               },
@@ -144,6 +222,16 @@
                 name: "caritas",
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
+                  {
+                    label: "Logo / imagen",
+                    name: "imagen",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      { label: "Imagen", name: "src", widget: "image" },
+                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
+                    ],
+                  },
                   { label: "Contenido", name: "body", widget: "markdown" },
                 ],
               },
@@ -153,6 +241,16 @@
                 name: "donativos",
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
+                  {
+                    label: "Imagen",
+                    name: "imagen",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      { label: "Imagen", name: "src", widget: "image" },
+                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
+                    ],
+                  },
                   { label: "Contenido", name: "body", widget: "markdown" },
                 ],
               },
@@ -162,6 +260,16 @@
                 name: "tasas",
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
+                  {
+                    label: "Imagen",
+                    name: "imagen",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      { label: "Imagen", name: "src", widget: "image" },
+                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
+                    ],
+                  },
                   { label: "Contenido", name: "body", widget: "markdown" },
                 ],
               },
@@ -172,6 +280,16 @@
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
                   { label: "Introducción (subtítulo del hero)", name: "intro", widget: "text", required: false },
+                  {
+                    label: "Imagen",
+                    name: "imagen",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      { label: "Imagen", name: "src", widget: "image" },
+                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
+                    ],
+                  },
                   { label: "Información", name: "informacion", widget: "markdown", required: false },
                   { label: "Requisitos", name: "requisitos", widget: "markdown", required: false },
                   { label: "Pasos a seguir (3 pasos)", name: "pasos", widget: "list", required: false, fields: [
@@ -189,6 +307,16 @@
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
                   { label: "Introducción (subtítulo del hero)", name: "intro", widget: "text", required: false },
+                  {
+                    label: "Imagen",
+                    name: "imagen",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      { label: "Imagen", name: "src", widget: "image" },
+                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
+                    ],
+                  },
                   { label: "Información", name: "informacion", widget: "markdown", required: false },
                   { label: "Requisitos", name: "requisitos", widget: "markdown", required: false },
                   { label: "Pasos a seguir (3 pasos)", name: "pasos", widget: "list", required: false, fields: [
@@ -206,6 +334,16 @@
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
                   { label: "Introducción (subtítulo del hero)", name: "intro", widget: "text", required: false },
+                  {
+                    label: "Imagen",
+                    name: "imagen",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      { label: "Imagen", name: "src", widget: "image" },
+                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
+                    ],
+                  },
                   { label: "Información", name: "informacion", widget: "markdown", required: false },
                   { label: "Requisitos", name: "requisitos", widget: "markdown", required: false },
                   { label: "Pasos a seguir (3 pasos)", name: "pasos", widget: "list", required: false, fields: [
@@ -223,6 +361,16 @@
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
                   { label: "Introducción (subtítulo del hero)", name: "intro", widget: "text", required: false },
+                  {
+                    label: "Imagen",
+                    name: "imagen",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      { label: "Imagen", name: "src", widget: "image" },
+                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
+                    ],
+                  },
                   { label: "Información", name: "informacion", widget: "markdown", required: false },
                   { label: "Requisitos", name: "requisitos", widget: "markdown", required: false },
                   { label: "Pasos a seguir (3 pasos)", name: "pasos", widget: "list", required: false, fields: [
@@ -240,6 +388,16 @@
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
                   { label: "Introducción (subtítulo del hero)", name: "intro", widget: "text", required: false },
+                  {
+                    label: "Imagen",
+                    name: "imagen",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      { label: "Imagen", name: "src", widget: "image" },
+                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
+                    ],
+                  },
                   { label: "Información", name: "informacion", widget: "markdown", required: false },
                   { label: "Requisitos", name: "requisitos", widget: "markdown", required: false },
                   { label: "Pasos a seguir", name: "pasos", widget: "list", required: false, fields: [
@@ -251,12 +409,34 @@
                 ],
               },
               {
+                file: "src/content/paginas/hermandades.md",
+                label: "Hermandades",
+                name: "hermandades",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  {
+                    label: "Hermandades",
+                    name: "listaHermandades",
+                    widget: "list",
+                    required: false,
+                    summary: "{{nombre}}",
+                    fields: [
+                      { label: "Nombre", name: "nombre", widget: "string" },
+                      { label: "Descripción", name: "descripcion", widget: "text", required: false },
+                      { label: "Color de fondo (CSS, si no hay imagen)", name: "color", widget: "string", required: false },
+                      { label: "Imagen de fondo (opcional, sustituye al color)", name: "imagen", widget: "image", required: false },
+                    ],
+                  },
+                ],
+              },
+              {
                 file: "src/content/paginas/contacto.md",
                 label: "Contacto",
                 name: "contacto",
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
                   { label: "Nombre de la parroquia (footer)", name: "parroquiaNombre", widget: "string", required: false },
+                  { label: "Logo (navbar)", name: "logo", widget: "image", required: false },
                   { label: "Dirección", name: "direccion", widget: "string" },
                   { label: "Email", name: "email", widget: "string" },
                   { label: "Mapa de Google (código embed)", name: "mapa", widget: "text" },

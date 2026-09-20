@@ -1,5 +1,22 @@
 ---
 title: Historia y Patrimonio
+imagen:
+  src: /uploads/iglesia.webp
+  alt: Antigua fotografía de la Iglesia de Nuestra Señora de las Nieves de la Rinconada
+  pie: Antigua fotografía de la iglesia
+galeria:
+  - src: /uploads/retablo-completo.webp
+    alt: Retablo Mayor completo de la Iglesia de Nuestra Señora de las Nieves de la Rinconada
+    pie: Retablo Mayor de la Iglesia de Nuestra Señora de las Nieves de la Rinconada
+    grande: false
+  - src: /uploads/retablo.webp
+    alt: Detalle del Retablo Mayor
+    pie: Detalle del Retablo Mayor
+    grande: true
+  - src: /uploads/contrato.webp
+    alt: Detalle del contrato del Retablo Mayor firmado en 1717
+    pie: "Contrato Retablo Mayor. Antonio José de Carvajal. 1717. (detalle) AGAS, Fondo Arzobispal, Sec. III, sign. 11357 © Cabildo Catedral de Sevilla, s.f."
+    grande: false
 ---
 ## Fundación de la iglesia.
 

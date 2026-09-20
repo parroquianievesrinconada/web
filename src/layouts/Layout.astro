@@ -10,6 +10,7 @@ const contacto = await getEntry("paginas", "contacto");
 
 const parroquiaNombre = contacto?.data.parroquiaNombre || "Parroquia Nuestra Señora de las Nieves de la Rinconada";
 const direccion = contacto?.data.direccion || "Pl. de España, 41309 La Rinconada, Sevilla";
+const logo = contacto?.data.logo || "/uploads/logo.webp";
 ---
 
 <!DOCTYPE html>
@@ -36,7 +37,7 @@ const direccion = contacto?.data.direccion || "Pl. de España, 41309 La Rinconad
     <header>
       <div class="header-inner">
         <a href="/" class="logo">
-          <img src="/uploads/logo.webp" alt="" class="logo-img" />
+          <img src={logo} alt="" class="logo-img" />
           <span class="logo-texto">
             <span class="logo-sub">Parroquia de</span>
             <span class="logo-nombre">Ntra. Sra. de las Nieves de la Rinconada</span>

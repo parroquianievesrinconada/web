@@ -16,9 +16,50 @@ const paginas = defineCollection({
   schema: z.object({
     title: z.string(),
     parroquiaNombre: z.string().optional(),
+    logo: z.string().optional(),
     direccion: z.string().optional(),
     email: z.string().optional(),
     mapa: z.string().optional(),
+    imagen: z
+      .object({
+        src: z.string(),
+        alt: z.string().optional(),
+        pie: z.string().optional(),
+      })
+      .optional(),
+    galeria: z
+      .array(
+        z.object({
+          src: z.string(),
+          alt: z.string().optional(),
+          pie: z.string().optional(),
+          grande: z.boolean().optional(),
+        })
+      )
+      .optional(),
+    banner: z
+      .array(
+        z.object({
+          imagen: z.string(),
+          alt: z.string().optional(),
+          titulo: z.string().optional(),
+          texto: z.string().optional(),
+          ajuste: z.enum(["completa", "recortada"]).optional(),
+          posicion: z.string().optional(),
+        })
+      )
+      .optional(),
+    qrWhatsapp: z.string().optional(),
+    listaHermandades: z
+      .array(
+        z.object({
+          nombre: z.string(),
+          descripcion: z.string().optional(),
+          color: z.string().optional(),
+          imagen: z.string().optional(),
+        })
+      )
+      .optional(),
     misas: z
       .object({
         filas: z.array(

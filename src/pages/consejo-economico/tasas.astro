@@ -16,6 +16,9 @@ const { Content } = await render(entrada);
 
   <div class="container">
     <div class="cuerpo">
+      {entrada?.data.imagen && (
+        <img src={entrada.data.imagen.src} alt={entrada.data.imagen.alt ?? ""} class="img-pagina" />
+      )}
       <Content />
       <a href="/solicitud-partidas.pdf" class="btn-descarga" download>📄 Descargar solicitud de partidas</a>
     </div>
@@ -32,6 +35,8 @@ const { Content } = await render(entrada);
   .hero-interior p { opacity: 0.85; }
 
   .cuerpo { max-width: 760px; font-size: 1rem; line-height: 1.8; }
+
+  .img-pagina { width: 100%; max-width: 500px; border-radius: 6px; margin-bottom: 1.5rem; }
 
   .cuerpo :global(p) { margin-bottom: 1rem; }
 

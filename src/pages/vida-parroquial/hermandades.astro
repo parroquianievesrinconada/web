@@ -1,23 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getEntry } from "astro:content";
 
-const hermandades = [
-  {
-    nombre: "Nuestra Señora de los Dolores",
-    corto: "Dolores",
-    color: "linear-gradient(135deg, #2a0a0a, #6a1a1a)",
-  },
-  {
-    nombre: "Nuestra Señora de la Salud",
-    corto: "Salud",
-    color: "linear-gradient(135deg, #0a2a0a, #1a5a2a)",
-  },
-  {
-    nombre: "Santísimo Cristo Resucitado",
-    corto: "Resucitado",
-    color: "linear-gradient(135deg, #1a1a2a, #2a2a6a)",
-  },
-];
+const entrada = await getEntry("paginas", "hermandades");
+const hermandades = entrada?.data.listaHermandades ?? [];
 ---
 
 <Layout title="Hermandades">
@@ -38,7 +24,12 @@ const hermandades = [
     <div class="hermandades-grid">
       {hermandades.map((h) => (
         <article class="hmd-card">
-          <div class="hmd-header" style={`background: ${h.color};`}>
+          <div
+            class="hmd-header"
+            style={h.imagen
+              ? `background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('${h.imagen}'); background-size: cover; background-position: center;`
+              : `background: ${h.color ?? "linear-gradient(135deg, #2a0a0a, #6a1a1a)"};`}
+          >
             <p class="hmd-label">Hermandad de</p>
             <h2>{h.nombre}</h2>
           </div>

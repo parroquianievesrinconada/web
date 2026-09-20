@@ -1,6 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
+
+const inicio = await getEntry("paginas", "inicio");
+
+const banner = inicio?.data.banner?.length
+  ? inicio.data.banner
+  : [
+      {
+        imagen: "/uploads/rotativo-1.webp",
+        alt: "Parroquia Nuestra Señora de las Nieves de la Rinconada",
+        titulo: "Parroquia Nuestra Señora de las Nieves de la Rinconada",
+        texto: "Comunidad de fe, esperanza y caridad",
+        ajuste: "completa" as const,
+      },
+    ];
+
+const qrWhatsapp = inicio?.data.qrWhatsapp ?? "/uploads/qr-whatsapp.webp";
 
 const fechaDeAnuncio = (anuncio: any): Date => {
   if (anuncio.data.date) return new Date(anuncio.data.date);
@@ -24,37 +40,38 @@ const secundarios = anuncios.slice(1);
   <!-- BANNER ROTATIVO -->
   <div class="banner" aria-label="Fotos de la parroquia">
     <div class="slides">
-      <div class="slide active">
-        <img src="/uploads/rotativo-1.webp" alt="" class="slide-bg" aria-hidden="true" />
-        <img src="/uploads/rotativo-1.webp" alt="Parroquia Nuestra Señora de las Nieves de la Rinconada" class="slide-img slide-img-contain" fetchpriority="high" />
-        <div class="slide-overlay"></div>
-        <div class="slide-texto">
-          <h1>Parroquia Nuestra Señora de las Nieves de la Rinconada</h1>
-          <p>Comunidad de fe, esperanza y caridad</p>
+      {banner.map((slide, i) => (
+        <div class:list={["slide", i === 0 && "active"]}>
+          {slide.ajuste === "completa" && (
+            <img src={slide.imagen} alt="" class="slide-bg" aria-hidden="true" />
+          )}
+          <img
+            src={slide.imagen}
+            alt={slide.alt ?? ""}
+            class:list={["slide-img", slide.ajuste === "completa" && "slide-img-contain"]}
+            style={slide.posicion ? `object-position: ${slide.posicion};` : undefined}
+            fetchpriority={i === 0 ? "high" : undefined}
+            loading={i === 0 ? undefined : "lazy"}
+          />
+          <div class="slide-overlay"></div>
+          <div class="slide-texto">
+            {slide.titulo && <h1>{slide.titulo}</h1>}
+            {slide.texto && <p>{slide.texto}</p>}
+          </div>
         </div>
-      </div>
-      <div class="slide">
-        <img src="/uploads/rotativo-2.webp" class="slide-img" loading="lazy" style="object-position: center 15%;" />
-        <div class="slide-overlay"></div>
-        <div class="slide-texto">
-          <p>Un lugar de encuentro para todos</p>
-        </div>
-      </div>
-      <div class="slide">
-        <img src="/uploads/rotativo-3.webp" class="slide-img" loading="lazy" style="object-position: center 12%;" />
-        <div class="slide-overlay"></div>
-        <div class="slide-texto">
-          <p>Vida sacramental · Catequesis · Hermandades</p>
-        </div>
-      </div>
+      ))}
     </div>
-    <div class="dots" aria-hidden="true">
-      <button class="dot active" data-slide="0"></button>
-      <button class="dot" data-slide="1"></button>
-      <button class="dot" data-slide="2"></button>
-    </div>
-    <button class="arrow arrow-prev" aria-label="Anterior">&#8249;</button>
-    <button class="arrow arrow-next" aria-label="Siguiente">&#8250;</button>
+    {banner.length > 1 && (
+      <>
+        <div class="dots" aria-hidden="true">
+          {banner.map((_, i) => (
+            <button class:list={["dot", i === 0 && "active"]} data-slide={i}></button>
+          ))}
+        </div>
+        <button class="arrow arrow-prev" aria-label="Anterior">&#8249;</button>
+        <button class="arrow arrow-next" aria-label="Siguiente">&#8250;</button>
+      </>
+    )}
   </div>
 
   <!-- ACCESO RÁPIDO -->
@@ -132,7 +149,7 @@ const secundarios = anuncios.slice(1);
       <aside class="whatsapp-card">
         <h3>Únete a nuestro grupo de WhatsApp</h3>
         <p>Escanea el código QR para estar al tanto de todos los anuncios de la parroquia.</p>
-        <img src="/uploads/qr-whatsapp.webp" alt="Código QR para unirse al grupo de WhatsApp de la parroquia" class="qr-img" />
+        <img src={qrWhatsapp} alt="Código QR para unirse al grupo de WhatsApp de la parroquia" class="qr-img" />
       </aside>
     </div>
   </div>

@@ -34,6 +34,10 @@ if (entrada?.data.catequesisAdultos) {
   </div>
 
   <div class="container">
+    {entrada?.data.imagen && (
+      <img src={entrada.data.imagen.src} alt={entrada.data.imagen.alt ?? ""} class="img-pagina" />
+    )}
+
     {tabs.length === 0 ? (
       <p class="vacio">Próximamente publicaremos aquí la información de la Pastoral de Catequesis.</p>
     ) : (
@@ -72,6 +76,8 @@ if (entrada?.data.catequesisAdultos) {
   .hero-interior p { opacity: 0.9; font-size: 1.05rem; }
 
   .vacio { color: var(--color-muted); font-style: italic; padding: 2rem 0; text-align: center; }
+
+  .img-pagina { width: 100%; max-width: 500px; border-radius: 6px; margin-bottom: 1.5rem; }
 
   .tabs-wrap { margin-top: 1.5rem; }
 
