@@ -1,50 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getEntry } from "astro:content";
-import { marked } from "marked";
+import { getEntry, render } from "astro:content";
 
 const entrada = await getEntry("paginas", "historia");
-const body = entrada.body;
-
-const [parteInicial, parteResto = ""] = body.split(/^## Retablo mayor/m);
-const parteFundacion = parteInicial;
-const parteRetablo = "## Retablo mayor" + parteResto;
-
-marked.setOptions({ gfm: true, breaks: false });
-const htmlFundacion = await marked.parse(parteFundacion);
-const htmlRetablo = await marked.parse(parteRetablo);
-
-const imgIglesia = entrada.data.imagen
-  ? { ...entrada.data.imagen, grande: true }
-  : {
-      src: "/uploads/iglesia.webp",
-      alt: "Antigua fotografía de la Iglesia de Nuestra Señora de las Nieves de la Rinconada",
-      pie: "Antigua fotografía de la iglesia",
-      grande: true,
-    };
-
-const imgRetablo = entrada.data.galeria?.length
-  ? entrada.data.galeria
-  : [
-      {
-        src: "/uploads/retablo-completo.webp",
-        alt: "Retablo Mayor completo de la Iglesia de Nuestra Señora de las Nieves de la Rinconada",
-        pie: "Retablo Mayor de la Iglesia de Nuestra Señora de las Nieves de la Rinconada",
-        grande: false
-      },
-      {
-        src: "/uploads/retablo.webp",
-        alt: "Detalle del Retablo Mayor",
-        pie: "Detalle del Retablo Mayor",
-        grande: true
-      },
-      {
-        src: "/uploads/contrato.webp",
-        alt: "Detalle del contrato del Retablo Mayor firmado en 1717",
-        pie: "Contrato Retablo Mayor. Antonio José de Carvajal. 1717. (detalle) AGAS, Fondo Arzobispal, Sec. III, sign. 11357 © Cabildo Catedral de Sevilla, s.f.",
-        grande: false
-      }
-    ];
+const { Content } = await render(entrada);
 ---
 
 <Layout title="Historia y Patrimonio">
@@ -57,42 +16,7 @@ const imgRetablo = entrada.data.galeria?.length
 
   <div class="container">
     <div class="cuerpo">
-      <div set:html={htmlFundacion} />
-
-      <div class="galeria">
-        <figure class="galeria-fig">
-          <button class="galeria-btn" data-src={imgIglesia.src} aria-label={`Ampliar: ${imgIglesia.alt}`}>
-            <img class:list={[imgIglesia.grande && "img-grande"]} src={imgIglesia.src} alt={imgIglesia.alt} loading="lazy" />
-          </button>
-          <figcaption>{imgIglesia.pie}</figcaption>
-        </figure>
-      </div>
-
-      <div set:html={htmlRetablo} />
-
-      <div class="carrusel">
-        <div class="carrusel-viewport">
-          <div class="carrusel-track">
-            {imgRetablo.map((img, i) => (
-              <div class:list={["carrusel-slide", i === 0 && "active"]}>
-                <figure class="galeria-fig">
-                  <button class="galeria-btn" data-src={img.src} aria-label={`Ampliar: ${img.alt}`}>
-                    <img class:list={[img.grande && "img-grande"]} src={img.src} alt={img.alt} loading="lazy" />
-                  </button>
-                  <figcaption>{img.pie}</figcaption>
-                </figure>
-              </div>
-            ))}
-          </div>
-          <button class="carrusel-prev" aria-label="Anterior">‹</button>
-          <button class="carrusel-next" aria-label="Siguiente">›</button>
-        </div>
-        <div class="carrusel-dots">
-          {imgRetablo.map((_, i) => (
-            <button class:list={["carrusel-dot", i === 0 && "active"]} aria-label={`Ir al slide ${i + 1}`} />
-          ))}
-        </div>
-      </div>
+      <Content />
     </div>
   </div>
 
@@ -148,135 +72,25 @@ const imgRetablo = entrada.data.galeria?.length
     line-height: 1.6;
   }
 
-  .galeria {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
-    margin: 2.5rem 0;
-  }
-
-  .galeria-fig {
-    margin: 0;
-    width: 100%;
-    text-align: center;
-  }
-
-  .galeria-btn {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: zoom-in;
+  .cuerpo :global(img) {
     display: block;
-    width: 100%;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  .galeria-btn img {
-    display: block;
-    width: auto;
-    height: auto;
     max-width: 100%;
     max-height: 520px;
-    margin: 0 auto;
+    margin: 1.5rem auto 0;
     border-radius: 6px;
+    cursor: zoom-in;
     transition: opacity 0.2s ease;
   }
 
-  .galeria-btn img.img-grande {
-    max-height: 720px;
-  }
+  .cuerpo :global(img:hover) { opacity: 0.9; }
 
-  .galeria-btn:hover img { opacity: 0.9; }
-
-  .galeria-fig figcaption {
-    margin-top: 0.6rem;
+  .cuerpo :global(img + em) {
+    display: block;
+    text-align: center;
+    margin: 0.6rem 0 1.5rem;
     font-size: 0.85rem;
     color: var(--color-muted);
-    font-style: italic;
     line-height: 1.5;
-  }
-
-  .carrusel {
-    width: 100%;
-    margin: 2.5rem 0;
-  }
-
-  .carrusel-viewport {
-    position: relative;
-  }
-
-  .carrusel-track {
-    display: grid;
-  }
-
-  .carrusel-slide {
-    grid-area: 1 / 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-  }
-
-  .carrusel-slide.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .carrusel-prev,
-  .carrusel-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    font-size: 1.6rem;
-    line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    transition: background 0.2s ease;
-    padding: 0;
-  }
-
-  .carrusel-prev:hover,
-  .carrusel-next:hover {
-    background: rgba(0, 0, 0, 0.75);
-  }
-
-  .carrusel-prev { left: 0.5rem; }
-  .carrusel-next { right: 0.5rem; }
-
-  .carrusel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .carrusel-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--color-border);
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: background 0.2s ease;
-  }
-
-  .carrusel-dot.active {
-    background: var(--color-primary);
   }
 
   .lightbox {
@@ -321,11 +135,8 @@ const imgRetablo = entrada.data.galeria?.length
   .lightbox-cerrar:hover { background: rgba(255, 255, 255, 0.25); }
 
   @media (max-width: 600px) {
-    .galeria-btn img { max-height: 400px; }
-    .galeria-btn img.img-grande { max-height: 520px; }
+    .cuerpo :global(img) { max-height: 400px; }
     .lightbox { padding: 1rem; }
-    .carrusel-prev,
-    .carrusel-next { width: 38px; height: 38px; font-size: 1.4rem; }
   }
 </style>
 
@@ -349,10 +160,9 @@ const imgRetablo = entrada.data.galeria?.length
       document.body.style.overflow = "";
     }
 
-    document.querySelectorAll(".galeria-btn").forEach(function(btn) {
-      btn.addEventListener("click", function() {
-        const img = btn.querySelector("img");
-        open(btn.dataset.src, img ? img.alt : "");
+    document.querySelectorAll(".cuerpo img").forEach(function(img) {
+      img.addEventListener("click", function() {
+        open(img.src, img.alt);
       });
     });
 
@@ -363,50 +173,5 @@ const imgRetablo = entrada.data.galeria?.length
     document.addEventListener("keydown", function(e) {
       if (e.key === "Escape" && !lightbox.hidden) close();
     });
-  })();
-
-  (function() {
-    const carrusel = document.querySelector(".carrusel");
-    if (!carrusel) return;
-
-    const slides = carrusel.querySelectorAll(".carrusel-slide");
-    const dots = carrusel.querySelectorAll(".carrusel-dot");
-    const prevBtn = carrusel.querySelector(".carrusel-prev");
-    const nextBtn = carrusel.querySelector(".carrusel-next");
-    const total = slides.length;
-    let current = 0;
-    let timer;
-
-    function show(index) {
-      slides.forEach(function(s, i) { s.classList.toggle("active", i === index); });
-      dots.forEach(function(d, i) { d.classList.toggle("active", i === index); });
-      current = index;
-    }
-
-    function next() { show((current + 1) % total); }
-    function prev() { show((current - 1 + total) % total); }
-
-    function startAuto() { timer = setInterval(next, 5000); }
-    function resetAuto() { clearInterval(timer); startAuto(); }
-
-    prevBtn.addEventListener("click", function() { prev(); resetAuto(); });
-    nextBtn.addEventListener("click", function() { next(); resetAuto(); });
-    dots.forEach(function(dot, i) {
-      dot.addEventListener("click", function() { show(i); resetAuto(); });
-    });
-
-    let touchStartX = 0;
-    carrusel.addEventListener("touchstart", function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    carrusel.addEventListener("touchend", function(e) {
-      var diff = touchStartX - e.changedTouches[0].screenX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) next(); else prev();
-        resetAuto();
-      }
-    }, { passive: true });
-
-    startAuto();
   })();
 </script>

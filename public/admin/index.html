@@ -150,30 +150,6 @@
                 name: "historia",
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
-                  {
-                    label: "Foto antigua de la iglesia",
-                    name: "imagen",
-                    widget: "object",
-                    required: false,
-                    fields: [
-                      { label: "Imagen", name: "src", widget: "image" },
-                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
-                      { label: "Pie de foto", name: "pie", widget: "string", required: false },
-                    ],
-                  },
-                  {
-                    label: "Galería del Retablo Mayor",
-                    name: "galeria",
-                    widget: "list",
-                    required: false,
-                    summary: "{{pie}}",
-                    fields: [
-                      { label: "Imagen", name: "src", widget: "image" },
-                      { label: "Texto alternativo", name: "alt", widget: "string", required: false },
-                      { label: "Pie de foto", name: "pie", widget: "string", required: false },
-                      { label: "Mostrar grande", name: "grande", widget: "boolean", required: false, default: false },
-                    ],
-                  },
                   { label: "Contenido", name: "body", widget: "markdown" },
                 ],
               },

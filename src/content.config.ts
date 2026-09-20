@@ -24,18 +24,7 @@ const paginas = defineCollection({
       .object({
         src: z.string(),
         alt: z.string().optional(),
-        pie: z.string().optional(),
       })
-      .optional(),
-    galeria: z
-      .array(
-        z.object({
-          src: z.string(),
-          alt: z.string().optional(),
-          pie: z.string().optional(),
-          grande: z.boolean().optional(),
-        })
-      )
       .optional(),
     banner: z
       .array(

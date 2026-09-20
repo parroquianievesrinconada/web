@@ -53,7 +53,7 @@ catequesisAdultos: |
 
   Variable según el itinerario. Generalmente un curso pastoral completo, de septiembre a junio, con encuentros semanales o quincenales.
 
-  ## Inscripción y horarios
+  ## Inscripción
 
-  Contactar con el despacho parroquial para concertar una primera entrevista con el párroco y conocer las fechas del próximo itinerario.
+  Debe rellenar y entregar la inscripción que se puede descargar en el botón de abajo
 ---

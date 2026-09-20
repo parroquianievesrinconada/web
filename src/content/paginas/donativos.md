@@ -16,19 +16,14 @@ Puedes colaborar económicamente con la parroquia y con Cáritas mediante donati
 
 En esta tabla se explican los distintos porcentajes de desgravación para los donativos, según el régimen fiscal:
 
-<table>
-  <thead>
-    <tr><th>Régimen fiscal</th><th>Concepto</th><th>Deducción</th></tr>
-  </thead>
-  <tbody>
-    <tr><td rowspan="4">Personas físicas (IRPF)</td><td>Donativos de hasta 150 €</td><td>80%</td></tr>
-    <tr><td>Donativos a partir de 151 €</td><td>80% de los primeros 150 € y 35% del resto</td></tr>
-    <tr><td>Donativos recurrentes (dos años consecutivos donando la misma cantidad o mayor)</td><td>40%</td></tr>
-    <tr><td>Límite de deducción máxima</td><td>Hasta el 10% de la base liquidable</td></tr>
-    <tr><td rowspan="3">Personas jurídicas (Impuesto de Sociedades)</td><td>Donativos en general</td><td>35%</td></tr>
-    <tr><td>Donativos recurrentes</td><td>40%</td></tr>
-    <tr><td>Límite de deducción máxima</td><td>Hasta el 10% de la base liquidable</td></tr>
-  </tbody>
-</table>
+| Régimen fiscal | Concepto | Deducción |
+| --- | --- | --- |
+| Personas físicas (IRPF) | Donativos de hasta 150 € | 80% |
+| Personas físicas (IRPF) | Donativos a partir de 151 € | 80% de los primeros 150 € y 35% del resto |
+| Personas físicas (IRPF) | Donativos recurrentes (dos años consecutivos donando la misma cantidad o mayor) | 40% |
+| Personas físicas (IRPF) | Límite de deducción máxima | Hasta el 10% de la base liquidable |
+| Personas jurídicas (Impuesto de Sociedades) | Donativos en general | 35% |
+| Personas jurídicas (Impuesto de Sociedades) | Donativos recurrentes | 40% |
+| Personas jurídicas (Impuesto de Sociedades) | Límite de deducción máxima | Hasta el 10% de la base liquidable |
 
 **Es necesario identificarse con nombre y DNI en el caso de querer beneficiarse de la deducción.**
