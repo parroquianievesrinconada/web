@@ -25,26 +25,25 @@ const secundarios = anuncios.slice(1);
   <div class="banner" aria-label="Fotos de la parroquia">
     <div class="slides">
       <div class="slide active">
-        <img src="/uploads/rotativo-1.webp" alt="Parroquia Nuestra Señora de las Nieves" class="slide-img" fetchpriority="high" />
+        <img src="/uploads/rotativo-1.webp" alt="" class="slide-bg" aria-hidden="true" />
+        <img src="/uploads/rotativo-1.webp" alt="Parroquia Nuestra Señora de las Nieves de la Rinconada" class="slide-img slide-img-contain" fetchpriority="high" />
         <div class="slide-overlay"></div>
         <div class="slide-texto">
-          <h1>Parroquia Nuestra Señora de las Nieves</h1>
+          <h1>Parroquia Nuestra Señora de las Nieves de la Rinconada</h1>
           <p>Comunidad de fe, esperanza y caridad</p>
         </div>
       </div>
       <div class="slide">
-        <img src="/uploads/rotativo-2.webp" alt="Bienvenidos a nuestra casa" class="slide-img" loading="lazy" />
+        <img src="/uploads/rotativo-2.webp" class="slide-img" loading="lazy" style="object-position: center 15%;" />
         <div class="slide-overlay"></div>
         <div class="slide-texto">
-          <h1>Bienvenidos a nuestra casa</h1>
           <p>Un lugar de encuentro para todos</p>
         </div>
       </div>
       <div class="slide">
-        <img src="/uploads/rotativo-3.webp" alt="Juntos en el camino" class="slide-img" loading="lazy" />
+        <img src="/uploads/rotativo-3.webp" class="slide-img" loading="lazy" style="object-position: center 12%;" />
         <div class="slide-overlay"></div>
         <div class="slide-texto">
-          <h1>Juntos en el camino</h1>
           <p>Vida sacramental · Catequesis · Hermandades</p>
         </div>
       </div>
@@ -64,9 +63,13 @@ const secundarios = anuncios.slice(1);
       <span class="acceso-icono">🕐</span>
       <span class="acceso-label">Horarios de Misa</span>
     </a>
+    <a href="/parroquia/horarios#prebautismal" class="acceso-btn">
+      <span class="acceso-icono">🕐</span>
+      <span class="acceso-label">Calendario de Cursos Prebautismales</span>
+    </a>
     <a href="/actualidad" class="acceso-btn">
       <span class="acceso-icono">📢</span>
-      <span class="acceso-label">Noticias</span>
+      <span class="acceso-label">Anuncios</span>
     </a>
     <a href="/contacto" class="acceso-btn">
       <span class="acceso-icono">📍</span>
@@ -74,56 +77,64 @@ const secundarios = anuncios.slice(1);
     </a>
   </div>
 
-  <!-- ÚLTIMAS NOTICIAS -->
-  <div class="container">
-    <section class="noticias">
-      <div class="section-header">
-        <h2>Últimas noticias</h2>
-        <a href="/actualidad">Ver todas →</a>
-      </div>
-
-      {anuncios.length === 0 ? (
-        <p class="vacio">No hay anuncios publicados todavía.</p>
-      ) : (
-        <div class="noticias-grid">
-          {principal && (
-            <article class="noticia-principal">
-              {principal.data.image && (
-                <a href={`/actualidad/${principal.id}`} class="principal-img-wrap">
-                  <img src={principal.data.image} alt={principal.data.title} class="principal-img" loading="lazy" />
-                </a>
-              )}
-              <div class="principal-cuerpo">
-                <time class="noticia-fecha">{formatFecha(fechaDeAnuncio(principal))}</time>
-                <h3 class="principal-titulo">
-                  <a href={`/actualidad/${principal.id}`}>{principal.data.title}</a>
-                </h3>
-                <p class="principal-resumen">{principal.data.summary}</p>
-                <a href={`/actualidad/${principal.id}`} class="leer-mas">Leer más →</a>
-              </div>
-            </article>
-          )}
-          {secundarios.length > 0 && (
-            <div class="noticias-secundarias">
-              {secundarios.map((anuncio) => (
-                <article class="noticia-secundaria">
-                  <div class="secundaria-cuerpo">
-                    <time class="noticia-fecha">{formatFecha(fechaDeAnuncio(anuncio))}</time>
-                    <h4><a href={`/actualidad/${anuncio.id}`}>{anuncio.data.title}</a></h4>
-                    <p>{anuncio.data.summary}</p>
-                  </div>
-                  {anuncio.data.image && (
-                    <a href={`/actualidad/${anuncio.id}`} class="secundaria-img-wrap">
-                      <img src={anuncio.data.image} alt={anuncio.data.title} class="secundaria-img" loading="lazy" />
-                    </a>
-                  )}
-                </article>
-              ))}
-            </div>
-          )}
+  <!-- ÚLTIMOS ANUNCIOS + QR WHATSAPP -->
+  <div class="container container-ancho">
+    <div class="inicio-grid">
+      <section class="noticias">
+        <div class="section-header">
+          <h2>Últimos anuncios</h2>
+          <a href="/actualidad">Ver todas →</a>
         </div>
-      )}
-    </section>
+
+        {anuncios.length === 0 ? (
+          <p class="vacio">No hay anuncios publicados todavía.</p>
+        ) : (
+          <div class="noticias-grid">
+            {principal && (
+              <article class="noticia-principal">
+                {principal.data.image && (
+                  <a href={`/actualidad/${principal.id}`} class="principal-img-wrap">
+                    <img src={principal.data.image} alt={principal.data.title} class="principal-img" loading="lazy" />
+                  </a>
+                )}
+                <div class="principal-cuerpo">
+                  <time class="noticia-fecha">{formatFecha(fechaDeAnuncio(principal))}</time>
+                  <h3 class="principal-titulo">
+                    <a href={`/actualidad/${principal.id}`}>{principal.data.title}</a>
+                  </h3>
+                  <p class="principal-resumen">{principal.data.summary}</p>
+                  <a href={`/actualidad/${principal.id}`} class="leer-mas">Leer más →</a>
+                </div>
+              </article>
+            )}
+            {secundarios.length > 0 && (
+              <div class="noticias-secundarias">
+                {secundarios.map((anuncio) => (
+                  <article class="noticia-secundaria">
+                    <div class="secundaria-cuerpo">
+                      <time class="noticia-fecha">{formatFecha(fechaDeAnuncio(anuncio))}</time>
+                      <h4><a href={`/actualidad/${anuncio.id}`}>{anuncio.data.title}</a></h4>
+                      <p>{anuncio.data.summary}</p>
+                    </div>
+                    {anuncio.data.image && (
+                      <a href={`/actualidad/${anuncio.id}`} class="secundaria-img-wrap">
+                        <img src={anuncio.data.image} alt={anuncio.data.title} class="secundaria-img" loading="lazy" />
+                      </a>
+                    )}
+                  </article>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </section>
+
+      <aside class="whatsapp-card">
+        <h3>Únete a nuestro grupo de WhatsApp</h3>
+        <p>Escanea el código QR para estar al tanto de todos los anuncios de la parroquia.</p>
+        <img src="/uploads/qr-whatsapp.webp" alt="Código QR para unirse al grupo de WhatsApp de la parroquia" class="qr-img" />
+      </aside>
+    </div>
   </div>
 
   <script is:inline>
@@ -193,6 +204,20 @@ const secundarios = anuncios.slice(1);
     object-fit: cover;
   }
 
+  .slide-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(35px) brightness(0.6);
+    transform: scale(1.15);
+  }
+
+  .slide-img-contain {
+    object-fit: contain;
+  }
+
   .slide-overlay {
     position: absolute;
     inset: 0;
@@ -200,6 +225,7 @@ const secundarios = anuncios.slice(1);
   }
 
   .slide-texto {
+    position: relative;
     text-align: center;
     color: #fff;
     padding: 2rem;
@@ -290,6 +316,49 @@ const secundarios = anuncios.slice(1);
   .acceso-icono { font-size: 1.6rem; }
   .acceso-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
 
+  /* ── INICIO: ANUNCIOS + WHATSAPP ── */
+  .container-ancho {
+    max-width: 1280px;
+  }
+
+  .inicio-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .whatsapp-card {
+    background: linear-gradient(160deg, #e9f9ee, #d5f2df);
+    border: 1px solid #8fd9a8;
+    border-radius: 6px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .whatsapp-card h3 {
+    font-size: 1rem;
+    color: #1f7a3d;
+    margin-bottom: 0.6rem;
+  }
+
+  .whatsapp-card p {
+    font-size: 0.85rem;
+    color: #3a6b4a;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .qr-img {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto;
+    border-radius: 4px;
+    border: 1px solid #8fd9a8;
+    background: #fff;
+    padding: 0.5rem;
+  }
+
   /* ── NOTICIAS ── */
   .section-header {
     display: flex;
@@ -348,6 +417,11 @@ const secundarios = anuncios.slice(1);
 
   .secundaria-img-wrap { flex-shrink: 0; margin-left: 0.75rem; }
   .secundaria-img { width: 68px; height: 68px; object-fit: cover; border-radius: 3px; }
+
+  @media (max-width: 820px) {
+    .inicio-grid { grid-template-columns: 1fr; }
+    .whatsapp-card { max-width: 320px; margin: 0 auto; }
+  }
 
   @media (max-width: 620px) {
     .banner { height: 300px; }

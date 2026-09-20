@@ -5,20 +5,19 @@ import { getEntry } from "astro:content";
 const entrada = await getEntry("paginas", "horarios");
 const d = entrada?.data;
 
-const tieneInvierno = !!d?.misasInvierno && d.misasInvierno.filas.length > 0;
-const tieneVerano = !!d?.misasVerano && d.misasVerano.filas.length > 0;
-const tieneConfesiones = !!d?.confesiones && d.confesiones.filas.length > 0;
-const tieneApertura = !!d?.apertura && d.apertura.filas.length > 0;
+const tieneMisas = !!d?.misas && d.misas.filas.length > 0;
+const tienePrebautismal = !!d?.prebautismal && d.prebautismal.filas.length > 0;
+const tieneConfesiones = !!d?.confesiones && !!d.confesiones.texto;
 const tieneDespacho = !!d?.despacho && d.despacho.filas.length > 0;
 
-const hayContenido = tieneInvierno || tieneVerano || tieneConfesiones || tieneApertura || tieneDespacho;
+const hayContenido = tieneMisas || tienePrebautismal || tieneConfesiones || tieneDespacho;
 ---
 
 <Layout title="Horarios">
   <div class="hero-interior">
     <div class="container">
       <h1>Horarios</h1>
-      <p>Celebraciones, apertura del templo y atención parroquial</p>
+      <p>Misas, cursos prebautismales, confesiones y despacho parroquial</p>
     </div>
   </div>
 
@@ -28,89 +27,65 @@ const hayContenido = tieneInvierno || tieneVerano || tieneConfesiones || tieneAp
     ) : (
       <div class="grid-horarios">
 
-        {tieneInvierno && (
-          <section class="bloque">
-            <h2>⛪ Misas — Temporada de invierno</h2>
-            {d.misasInvierno.subtitulo && <p class="subtitulo">{d.misasInvierno.subtitulo}</p>}
-            <table>
-              <thead>
-                <tr><th>Día</th><th>Horario</th></tr>
-              </thead>
-              <tbody>
-                {d.misasInvierno.filas.map((f) => (
-                  <tr><td>{f.dias}</td><td>{f.horario}</td></tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        )}
+        <div class="columna">
+          {tieneMisas && (
+            <section class="bloque">
+              <h2>Horario de misas</h2>
+              <table>
+                <thead>
+                  <tr><th>Día</th><th>Horario</th></tr>
+                </thead>
+                <tbody>
+                  {d.misas.filas.map((f) => (
+                    <tr><td>{f.dias}</td><td>{f.horario}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          )}
 
-        {tieneVerano && (
-          <section class="bloque">
-            <h2>☀️ Misas — Temporada de verano</h2>
-            {d.misasVerano.subtitulo && <p class="subtitulo">{d.misasVerano.subtitulo}</p>}
-            <table>
-              <thead>
-                <tr><th>Día</th><th>Horario</th></tr>
-              </thead>
-              <tbody>
-                {d.misasVerano.filas.map((f) => (
-                  <tr><td>{f.dias}</td><td>{f.horario}</td></tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        )}
+          {tieneDespacho && (
+            <section class="bloque">
+              <h2>Despacho parroquial</h2>
+              <table>
+                <thead>
+                  <tr><th>Día</th><th>Horario</th></tr>
+                </thead>
+                <tbody>
+                  {d.despacho.filas.map((f) => (
+                    <tr><td>{f.dias}</td><td>{f.horario}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+              {d.despacho.nota && <p class="nota">{d.despacho.nota}</p>}
+            </section>
+          )}
 
-        {tieneConfesiones && (
-          <section class="bloque" id="confesiones">
-            <h2>🙏 Confesiones</h2>
-            <table>
-              <thead>
-                <tr><th>Día</th><th>Horario</th></tr>
-              </thead>
-              <tbody>
-                {d.confesiones.filas.map((f) => (
-                  <tr><td>{f.dias}</td><td>{f.horario}</td></tr>
-                ))}
-              </tbody>
-            </table>
-            {d.confesiones.nota && <p class="nota">{d.confesiones.nota}</p>}
-          </section>
-        )}
+          {tieneConfesiones && (
+            <section class="bloque" id="confesiones">
+              <h2>Confesiones</h2>
+              <p class="texto-simple">{d.confesiones.texto}</p>
+            </section>
+          )}
+        </div>
 
-        {tieneApertura && (
-          <section class="bloque">
-            <h2>🚪 Apertura del templo</h2>
-            <table>
-              <thead>
-                <tr><th>Período</th><th>Horario</th></tr>
-              </thead>
-              <tbody>
-                {d.apertura.filas.map((f) => (
-                  <tr><td>{f.dias}</td><td>{f.horario}</td></tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        )}
-
-        {tieneDespacho && (
-          <section class="bloque">
-            <h2>🏢 Despacho parroquial</h2>
-            <table>
-              <thead>
-                <tr><th>Día</th><th>Horario</th></tr>
-              </thead>
-              <tbody>
-                {d.despacho.filas.map((f) => (
-                  <tr><td>{f.dias}</td><td>{f.horario}</td></tr>
-                ))}
-              </tbody>
-            </table>
-            {d.despacho.nota && <p class="nota">{d.despacho.nota}</p>}
-          </section>
-        )}
+        <div class="columna">
+          {tienePrebautismal && (
+            <section class="bloque" id="prebautismal">
+              <h2>Cursos prebautismales</h2>
+              <table>
+                <thead>
+                  <tr><th>Fecha</th><th>Hora</th></tr>
+                </thead>
+                <tbody>
+                  {d.prebautismal.filas.map((f) => (
+                    <tr><td>{f.dias}</td><td>{f.horario}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          )}
+        </div>
 
       </div>
     )}
@@ -133,6 +108,13 @@ const hayContenido = tieneInvierno || tieneVerano || tieneConfesiones || tieneAp
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
+    align-items: start;
+  }
+
+  .columna {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
   .bloque {
@@ -153,6 +135,16 @@ const hayContenido = tieneInvierno || tieneVerano || tieneConfesiones || tieneAp
     color: var(--color-muted);
     margin-bottom: 0.75rem;
     font-style: italic;
+  }
+
+  .texto-simple {
+    width: 100%;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    background: #fdf8f3;
+    padding: 0.6rem 0.9rem;
+    border-radius: 4px;
+    display: inline-block;
   }
 
   table {

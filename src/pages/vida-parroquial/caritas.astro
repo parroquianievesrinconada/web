@@ -1,0 +1,63 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getEntry, render } from "astro:content";
+
+const entrada = await getEntry("paginas", "caritas");
+const { Content } = await render(entrada);
+---
+
+<Layout title="Cáritas">
+  <div class="hero-interior">
+    <div class="container">
+      <h1>Cáritas</h1>
+      <p>El brazo de la caridad de la Iglesia junto a los más necesitados</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cuerpo">
+      <img src="/uploads/caritas.webp" alt="Logo de Cáritas" class="logo-caritas" />
+      <Content />
+      <p class="donativo-cta">
+        ¿Quieres colaborar económicamente con Cáritas? <a href="/consejo-economico/donativos">Consulta cómo hacer un donativo</a>.
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .hero-interior {
+    background: linear-gradient(135deg, #4a2515, #7a4020);
+    color: #fff;
+    padding: 3rem 0;
+  }
+  .hero-interior h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
+  .hero-interior p { opacity: 0.85; }
+
+  .cuerpo { max-width: 760px; font-size: 1rem; line-height: 1.8; }
+
+  .logo-caritas { max-width: 220px; margin-bottom: 1.5rem; }
+
+  .cuerpo :global(p) { margin-bottom: 1rem; }
+
+  .cuerpo :global(h2) {
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    margin: 2rem 0 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cuerpo :global(ul) { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .cuerpo :global(li) { margin-bottom: 0.4rem; }
+  .cuerpo :global(a) { color: var(--color-primary); }
+
+  .donativo-cta {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--color-bg);
+    border-left: 3px solid var(--color-primary);
+    border-radius: 0 4px 4px 0;
+    font-size: 0.95rem;
+  }
+</style>

@@ -1,8 +1,7 @@
 ---
 title: Contacto
-parroquiaNombre: "Parroquia Nuestra Señora de las Nieves"
+parroquiaNombre: "Parroquia Nuestra Señora de las Nieves de la Rinconada"
 direccion: Pl. de España, 41309 La Rinconada, Sevilla, España
-telefono: "69874521"
 email: anbetis46@gmail.com
 mapa: <iframe
   src="https://maps.google.com/maps?q=37.4880835,-5.978953&hl=es&z=17&output=embed"

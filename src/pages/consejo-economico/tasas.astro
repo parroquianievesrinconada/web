@@ -1,0 +1,84 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getEntry, render } from "astro:content";
+
+const entrada = await getEntry("paginas", "tasas");
+const { Content } = await render(entrada);
+---
+
+<Layout title="Tasas de la Curia Diocesana">
+  <div class="hero-interior">
+    <div class="container">
+      <h1>Tasas de la Curia Diocesana</h1>
+      <p>Tasas vigentes para sacramentos, celebraciones y trámites</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cuerpo">
+      <Content />
+      <a href="/solicitud-partidas.pdf" class="btn-descarga" download>📄 Descargar solicitud de partidas</a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .hero-interior {
+    background: linear-gradient(135deg, #4a2515, #7a4020);
+    color: #fff;
+    padding: 3rem 0;
+  }
+  .hero-interior h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
+  .hero-interior p { opacity: 0.85; }
+
+  .cuerpo { max-width: 760px; font-size: 1rem; line-height: 1.8; }
+
+  .cuerpo :global(p) { margin-bottom: 1rem; }
+
+  .cuerpo :global(h2) {
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    margin: 2rem 0 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cuerpo :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .cuerpo :global(th) {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 0.6rem 0.85rem;
+    text-align: left;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .cuerpo :global(td) {
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cuerpo :global(tr:nth-child(even) td) { background: var(--color-bg); }
+
+  .btn-descarga {
+    display: inline-block;
+    margin-top: 0.5rem;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .btn-descarga:hover { background: var(--color-primary-light); text-decoration: none; color: #fff; }
+</style>

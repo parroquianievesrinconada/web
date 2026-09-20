@@ -1,0 +1,72 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getEntry, render } from "astro:content";
+
+const entrada = await getEntry("paginas", "donativos");
+const { Content } = await render(entrada);
+---
+
+<Layout title="Donativos">
+  <div class="hero-interior">
+    <div class="container">
+      <h1>Donativos</h1>
+      <p>Colabora económicamente con la parroquia y con Cáritas</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cuerpo">
+      <Content />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .hero-interior {
+    background: linear-gradient(135deg, #4a2515, #7a4020);
+    color: #fff;
+    padding: 3rem 0;
+  }
+  .hero-interior h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
+  .hero-interior p { opacity: 0.85; }
+
+  .cuerpo { max-width: 760px; font-size: 1rem; line-height: 1.8; }
+
+  .cuerpo :global(p) { margin-bottom: 1rem; }
+
+  .cuerpo :global(h2) {
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    margin: 2rem 0 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cuerpo :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .cuerpo :global(th) {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 0.6rem 0.85rem;
+    text-align: left;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .cuerpo :global(td) {
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cuerpo :global(tr:nth-child(even) td) { background: var(--color-bg); }
+
+  .cuerpo :global(ul) { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .cuerpo :global(li) { margin-bottom: 0.4rem; }
+  .cuerpo :global(a) { color: var(--color-primary); }
+</style>

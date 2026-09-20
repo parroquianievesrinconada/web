@@ -8,9 +8,8 @@ const { title = "Parroquia" } = Astro.props;
 
 const contacto = await getEntry("paginas", "contacto");
 
-const parroquiaNombre = contacto?.data.parroquiaNombre || "Parroquia Nuestra Señora de las Nieves";
+const parroquiaNombre = contacto?.data.parroquiaNombre || "Parroquia Nuestra Señora de las Nieves de la Rinconada";
 const direccion = contacto?.data.direccion || "Pl. de España, 41309 La Rinconada, Sevilla";
-const telefono = contacto?.data.telefono || "955 79 00 00";
 ---
 
 <!DOCTYPE html>
@@ -18,9 +17,9 @@ const telefono = contacto?.data.telefono || "955 79 00 00";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} | Parroquia Nuestra Señora de las Nieves</title>
+    <title>{title} | Parroquia Nuestra Señora de las Nieves de la Rinconada</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
@@ -37,8 +36,11 @@ const telefono = contacto?.data.telefono || "955 79 00 00";
     <header>
       <div class="header-inner">
         <a href="/" class="logo">
-          <span class="logo-sub">Parroquia de</span>
-          <span class="logo-nombre">Ntra. Sra. de las Nieves</span>
+          <img src="/uploads/logo.webp" alt="" class="logo-img" />
+          <span class="logo-texto">
+            <span class="logo-sub">Parroquia de</span>
+            <span class="logo-nombre">Ntra. Sra. de las Nieves de la Rinconada</span>
+          </span>
         </a>
 
         <button class="hamburger" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
@@ -55,8 +57,7 @@ const telefono = contacto?.data.telefono || "955 79 00 00";
             <div class="dropdown" role="menu">
               <a href="/parroquia" role="menuitem">Historia y Patrimonio</a>
               <a href="/parroquia/horarios" role="menuitem">Horarios</a>
-              <a href="/actualidad" role="menuitem">Noticias</a>
-              <a href="/actualidad/calendario" role="menuitem">Calendario Litúrgico</a>
+              <a href="/actualidad" role="menuitem">Anuncios</a>
             </div>
           </div>
 
@@ -70,6 +71,7 @@ const telefono = contacto?.data.telefono || "955 79 00 00";
               <a href="/sacramentos/primera-comunion" role="menuitem">Primera Comunión</a>
               <a href="/sacramentos/confirmacion" role="menuitem">Confirmación</a>
               <a href="/sacramentos/matrimonio" role="menuitem">Matrimonio</a>
+              <a href="/sacramentos/uncion-enfermos" role="menuitem">Unción de Enfermos</a>
             </div>
           </div>
 
@@ -80,10 +82,20 @@ const telefono = contacto?.data.telefono || "955 79 00 00";
             <div class="dropdown" role="menu">
               <a href="/vida-parroquial/catequesis" role="menuitem">Catequesis</a>
               <a href="/vida-parroquial/pastoral-salud" role="menuitem">Pastoral de la Salud</a>
+              <a href="/vida-parroquial/caritas" role="menuitem">Cáritas</a>
+              <a href="/vida-parroquial/hermandades" role="menuitem">Hermandades</a>
             </div>
           </div>
 
-          <a href="/hermandades" class="nav-link">Hermandades</a>
+          <div class="nav-grupo">
+            <button class="nav-btn" aria-haspopup="true" aria-expanded="false">
+              Consejo Económico <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="dropdown" role="menu">
+              <a href="/consejo-economico/donativos" role="menuitem">Donativos</a>
+              <a href="/consejo-economico/tasas" role="menuitem">Tasas de la Curia Diocesana</a>
+            </div>
+          </div>
 
           <a href="/contacto" class="nav-link">Contacto</a>
         </nav>
@@ -99,13 +111,12 @@ const telefono = contacto?.data.telefono || "955 79 00 00";
         <div class="footer-col">
           <strong>{parroquiaNombre}</strong>
           <p>{direccion}</p>
-          <p>Tel. {telefono}</p>
         </div>
         <div class="footer-col">
           <strong>Accesos</strong>
           <nav class="footer-nav">
             <a href="/parroquia">La Parroquia</a>
-            <a href="/actualidad">Noticias</a>
+            <a href="/actualidad">Anuncios</a>
             <a href="/contacto">Contacto</a>
             <a href="/admin/">Panel</a>
           </nav>
@@ -212,7 +223,9 @@ const telefono = contacto?.data.telefono || "955 79 00 00";
     gap: 1rem;
   }
 
-  .logo { display: flex; flex-direction: column; line-height: 1.1; text-decoration: none; }
+  .logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+  .logo-img { height: 42px; width: auto; flex-shrink: 0; }
+  .logo-texto { display: flex; flex-direction: column; line-height: 1.1; }
   .logo-sub { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-muted); }
   .logo-nombre { font-family: var(--font-serif); font-size: 1.2rem; color: var(--color-primary); font-weight: 600; }
 

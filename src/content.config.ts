@@ -17,23 +17,10 @@ const paginas = defineCollection({
     title: z.string(),
     parroquiaNombre: z.string().optional(),
     direccion: z.string().optional(),
-    telefono: z.string().optional(),
     email: z.string().optional(),
     mapa: z.string().optional(),
-    misasInvierno: z
+    misas: z
       .object({
-        subtitulo: z.string().optional(),
-        filas: z.array(
-          z.object({
-            dias: z.string(),
-            horario: z.string(),
-          })
-        ),
-      })
-      .optional(),
-    misasVerano: z
-      .object({
-        subtitulo: z.string().optional(),
         filas: z.array(
           z.object({
             dias: z.string(),
@@ -44,23 +31,7 @@ const paginas = defineCollection({
       .optional(),
     confesiones: z
       .object({
-        filas: z.array(
-          z.object({
-            dias: z.string(),
-            horario: z.string(),
-          })
-        ),
-        nota: z.string().optional(),
-      })
-      .optional(),
-    apertura: z
-      .object({
-        filas: z.array(
-          z.object({
-            dias: z.string(),
-            horario: z.string(),
-          })
-        ),
+        texto: z.string(),
       })
       .optional(),
     despacho: z
@@ -74,15 +45,15 @@ const paginas = defineCollection({
         nota: z.string().optional(),
       })
       .optional(),
-    eventos: z
-      .array(
-        z.object({
-          dia: z.coerce.number(),
-          mes: z.coerce.number(),
-          texto: z.string(),
-          tipo: z.string(),
-        })
-      )
+    prebautismal: z
+      .object({
+        filas: z.array(
+          z.object({
+            dias: z.string(),
+            horario: z.string(),
+          })
+        ),
+      })
       .optional(),
     intro: z.string().optional(),
     informacion: z.string().optional(),

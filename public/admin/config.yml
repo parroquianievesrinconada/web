@@ -35,6 +35,5 @@ collections:
         fields:
           - { label: "Título", name: "title", widget: "string" }
           - { label: "Dirección", name: "direccion", widget: "string" }
-          - { label: "Teléfono", name: "telefono", widget: "string" }
           - { label: "Email", name: "email", widget: "string" }
           - { label: "Mapa de Google (código embed)", name: "mapa", widget: "text" }

@@ -45,31 +45,11 @@
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
                   {
-                    label: "Misas — Temporada de invierno",
-                    name: "misasInvierno",
+                    label: "Horario de misas",
+                    name: "misas",
                     widget: "object",
                     required: false,
                     fields: [
-                      { label: "Subtítulo (ej: 'Octubre – mayo')", name: "subtitulo", widget: "string", required: false },
-                      {
-                        label: "Filas",
-                        name: "filas",
-                        widget: "list",
-                        summary: "{{dias}}: {{horario}}",
-                        fields: [
-                          { label: "Día", name: "dias", widget: "string" },
-                          { label: "Horario", name: "horario", widget: "string" },
-                        ],
-                      },
-                    ],
-                  },
-                  {
-                    label: "Misas — Temporada de verano",
-                    name: "misasVerano",
-                    widget: "object",
-                    required: false,
-                    fields: [
-                      { label: "Subtítulo (ej: 'Junio – septiembre')", name: "subtitulo", widget: "string", required: false },
                       {
                         label: "Filas",
                         name: "filas",
@@ -88,35 +68,7 @@
                     widget: "object",
                     required: false,
                     fields: [
-                      {
-                        label: "Filas",
-                        name: "filas",
-                        widget: "list",
-                        summary: "{{dias}}: {{horario}}",
-                        fields: [
-                          { label: "Día", name: "dias", widget: "string" },
-                          { label: "Horario", name: "horario", widget: "string" },
-                        ],
-                      },
-                      { label: "Nota al pie", name: "nota", widget: "text", required: false },
-                    ],
-                  },
-                  {
-                    label: "Apertura del templo",
-                    name: "apertura",
-                    widget: "object",
-                    required: false,
-                    fields: [
-                      {
-                        label: "Filas",
-                        name: "filas",
-                        widget: "list",
-                        summary: "{{dias}}: {{horario}}",
-                        fields: [
-                          { label: "Período", name: "dias", widget: "string" },
-                          { label: "Horario", name: "horario", widget: "string" },
-                        ],
-                      },
+                      { label: "Texto", name: "texto", widget: "string" },
                     ],
                   },
                   {
@@ -136,6 +88,24 @@
                         ],
                       },
                       { label: "Nota al pie", name: "nota", widget: "text", required: false },
+                    ],
+                  },
+                  {
+                    label: "Cursos prebautismales",
+                    name: "prebautismal",
+                    widget: "object",
+                    required: false,
+                    fields: [
+                      {
+                        label: "Filas",
+                        name: "filas",
+                        widget: "list",
+                        summary: "{{dias}}: {{horario}}",
+                        fields: [
+                          { label: "Fecha", name: "dias", widget: "string" },
+                          { label: "Hora", name: "horario", widget: "string" },
+                        ],
+                      },
                     ],
                   },
                 ],
@@ -163,6 +133,33 @@
                 file: "src/content/paginas/pastoral-salud.md",
                 label: "Pastoral de la Salud",
                 name: "pastoral-salud",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  { label: "Contenido", name: "body", widget: "markdown" },
+                ],
+              },
+              {
+                file: "src/content/paginas/caritas.md",
+                label: "Cáritas",
+                name: "caritas",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  { label: "Contenido", name: "body", widget: "markdown" },
+                ],
+              },
+              {
+                file: "src/content/paginas/donativos.md",
+                label: "Donativos",
+                name: "donativos",
+                fields: [
+                  { label: "Título", name: "title", widget: "string" },
+                  { label: "Contenido", name: "body", widget: "markdown" },
+                ],
+              },
+              {
+                file: "src/content/paginas/tasas.md",
+                label: "Tasas de la Curia Diocesana",
+                name: "tasas",
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
                   { label: "Contenido", name: "body", widget: "markdown" },
@@ -237,52 +234,20 @@
                 ],
               },
               {
-                file: "src/content/paginas/calendario.md",
-                label: "Calendario Litúrgico",
-                name: "calendario",
+                file: "src/content/paginas/uncion-enfermos.md",
+                label: "Sacramento: Unción de Enfermos",
+                name: "uncion-enfermos",
                 fields: [
                   { label: "Título", name: "title", widget: "string" },
-                  {
-                    label: "Eventos del mes",
-                    name: "eventos",
-                    widget: "list",
-                    fields: [
-                      {
-                        label: "Mes",
-                        name: "mes",
-                        widget: "select",
-                        options: [
-                          { label: "Enero", value: 1 },
-                          { label: "Febrero", value: 2 },
-                          { label: "Marzo", value: 3 },
-                          { label: "Abril", value: 4 },
-                          { label: "Mayo", value: 5 },
-                          { label: "Junio", value: 6 },
-                          { label: "Julio", value: 7 },
-                          { label: "Agosto", value: 8 },
-                          { label: "Septiembre", value: 9 },
-                          { label: "Octubre", value: 10 },
-                          { label: "Noviembre", value: 11 },
-                          { label: "Diciembre", value: 12 },
-                        ],
-                      },
-                      { label: "Día", name: "dia", widget: "number", value_type: "int", min: 1, max: 31 },
-                      { label: "Descripción", name: "texto", widget: "string" },
-                      {
-                        label: "Tipo",
-                        name: "tipo",
-                        widget: "select",
-                        options: [
-                          { label: "Misa especial", value: "misa" },
-                          { label: "Sacramento", value: "sacramento" },
-                          { label: "Pastoral", value: "pastoral" },
-                          { label: "Formación", value: "formacion" },
-                          { label: "Evento especial", value: "especial" },
-                          { label: "Festividad", value: "festivo" },
-                        ],
-                      },
-                    ],
-                  },
+                  { label: "Introducción (subtítulo del hero)", name: "intro", widget: "text", required: false },
+                  { label: "Información", name: "informacion", widget: "markdown", required: false },
+                  { label: "Requisitos", name: "requisitos", widget: "markdown", required: false },
+                  { label: "Pasos a seguir", name: "pasos", widget: "list", required: false, fields: [
+                    { label: "Título del paso", name: "titulo", widget: "string" },
+                    { label: "Descripción", name: "descripcion", widget: "text", required: false },
+                  ] },
+                  { label: "Catequesis", name: "catequesis", widget: "markdown", required: false },
+                  { label: "Nota final", name: "nota", widget: "markdown", required: false },
                 ],
               },
               {
@@ -293,7 +258,6 @@
                   { label: "Título", name: "title", widget: "string" },
                   { label: "Nombre de la parroquia (footer)", name: "parroquiaNombre", widget: "string", required: false },
                   { label: "Dirección", name: "direccion", widget: "string" },
-                  { label: "Teléfono", name: "telefono", widget: "string" },
                   { label: "Email", name: "email", widget: "string" },
                   { label: "Mapa de Google (código embed)", name: "mapa", widget: "text" },
                 ],

@@ -60,7 +60,8 @@ if (entrada?.data.catequesisAdultos) {
 
     <section class="contacto-final">
       <h2>¿Te interesa participar?</h2>
-      <p>Acércate al <strong>despacho parroquial</strong> o contacta con nosotros a través de la <a href="/contacto">página de contacto</a> para más información sobre horarios e inscripciones.</p>
+      <p>Trae esta hoja de inscripción rellena con tus datos</p>
+      <a href="/inscripcion-catequesis.pdf" class="btn-descarga" download>📄 Descargar hoja de inscripción</a>
     </section>
   </div>
 </Layout>
@@ -155,6 +156,21 @@ if (entrada?.data.catequesisAdultos) {
   }
 
   .contacto-final p { color: var(--color-muted); }
+
+  .btn-descarga {
+    display: inline-block;
+    margin-top: 1.25rem;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .btn-descarga:hover { background: var(--color-primary-light); text-decoration: none; color: #fff; }
 
   @media (max-width: 600px) {
     .tab-label { padding: 0.6rem 0.9rem; font-size: 0.82rem; }

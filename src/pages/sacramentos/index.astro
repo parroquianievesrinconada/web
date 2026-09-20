@@ -6,25 +6,26 @@ const sacramentos = [
     nombre: "Bautismo",
     descripcion: "El primer sacramento de la Iniciación Cristiana. Acoge al niño en la comunidad de fe.",
     href: "/sacramentos/bautismo",
-    icono: "🕊️",
   },
   {
     nombre: "Primera Comunión",
     descripcion: "Itinerario catequético para que los niños reciban por primera vez el sacramento de la Eucaristía.",
     href: "/sacramentos/primera-comunion",
-    icono: "🍞",
   },
   {
     nombre: "Confirmación",
     descripcion: "Sacramento en el que se recibe la fuerza del Espíritu Santo para ser testigos de Cristo.",
     href: "/sacramentos/confirmacion",
-    icono: "🔥",
   },
   {
     nombre: "Matrimonio",
     descripcion: "Sacramento que une a los esposos en una comunidad de amor y vida entregada a Dios.",
     href: "/sacramentos/matrimonio",
-    icono: "💍",
+  },
+  {
+    nombre: "Unción de Enfermos",
+    descripcion: "Sacramento que conforta y fortalece a quienes sufren enfermedad grave o vejez.",
+    href: "/sacramentos/uncion-enfermos",
   },
 ];
 ---
@@ -39,7 +40,7 @@ const sacramentos = [
 
   <div class="container">
     <p class="intro">
-      La parroquia de La Rinconada acompaña a los fieles en la celebración
+      La parroquia acompaña a los fieles en la celebración
       y preparación de los sacramentos. Aquí encontrarás la información
       necesaria para cada uno, así como los pasos a seguir y la
       documentación requerida.
@@ -48,7 +49,6 @@ const sacramentos = [
     <div class="sacramentos-grid">
       {sacramentos.map((s) => (
         <a href={s.href} class="card">
-          <span class="card-icono" aria-hidden="true">{s.icono}</span>
           <h2>{s.nombre}</h2>
           <p>{s.descripcion}</p>
           <span class="card-flecha">Ver información →</span>
@@ -96,11 +96,6 @@ const sacramentos = [
     box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     border-color: var(--color-primary);
     text-decoration: none;
-  }
-
-  .card-icono {
-    font-size: 2rem;
-    line-height: 1;
   }
 
   .card h2 {

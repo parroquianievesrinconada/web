@@ -26,13 +26,8 @@ visionGeneral: |
 
   **LUGAR:** Salones parroquiales
 
-  **INSCRIPCIÓN y HORARIOS:** Contactar con despacho
-
-  **Telf:**
-
-  **e-mail:**
+  **INSCRIPCIÓN:** Debe rellenar y entregar la inscripción que se puede descargar en el botón de abajo
 catequesisAdultos: |
-  > **CONTENIDO PROVISIONAL** — Pendiente de confirmar con el párroco.
 
   La parroquia ofrece itinerarios personalizados para adultos que deseen recibir los sacramentos de la Iniciación Cristiana o profundizar en su fe.
 

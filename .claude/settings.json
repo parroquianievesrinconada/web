@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "WebSearch",
-      "WebFetch(domain:formsubmit.co)"
+      "WebFetch(domain:formsubmit.co)",
+      "Bash(npm run *)",
+      "Bash(git status *)"
     ]
   }
 }
