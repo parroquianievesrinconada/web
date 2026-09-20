@@ -80,9 +80,9 @@ const datos = {
         </div>
 
         <form id="form-contacto" class="formulario">
-          <input type="hidden" name="access_key" value="REEMPLAZA_CON_TU_CLAVE_WEB3FORMS" />
-          <input type="hidden" name="subject" value="Mensaje desde la web de la parroquia" />
-          <input type="checkbox" name="botcheck" style="display:none" />
+          <input type="hidden" name="_subject" value="Mensaje desde la web de la parroquia" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
           <div class="campo-form">
             <label for="nombre">Nombre</label>
@@ -135,10 +135,11 @@ const datos = {
 
     var formData = new FormData(this);
     var asunto = formData.get("asunto");
-    formData.set("subject", "Parroquia Rinconada — " + asunto);
+    formData.set("_subject", asunto);
+    formData.set("_replyto", formData.get("email"));
 
     try {
-      var res = await fetch("https://api.web3forms.com/submit", {
+      var res = await fetch("https://formsubmit.co/ajax/268e7051f1ccb1ef2d290ac692872fb9", {
         method: "POST",
         headers: { Accept: "application/json" },
         body: formData,
