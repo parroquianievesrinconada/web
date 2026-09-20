@@ -16,9 +16,6 @@ const { Content } = await render(entrada);
 
   <div class="container">
     <div class="cuerpo">
-      {entrada?.data.imagen && (
-        <img src={entrada.data.imagen.src} alt={entrada.data.imagen.alt ?? ""} class="img-pagina" />
-      )}
       <Content />
     </div>
   </div>
@@ -35,9 +32,8 @@ const { Content } = await render(entrada);
 
   .cuerpo { max-width: 760px; font-size: 1rem; line-height: 1.8; }
 
-  .img-pagina { width: 100%; max-width: 500px; border-radius: 6px; margin-bottom: 1.5rem; }
-
   .cuerpo :global(p) { margin-bottom: 1rem; }
+  .cuerpo :global(img) { max-width: 100%; border-radius: 6px; margin: 1rem 0; }
 
   .cuerpo :global(h2) {
     font-size: 1.2rem;
