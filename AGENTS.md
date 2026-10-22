@@ -10,7 +10,7 @@ Web oficial de la **Parroquia de La Rinconada** (Diócesis de Sevilla). Es un si
 
 **Idioma del sitio:** español (`<html lang="es">`, `locale: "es"` en Decap).
 **Sin frameworks UI** (sin React/Vue/Svelte/Tailwind): todo es HTML + CSS plano + JS inline.
-**Sin backend propio**: el formulario de contacto delega en **Web3Forms** (servicio externo con access_key).
+**Sin backend propio**: el formulario de contacto delega en **FormSubmit** (servicio externo, envía al correo de la parroquia).
 
 ---
 
@@ -25,7 +25,7 @@ Web oficial de la **Parroquia de La Rinconada** (Diócesis de Sevilla). Es un si
 | CMS | Decap CMS | `^3.0.0` | Cargado por CDN en `public/admin/index.html` |
 | Auth CMS | Netlify Identity (git-gateway) | — | `public/admin/index.html:16-19` |
 | Host | Netlify | — | `netlify.toml` + auto-deploy desde `main` |
-| Formulario | Web3Forms | API pública | `https://api.web3forms.com/submit` |
+| Formulario | FormSubmit | API pública | `https://formsubmit.co/ajax/<correo>` |
 | Fuentes | Google Fonts (Lora + Open Sans) | — | Cargadas en `Layout.astro:16-18` |
 
 **Dependencias (`package.json`):** `astro` y `marked`. No hay UI frameworks, linters, formateadores ni tests configurados.
@@ -329,10 +329,9 @@ Replicado literalmente en: `contacto.astro:159`, `actualidad/index.astro:57`, `a
 - `resetTimer()` se llama en cada interacción manual.
 
 ### 10.4 Formulario de contacto (`contacto.astro:82-156`)
-- POST a `https://api.web3forms.com/submit` con `FormData`.
-- Campo oculto `access_key` ⚠️ **pendiente de configurar** (ver §14).
-- Honeypot `botcheck` (checkbox oculto) — si viene relleno, Web3Forms descarta.
-- `subject` se sobrescribe con `"Parroquia Rinconada — " + asunto`.
+- POST a `https://formsubmit.co/ajax/parroquianievesrinconada@gmail.com` con `FormData` (FormSubmit, sin cuenta).
+- La primera vez que se usa un correo, FormSubmit envía un email de activación a ese correo; hasta confirmarlo no se reciben mensajes.
+- `_subject` = asunto del formulario; `_replyto` = email del remitente.
 - UI: muestra `#aviso-ok` (verde) o `#aviso-error` (rojo), deshabilita botón durante envío.
 
 ### 10.5 Helper de fecha `fechaDeAnuncio` (duplicado)
@@ -479,7 +478,7 @@ Todo lo que va en `public/` se sirve **tal cual** en la raíz.
 
 | # | Severidad | Issue | Archivo / línea |
 |---|-----------|-------|-----------------|
-| 1 | 🔴 Alta | `access_key` de Web3Forms es un placeholder. **El formulario NO funciona hasta reemplazarlo.** | `src/pages/contacto.astro:83` |
+| 1 | 🟢 Resuelto | Formulario migrado a FormSubmit con destino `parroquianievesrinconada@gmail.com` (requiere activación por email la primera vez). | `src/pages/contacto.astro` |
 | 2 | 🟠 Media | `public/admin/config.yml` está abandonado y no se carga. Mantenerlo genera confusión; el activo es el inline en `index.html`. | `public/admin/config.yml` |
 | 3 | 🟠 Media | `paginas/horarios.md` existe pero **nadie lo renderiza**. `/parroquia/horarios` está hardcoded. | `src/pages/parroquia/horarios.astro` vs `src/content/paginas/horarios.md` |
 | 4 | 🟠 Media | Divergencia CMS ↔ schema: el CMS obliga `date` + `image?` mientras el Zod los marca opcionales. | `public/admin/index.html:30-35` vs `src/content.config.ts:6-11` |
@@ -541,10 +540,9 @@ Todo lo que va en `public/` se sirve **tal cual** en la raíz.
 - O refactorizar: hacer que la página use `getEntry("paginas", "horarios")` y mueva los datos a `paginas/horarios.md`. **No hecho todavía** (ver §14 #3).
 
 ### Configurar el formulario de contacto
-1. Crear cuenta en https://web3forms.com (gratis).
-2. Obtener el `access_key`.
-3. Sustituir `REEMPLAZA_CON_TU_CLAVE_WEB3FORMS` en `src/pages/contacto.astro:83` por la clave real.
-4. Commit y push.
+1. Cambiar el correo de destino en la URL de `fetch("https://formsubmit.co/ajax/<correo>")` en `src/pages/contacto.astro`.
+2. Commit y push.
+3. Enviar el formulario una vez desde la web y confirmar el email de activación que llega a ese correo.
 
 ### Desplegar
 1. Hacer commit a `main`.
