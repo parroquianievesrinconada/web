@@ -329,7 +329,7 @@ Replicado literalmente en: `contacto.astro:159`, `actualidad/index.astro:57`, `a
 - `resetTimer()` se llama en cada interacción manual.
 
 ### 10.4 Formulario de contacto (`contacto.astro:82-156`)
-- POST a `https://formsubmit.co/ajax/parroquianievesrinconada@gmail.com` con `FormData` (FormSubmit, sin cuenta).
+- POST a `https://formsubmit.co/ajax/0625fa5d9eaf3f1fda0a6a17c1c39155` con `FormData` (FormSubmit, sin cuenta). El token equivale a `parroquianievesrinconada@gmail.com`.
 - La primera vez que se usa un correo, FormSubmit envía un email de activación a ese correo; hasta confirmarlo no se reciben mensajes.
 - `_subject` = asunto del formulario; `_replyto` = email del remitente.
 - UI: muestra `#aviso-ok` (verde) o `#aviso-error` (rojo), deshabilita botón durante envío.
@@ -540,7 +540,7 @@ Todo lo que va en `public/` se sirve **tal cual** en la raíz.
 - O refactorizar: hacer que la página use `getEntry("paginas", "horarios")` y mueva los datos a `paginas/horarios.md`. **No hecho todavía** (ver §14 #3).
 
 ### Configurar el formulario de contacto
-1. Cambiar el correo de destino en la URL de `fetch("https://formsubmit.co/ajax/<correo>")` en `src/pages/contacto.astro`.
+1. Cambiar el correo (o su token de FormSubmit) en la URL de `fetch("https://formsubmit.co/ajax/<correo-o-token>")` en `src/pages/contacto.astro`.
 2. Commit y push.
 3. Enviar el formulario una vez desde la web y confirmar el email de activación que llega a ese correo.
 
