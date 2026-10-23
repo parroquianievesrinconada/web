@@ -1,6 +1,6 @@
 ---
 title: Primera Comunión
-intro: '"DEJAD QUE LOS NIÑOS SE ACERQUEN A MÍ" (Mc 10-14)'
+intro: '"DEJAD QUE LOS NIÑOS SE ACERQUEN A MÍ" (Mc 10,14)'
 informacion: |
   La catequesis de Primera Comunión es el proceso por el cual la comunidad parroquial acompaña a los niños y a sus familias en el conocimiento y la vivencia de la fe cristiana, culminando con la recepción de los sacramentos de la Reconciliación y la Eucaristía.
 

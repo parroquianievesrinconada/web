@@ -19,7 +19,7 @@ visionGeneral: |
 
   - [Catequesis de Primera Comunión](/sacramentos/primera-comunion)
   - [Catequesis de Confirmación](/sacramentos/confirmacion)
-  - [Catequesis de Adultos](/vida-parroquial/catequesis)
+  - Catequesis de Adultos
   - [Cursillos Prebautismales](/sacramentos/bautismo#catequesis)
   - Formación permanente de catequistas
   - Actividades y encuentros de evangelización
