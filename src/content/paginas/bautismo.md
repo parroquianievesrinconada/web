@@ -38,7 +38,7 @@ pasos:
   - titulo: "Solicita el bautismo"
     descripcion: "Rellena la solicitud de bautismo en el despacho parroquial o a través del formulario correspondiente."
   - titulo: "Acude al despacho parroquial"
-    descripcion: "Entrega la documentación necesaria. Martes de 18:00 a 19:30."
+    descripcion: "Entrega la documentación necesaria en el [horario del despacho parroquial](/parroquia/horarios#despacho)."
   - titulo: "Asiste al Cursillo Prebautismal"
     descripcion: "Apúntate y participa en la sesión preparatoria antes de la celebración."
 catequesis: |

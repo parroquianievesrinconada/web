@@ -11,6 +11,10 @@ const datos = {
   ...entrada?.data,
 };
 
+// El horario del despacho se edita en la página de Horarios
+const horarios = await getEntry("paginas", "horarios");
+const despacho = horarios?.data.despacho;
+
 const enlacesInteres = [
   { nombre: "La Santa Sede", url: "https://www.vatican.va/content/vatican/es.html" },
   { nombre: "Conferencia Episcopal Española", url: "https://www.conferenciaepiscopal.es/" },
@@ -52,13 +56,18 @@ const enlacesInteres = [
           </div>
         )}
 
-        <div class="campo">
-          <span class="icono">🕐</span>
-          <div>
-            <strong>Despacho parroquial</strong>
-            <p>Martes: 18:00 – 19:30</p>
+        {despacho && despacho.filas.length > 0 && (
+          <div class="campo">
+            <span class="icono">🕐</span>
+            <div>
+              <strong>Despacho parroquial</strong>
+              {despacho.filas.map((f) => (
+                <p>{f.dias}: {f.horario}</p>
+              ))}
+              {despacho.nota && <p>{despacho.nota}</p>}
+            </div>
           </div>
-        </div>
+        )}
 
         <div class="campo">
           <span class="icono">📄</span>

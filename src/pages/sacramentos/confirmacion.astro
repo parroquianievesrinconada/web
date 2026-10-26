@@ -45,7 +45,7 @@ const pasos = entrada?.data.pasos ?? [];
             <div class="paso-card">
               <span class="paso-num">{i + 1}</span>
               <h3>{p.titulo}</h3>
-              {p.descripcion && <p>{p.descripcion}</p>}
+              {p.descripcion && <p set:html={marked.parseInline(p.descripcion)} />}
             </div>
           ))}
         </div>
