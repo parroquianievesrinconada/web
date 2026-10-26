@@ -11,7 +11,7 @@ confesiones:
 despacho:
   filas:
     - dias: Martes
-      horario: 170:00 – 19:00
+      horario: 17:00 – 19:00
 prebautismal:
   filas:
     - dias: 02/09 Miércoles
