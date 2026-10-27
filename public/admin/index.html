@@ -29,9 +29,20 @@
             slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
             fields: [
               { label: "Título", name: "title", widget: "string" },
-              { label: "Resumen corto", name: "summary", widget: "text" },
-              { label: "Imagen", name: "image", widget: "image", required: false },
-              { label: "Contenido", name: "body", widget: "markdown" },
+              { label: "Fecha de publicación", name: "date", widget: "datetime", hint: "Se rellena sola con la fecha y hora actuales. Los anuncios se ordenan por esta fecha." },
+              { label: "Contenido", name: "body", widget: "markdown", required: false },
+              {
+                label: "Galería de imágenes",
+                label_singular: "imagen",
+                name: "galeria",
+                widget: "list",
+                required: false,
+                hint: "Se muestran al final del anuncio y se pueden ampliar al pulsarlas. La primera se usa como miniatura en la portada y en el listado de anuncios.",
+                fields: [
+                  { label: "Imagen", name: "imagen", widget: "image" },
+                  { label: "Pie de foto (opcional)", name: "pie", widget: "string", required: false },
+                ],
+              },
             ],
           },
           {

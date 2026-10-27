@@ -1,39 +1,481 @@
+# Copia de respaldo de la configuración del CMS.
+# La configuración ACTIVA está en public/admin/index.html (load_config_file: false): este archivo no se carga.
+# Si cambias index.html, actualiza también este archivo.
+
 backend:
   name: git-gateway
   branch: main
-
-media_folder: "public/uploads"
-public_folder: "/uploads"
-
-locale: "es"
-
+media_folder: public/uploads
+public_folder: /uploads
+locale: es
 collections:
-  - name: "anuncios"
-    label: "Anuncios"
-    folder: "src/content/anuncios"
+  - name: anuncios
+    label: Anuncios
+    folder: src/content/anuncios
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Fecha", name: "date", widget: "datetime" }
-      - { label: "Imagen destacada", name: "image", widget: "image", required: false }
-      - { label: "Resumen corto", name: "summary", widget: "text" }
-      - { label: "Contenido", name: "body", widget: "markdown" }
-
-  - name: "paginas"
-    label: "Páginas fijas"
+      - label: Título
+        name: title
+        widget: string
+      - label: Fecha de publicación
+        name: date
+        widget: datetime
+        hint: Se rellena sola con la fecha y hora actuales. Los anuncios se ordenan por esta fecha.
+      - label: Contenido
+        name: body
+        widget: markdown
+        required: false
+      - label: Galería de imágenes
+        label_singular: imagen
+        name: galeria
+        widget: list
+        required: false
+        hint: Se muestran al final del anuncio y se pueden ampliar al pulsarlas. La primera se usa como miniatura en la portada y en el listado de anuncios.
+        fields:
+          - label: Imagen
+            name: imagen
+            widget: image
+          - label: Pie de foto (opcional)
+            name: pie
+            widget: string
+            required: false
+  - name: paginas
+    label: Páginas fijas
     files:
-      - file: "src/content/paginas/horarios.md"
-        label: "Horarios"
-        name: "horarios"
+      - file: src/content/paginas/inicio.md
+        label: Inicio (portada)
+        name: inicio
         fields:
-          - { label: "Título", name: "title", widget: "string" }
-          - { label: "Contenido", name: "body", widget: "markdown" }
-      - file: "src/content/paginas/contacto.md"
-        label: "Contacto"
-        name: "contacto"
+          - label: Título
+            name: title
+            widget: string
+          - label: Banner rotativo
+            name: banner
+            widget: list
+            required: false
+            summary: '{{fields.titulo}} {{fields.texto}}'
+            fields:
+              - label: Imagen
+                name: imagen
+                widget: image
+              - label: Texto alternativo
+                name: alt
+                widget: string
+                required: false
+              - label: Título (opcional)
+                name: titulo
+                widget: string
+                required: false
+              - label: Texto
+                name: texto
+                widget: string
+                required: false
+              - label: Cómo encajar la imagen
+                name: ajuste
+                widget: select
+                required: false
+                options:
+                  - label: Completa (se ve entera, con fondo difuminado alrededor)
+                    value: completa
+                  - label: Recortada (rellena todo el hueco, puede recortar bordes)
+                    value: recortada
+              - label: 'Posición del recorte (ej: ''center 15%'')'
+                name: posicion
+                widget: string
+                required: false
+          - label: Código QR del grupo de WhatsApp
+            name: qrWhatsapp
+            widget: image
+            required: false
+      - file: src/content/paginas/horarios.md
+        label: Horarios de misa
+        name: horarios
         fields:
-          - { label: "Título", name: "title", widget: "string" }
-          - { label: "Dirección", name: "direccion", widget: "string" }
-          - { label: "Email", name: "email", widget: "string" }
-          - { label: "Mapa de Google (código embed)", name: "mapa", widget: "text" }
+          - label: Título
+            name: title
+            widget: string
+          - label: Horario de misas
+            name: misas
+            widget: object
+            required: false
+            fields:
+              - label: Filas
+                name: filas
+                widget: list
+                summary: '{{dias}}: {{horario}}'
+                fields:
+                  - label: Día
+                    name: dias
+                    widget: string
+                  - label: Horario
+                    name: horario
+                    widget: string
+          - label: Confesiones
+            name: confesiones
+            widget: object
+            required: false
+            fields:
+              - label: Texto
+                name: texto
+                widget: string
+          - label: Despacho parroquial
+            name: despacho
+            widget: object
+            required: false
+            fields:
+              - label: Filas
+                name: filas
+                widget: list
+                summary: '{{dias}}: {{horario}}'
+                fields:
+                  - label: Día
+                    name: dias
+                    widget: string
+                  - label: Horario
+                    name: horario
+                    widget: string
+              - label: Nota al pie
+                name: nota
+                widget: text
+                required: false
+          - label: Cursos prebautismales
+            name: prebautismal
+            widget: object
+            required: false
+            fields:
+              - label: Filas
+                name: filas
+                widget: list
+                summary: '{{dias}}: {{horario}}'
+                fields:
+                  - label: Fecha
+                    name: dias
+                    widget: string
+                  - label: Hora
+                    name: horario
+                    widget: string
+      - file: src/content/paginas/historia.md
+        label: Historia y Patrimonio
+        name: historia
+        fields:
+          - label: Título
+            name: title
+            widget: string
+          - label: Contenido
+            name: body
+            widget: markdown
+      - file: src/content/paginas/catequesis.md
+        label: Catequesis
+        name: catequesis
+        fields:
+          - label: Título
+            name: title
+            widget: string
+          - label: Visión general
+            name: visionGeneral
+            widget: markdown
+            required: false
+          - label: Catequesis de Adultos
+            name: catequesisAdultos
+            widget: markdown
+            required: false
+      - file: src/content/paginas/pastoral-salud.md
+        label: Pastoral de la Salud
+        name: pastoral-salud
+        fields:
+          - label: Título
+            name: title
+            widget: string
+          - label: Contenido
+            name: body
+            widget: markdown
+      - file: src/content/paginas/caritas.md
+        label: Cáritas
+        name: caritas
+        fields:
+          - label: Título
+            name: title
+            widget: string
+          - label: Logo / imagen
+            name: imagen
+            widget: object
+            required: false
+            fields:
+              - label: Imagen
+                name: src
+                widget: image
+              - label: Texto alternativo
+                name: alt
+                widget: string
+                required: false
+          - label: Contenido
+            name: body
+            widget: markdown
+      - file: src/content/paginas/donativos.md
+        label: Donativos
+        name: donativos
+        fields:
+          - label: Título
+            name: title
+            widget: string
+          - label: Contenido
+            name: body
+            widget: markdown
+      - file: src/content/paginas/tasas.md
+        label: Tasas de la Curia Diocesana
+        name: tasas
+        fields:
+          - label: Título
+            name: title
+            widget: string
+          - label: Contenido
+            name: body
+            widget: markdown
+      - file: src/content/paginas/bautismo.md
+        label: 'Sacramento: Bautismo'
+        name: bautismo
+        fields:
+          - label: Título
+            name: title
+            widget: string
+          - label: Introducción (subtítulo del hero)
+            name: intro
+            widget: text
+            required: false
+          - label: Información
+            name: informacion
+            widget: markdown
+            required: false
+          - label: Requisitos
+            name: requisitos
+            widget: markdown
+            required: false
+          - label: Pasos a seguir (3 pasos)
+            name: pasos
+            widget: list
+            required: false
+            fields:
+              - label: Título del paso
+                name: titulo
+                widget: string
+              - label: Descripción
+                name: descripcion
+                widget: text
+                required: false
+          - label: Catequesis (Cursillos Prebautismales)
+            name: catequesis
+            widget: markdown
+            required: false
+          - label: Nota final
+            name: nota
+            widget: markdown
+            required: false
+      - file: src/content/paginas/primera-comunion.md
+        label: 'Sacramento: Primera Comunión'
+        name: primera-comunion
+        fields:
+          - label: Título
+            name: title
+            widget: string
+          - label: Introducción (subtítulo del hero)
+            name: intro
+            widget: text
+            required: false
+          - label: Información
+            name: informacion
+            widget: markdown
+            required: false
+          - label: Requisitos
+            name: requisitos
+            widget: markdown
+            required: false
+          - label: Pasos a seguir (3 pasos)
+            name: pasos
+            widget: list
+            required: false
+            fields:
+              - label: Título del paso
+                name: titulo
+                widget: string
+              - label: Descripción
+                name: descripcion
+                widget: text
+                required: false
+          - label: Catequesis de Comunión
+            name: catequesis
+            widget: markdown
+            required: false
+          - label: Nota final
+            name: nota
+            widget: markdown
+            required: false
+      - file: src/content/paginas/confirmacion.md
+        label: 'Sacramento: Confirmación'
+        name: confirmacion
+        fields:
+          - label: Título
+            name: title
+            widget: string
+          - label: Introducción (subtítulo del hero)
+            name: intro
+            widget: text
+            required: false
+          - label: Información
+            name: informacion
+            widget: markdown
+            required: false
+          - label: Requisitos
+            name: requisitos
+            widget: markdown
+            required: false
+          - label: Pasos a seguir (3 pasos)
+            name: pasos
+            widget: list
+            required: false
+            fields:
+              - label: Título del paso
+                name: titulo
+                widget: string
+              - label: Descripción
+                name: descripcion
+                widget: text
+                required: false
+          - label: Catequesis de Confirmación
+            name: catequesis
+            widget: markdown
+            required: false
+          - label: Nota final
+            name: nota
+            widget: markdown
+            required: false
+      - file: src/content/paginas/matrimonio.md
+        label: 'Sacramento: Matrimonio'
+        name: matrimonio
+        fields:
+          - label: Título
+            name: title
+            widget: string
+          - label: Introducción (subtítulo del hero)
+            name: intro
+            widget: text
+            required: false
+          - label: Información
+            name: informacion
+            widget: markdown
+            required: false
+          - label: Requisitos
+            name: requisitos
+            widget: markdown
+            required: false
+          - label: Pasos a seguir (3 pasos)
+            name: pasos
+            widget: list
+            required: false
+            fields:
+              - label: Título del paso
+                name: titulo
+                widget: string
+              - label: Descripción
+                name: descripcion
+                widget: text
+                required: false
+          - label: Catequesis
+            name: catequesis
+            widget: markdown
+            required: false
+          - label: Nota final
+            name: nota
+            widget: markdown
+            required: false
+      - file: src/content/paginas/uncion-enfermos.md
+        label: 'Sacramento: Unción de Enfermos'
+        name: uncion-enfermos
+        fields:
+          - label: Título
+            name: title
+            widget: string
+          - label: Introducción (subtítulo del hero)
+            name: intro
+            widget: text
+            required: false
+          - label: Información
+            name: informacion
+            widget: markdown
+            required: false
+          - label: Requisitos
+            name: requisitos
+            widget: markdown
+            required: false
+          - label: Pasos a seguir
+            name: pasos
+            widget: list
+            required: false
+            fields:
+              - label: Título del paso
+                name: titulo
+                widget: string
+              - label: Descripción
+                name: descripcion
+                widget: text
+                required: false
+          - label: Catequesis
+            name: catequesis
+            widget: markdown
+            required: false
+          - label: Nota final
+            name: nota
+            widget: markdown
+            required: false
+      - file: src/content/paginas/hermandades.md
+        label: Hermandades
+        name: hermandades
+        fields:
+          - label: Título
+            name: title
+            widget: string
+          - label: Hermandades
+            name: listaHermandades
+            widget: list
+            required: false
+            summary: '{{nombre}}'
+            fields:
+              - label: Nombre
+                name: nombre
+                widget: string
+              - label: Descripción
+                name: descripcion
+                widget: text
+                required: false
+              - label: Color de fondo (CSS, si no hay imagen)
+                name: color
+                widget: string
+                required: false
+              - label: Imagen de fondo (opcional, sustituye al color)
+                name: imagen
+                widget: image
+                required: false
+      - file: src/content/paginas/contacto.md
+        label: Contacto
+        name: contacto
+        fields:
+          - label: Título
+            name: title
+            widget: string
+          - label: Nombre de la parroquia (footer)
+            name: parroquiaNombre
+            widget: string
+            required: false
+          - label: Logo (navbar)
+            name: logo
+            widget: image
+            required: false
+          - label: Dirección
+            name: direccion
+            widget: string
+          - label: Email
+            name: email
+            widget: string
+          - label: Mapa de Google (código embed)
+            name: mapa
+            widget: text

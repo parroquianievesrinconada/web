@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getCollection, getEntry } from "astro:content";
+import { extractoDeAnuncio } from "../lib/anuncios";
 
 const inicio = await getEntry("paginas", "inicio");
 
@@ -29,10 +30,7 @@ const formatFecha = (date: Date) =>
 
 const anuncios = (await getCollection("anuncios"))
   .sort((a, b) => fechaDeAnuncio(b).valueOf() - fechaDeAnuncio(a).valueOf())
-  .slice(0, 4);
-
-const principal = anuncios[0];
-const secundarios = anuncios.slice(1);
+  .slice(0, 3);
 ---
 
 <Layout title="Inicio">
@@ -107,41 +105,23 @@ const secundarios = anuncios.slice(1);
           <p class="vacio">No hay anuncios publicados todavía.</p>
         ) : (
           <div class="noticias-grid">
-            {principal && (
-              <article class="noticia-principal">
-                {principal.data.image && (
-                  <a href={`/actualidad/${principal.id}`} class="principal-img-wrap">
-                    <img src={principal.data.image} alt={principal.data.title} class="principal-img" loading="lazy" />
+            {anuncios.map((anuncio, i) => (
+              <article class:list={["noticia", i === 0 && "noticia-destacada"]}>
+                {anuncio.data.galeria?.[0]?.imagen && (
+                  <a href={`/actualidad/${anuncio.id}`} class="noticia-img-wrap">
+                    <img src={anuncio.data.galeria[0].imagen} alt={anuncio.data.title} class="noticia-img" loading="lazy" />
                   </a>
                 )}
-                <div class="principal-cuerpo">
-                  <time class="noticia-fecha">{formatFecha(fechaDeAnuncio(principal))}</time>
-                  <h3 class="principal-titulo">
-                    <a href={`/actualidad/${principal.id}`}>{principal.data.title}</a>
+                <div class="noticia-cuerpo">
+                  <time class="noticia-fecha">{formatFecha(fechaDeAnuncio(anuncio))}</time>
+                  <h3 class="noticia-titulo">
+                    <a href={`/actualidad/${anuncio.id}`}>{anuncio.data.title}</a>
                   </h3>
-                  <p class="principal-resumen">{principal.data.summary}</p>
-                  <a href={`/actualidad/${principal.id}`} class="leer-mas">Leer más →</a>
+                  {extractoDeAnuncio(anuncio.body) && <p class="noticia-resumen">{extractoDeAnuncio(anuncio.body)}</p>}
+                  <a href={`/actualidad/${anuncio.id}`} class="leer-mas">Leer más →</a>
                 </div>
               </article>
-            )}
-            {secundarios.length > 0 && (
-              <div class="noticias-secundarias">
-                {secundarios.map((anuncio) => (
-                  <article class="noticia-secundaria">
-                    <div class="secundaria-cuerpo">
-                      <time class="noticia-fecha">{formatFecha(fechaDeAnuncio(anuncio))}</time>
-                      <h4><a href={`/actualidad/${anuncio.id}`}>{anuncio.data.title}</a></h4>
-                      <p>{anuncio.data.summary}</p>
-                    </div>
-                    {anuncio.data.image && (
-                      <a href={`/actualidad/${anuncio.id}`} class="secundaria-img-wrap">
-                        <img src={anuncio.data.image} alt={anuncio.data.title} class="secundaria-img" loading="lazy" />
-                      </a>
-                    )}
-                  </article>
-                ))}
-              </div>
-            )}
+            ))}
           </div>
         )}
       </section>
@@ -391,49 +371,30 @@ const secundarios = anuncios.slice(1);
 
   .vacio { color: var(--color-muted); font-style: italic; }
 
+  /* Últimos 3 anuncios en columnas; el más reciente, algo más ancho */
   .noticias-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    border: 1px solid var(--color-border);
-    border-radius: 4px;
-    overflow: hidden;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 1rem;
+    align-items: stretch;
   }
 
-  .noticia-principal { border-right: 1px solid var(--color-border); display: flex; flex-direction: column; }
-  .principal-img-wrap { display: block; overflow: hidden; }
-  .principal-img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.3s; display: block; }
-  .principal-img-wrap:hover .principal-img { transform: scale(1.03); }
-  .principal-cuerpo { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; background: #fff; }
+  .noticia { display: flex; flex-direction: column; border: 1px solid var(--color-border); border-radius: 4px; overflow: hidden; background: #fff; }
+  .noticia-img-wrap { display: block; overflow: hidden; }
+  /* Los carteles suelen llevar el título arriba: se muestra la parte superior */
+  .noticia-img { width: 100%; height: 170px; object-fit: cover; object-position: center top; transition: transform 0.3s; display: block; }
+  .noticia-destacada .noticia-img { height: 200px; }
+  .noticia-img-wrap:hover .noticia-img { transform: scale(1.03); }
+  .noticia-cuerpo { padding: 1rem; flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
 
   .noticia-fecha { font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-primary); font-weight: 600; }
 
-  .principal-titulo { font-size: 1.3rem; line-height: 1.25; }
-  .principal-titulo a { color: var(--color-text); }
-  .principal-titulo a:hover { color: var(--color-primary); text-decoration: none; }
-  .principal-resumen { font-size: 0.88rem; color: var(--color-muted); line-height: 1.6; flex: 1; }
-  .leer-mas { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-
-  .noticias-secundarias { display: flex; flex-direction: column; }
-
-  .noticia-secundaria {
-    display: flex;
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid var(--color-border);
-    background: #fff;
-    transition: background 0.15s;
-  }
-
-  .noticia-secundaria:last-child { border-bottom: none; }
-  .noticia-secundaria:hover { background: #faf6f2; }
-
-  .secundaria-cuerpo { flex: 1; display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
-  .secundaria-cuerpo h4 { font-size: 0.92rem; line-height: 1.3; font-family: var(--font-serif); }
-  .secundaria-cuerpo h4 a { color: var(--color-text); }
-  .secundaria-cuerpo h4 a:hover { color: var(--color-primary); text-decoration: none; }
-  .secundaria-cuerpo p { font-size: 0.8rem; color: var(--color-muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-
-  .secundaria-img-wrap { flex-shrink: 0; margin-left: 0.75rem; }
-  .secundaria-img { width: 68px; height: 68px; object-fit: cover; border-radius: 3px; }
+  .noticia-titulo { font-size: 1rem; line-height: 1.3; }
+  .noticia-destacada .noticia-titulo { font-size: 1.15rem; }
+  .noticia-titulo a { color: var(--color-text); }
+  .noticia-titulo a:hover { color: var(--color-primary); text-decoration: none; }
+  .noticia-resumen { font-size: 0.84rem; color: var(--color-muted); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .leer-mas { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: auto; padding-top: 0.4rem; }
 
   @media (max-width: 820px) {
     .inicio-grid { grid-template-columns: 1fr; }
@@ -443,7 +404,6 @@ const secundarios = anuncios.slice(1);
   @media (max-width: 620px) {
     .banner { height: 300px; }
     .noticias-grid { grid-template-columns: 1fr; }
-    .noticia-principal { border-right: none; border-bottom: 1px solid var(--color-border); }
     .acceso-btn { min-width: unset; flex: 1; padding: 1rem 0.75rem; }
     .acceso-label { font-size: 0.7rem; }
   }

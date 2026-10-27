@@ -6,8 +6,14 @@ const anuncios = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date().optional(),
-    image: z.string().optional(),
-    summary: z.string(),
+    galeria: z
+      .array(
+        z.object({
+          imagen: z.string(),
+          pie: z.string().optional(),
+        })
+      )
+      .optional(),
   }),
 });
 
